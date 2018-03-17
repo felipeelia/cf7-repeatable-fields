@@ -1,0 +1,24 @@
+{
+	"name": "cf7-repeatable-fields",
+	"version": "1.0.0",
+	"description": "Repeatable Fields Add-on for Contact Form 7",
+	"main": "Gruntfile.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/felipeelia/cf7-repeatable-fields"
+	},
+	"bugs": {
+		"url": "https://github.com/felipeelia/cf7-repeatable-fields/issues"
+	},
+	"author": "Felipe Elia",
+	"homepage": "https://github.com/felipeelia/cf7-repeatable-fields#readme",
+	"devDependencies": {
+		"grunt": "^1.0.2",
+		"grunt-checktextdomain": "^1.0.1",
+		"grunt-contrib-uglify": "^2.0.0",
+		"grunt-contrib-watch": "^1.0.0",
+		"grunt-wp-i18n": "^1.0.0",
+		"grunt-wp-readme-to-markdown": "^2.0.1"
+
+	}
+}

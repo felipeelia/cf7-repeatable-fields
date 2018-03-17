@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<ruleset name="Contact Form 7 - Repeatable Fields">
+	<description>CF7 Repeatable Fields rules for PHP_CodeSniffer</description>
+
+	<file>.</file>
+
+	<exclude-pattern>index.php</exclude-pattern> <!-- As we use it just to avoid directory listing. -->
+
+	<arg name="extensions" value="php"/>
+	<arg value="ps"/>
+
+	<rule ref="WordPress-Docs"/>
+	<rule ref="WordPress-Extra">
+		<exclude name="WordPress.CSRF.NonceVerification" /> <!-- We only uses $_POST throught CF7 hooks -->
+		<exclude name="Generic.Formatting.MultipleStatementAlignment" />
+	</rule>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" value="cf7-repeatable-fields" />
+		</properties>
+	</rule>
+</ruleset>
