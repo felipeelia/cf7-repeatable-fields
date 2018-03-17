@@ -14,9 +14,9 @@ Adds repeatable groups of fields to Contact Form 7.
 This plugin adds repeatable groups of fields to Contact Form 7.
 *NOTE:* Tested with Contact Form 7 5.0.
 
-### Usage ###
+## Usage ##
 
-## Form ##
+### Form ###
 Wrap the desired fields with `[field_group your_group_name_here][/field_group]`. The shortcode accepts additional parameters, in WP shortcode format and in CF7 fields parameters format as well. Example:
 
 ```
@@ -27,7 +27,7 @@ Wrap the desired fields with `[field_group your_group_name_here][/field_group]`.
 [checkbox* checkbox-252 "check 1" "check 2"]
 [/field_group]
 ```
-## Mail ##
+### Mail ###
 In the mail settings, wrap the fields with your group id. You can use the `[group_index]` tag to print the group index and an additional `__<NUMBER>` to print a field at a specific index.
 
 Example:
@@ -43,7 +43,7 @@ Select: [menu-840]
 [/emails]
 ```
 
-### Contribue ###
+### Contribute ###
 You can contribute with code, issues and ideas at the [GitHub repository](https://github.com/felipeelia/cf7-repeatable-fields).
 
 If you like it, a review is appreciated :)
@@ -52,4 +52,4 @@ If you like it, a review is appreciated :)
 
 ### Can I change the add/remove buttons? ###
 
-* Yes. You can use `wpcf7_field_group_add_button_atts`, wpcf7_field_group_add_button`, wpcf7_field_group_remove_button`, and `wpcf7_field_group_remove_button` filters. It'll be better documented soon.
+* Yes. You can use `wpcf7_field_group_add_button_atts`, `wpcf7_field_group_add_button`, `wpcf7_field_group_remove_button`, and `wpcf7_field_group_remove_button` filters. It'll be better documented soon.
