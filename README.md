@@ -61,6 +61,6 @@ If you like it, a review is appreciated :)
 
 ## Changelog ##
 
-### 1.0.0 - 2017/05/11 ###
+### 1.0.0 - 2018/03/19 ###
 
 * Initial release
