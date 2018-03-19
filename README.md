@@ -12,36 +12,39 @@ Adds repeatable groups of fields to Contact Form 7.
 
 ## Description ##
 This plugin adds repeatable groups of fields to Contact Form 7.
-*NOTE:* Tested with Contact Form 7 5.0.
+**NOTE:** Tested with Contact Form 7 5.0.
 
 ## Usage ##
 
 ### Form ###
-Wrap the desired fields with `[field_group your_group_name_here][/field_group]`. The shortcode accepts additional parameters, in WP shortcode format and in CF7 fields parameters format as well. Example:
+Wrap the desired fields with `[field_group your_group_name_here][/field_group]`. The shortcode accepts additional parameters, in WP shortcode format and in CF7 fields parameters format as well.
 
-```
+Example:
+`
 [field_group emails id="emails-groups" tabindex:1]
-<label> Your Email (required)[email* your-email] </label>
-[radio radio-8 use_label_element default:1 "radio 1" "radio 2" "radio 3"]
-[select* menu-840 include_blank "option1" "option 2"]
-[checkbox* checkbox-252 "check 1" "check 2"]
-[/field_group]
-```
+	<label>Your Email (required)[email* your-email]</label>
+	[radio your-radio use_label_element default:1 "radio 1" "radio 2" "radio 3"]
+	[select* your-menu include_blank "option1" "option 2"]
+	[checkbox* your-checkbox "check 1" "check 2"]
+[/field_group]`
+
+Group attributes are accepted in WordPress shortcode format and in CF7 field attributes format as well.
+
 ### Mail ###
 In the mail settings, wrap the fields with your group id. You can use the `[group_index]` tag to print the group index and an additional `__<NUMBER>` to print a field at a specific index.
 
 Example:
-```
-[your-email__2] // For second email entered by the user
+`
+The second email entered by the user was: [your-email__2]
 
+These were the groups:
 [emails]
 GROUP #[group_index]
-Checkbox: [checkbox-252]
-E-mail: [your-email]
-Radio: [radio-8]
-Select: [menu-840]
-[/emails]
-```
+	Checkbox: [your-checkbox]
+	E-mail: [your-email]
+	Radio: [your-radio]
+	Select: [your-menu]
+[/emails]`
 
 ### Contribute ###
 You can contribute with code, issues and ideas at the [GitHub repository](https://github.com/felipeelia/cf7-repeatable-fields).
