@@ -12,12 +12,13 @@ Adds repeatable groups of fields to Contact Form 7.
 
 == Description ==
 This plugin adds repeatable groups of fields to Contact Form 7.
+
 **NOTE:** Tested with Contact Form 7 5.0.
 
 == Usage ==
 
 = Form =
-Wrap the desired fields with `[field_group your_group_name_here][/field_group]`. The shortcode accepts additional parameters, in WP shortcode format and in CF7 fields parameters format as well.
+Wrap the desired fields with `[field_group your_group_id_here][/field_group]`. The shortcode accepts additional parameters, in WP shortcode format and in CF7 fields parameters format as well.
 
 Example:
 ~~~~
@@ -28,8 +29,6 @@ Example:
 	[checkbox* your-checkbox "check 1" "check 2"]
 [/field_group]
 ~~~~
-
-Group attributes are accepted in WordPress shortcode format and in CF7 field attributes format as well.
 
 = Mail =
 In the mail settings, wrap the fields with your group id. You can use the `[group_index]` tag to print the group index and an additional `__<NUMBER>` to print a field at a specific index.
