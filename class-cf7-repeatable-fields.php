@@ -115,7 +115,7 @@ class CF7_Repeatable_Fields {
 		 * @param array $remove_button_atts Array of strings with `additional_classes` and
 		 *                                  `text` as indexes.
 		 */
-		$remove_button_atts = apply_filters( 'wpcf7_field_group_remove_button', array(
+		$remove_button_atts = apply_filters( 'wpcf7_field_group_remove_button_atts', array(
 			'additional_classes' => '',
 			'text'               => '-',
 		) );

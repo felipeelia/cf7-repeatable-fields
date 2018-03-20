@@ -60,6 +60,10 @@ If you like it, a review is appreciated :)
 
 == Changelog ==
 
+= 1.0.1 - 2018/03/20 =
+
+* Fix the `wpcf7_field_group_remove_button_atts` filter name. Thanks @asilvestre87
+
 = 1.0.0 - 2018/03/19 =
 
 * Initial release
