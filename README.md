@@ -17,7 +17,7 @@ This plugin adds repeatable groups of fields to Contact Form 7.
 
 ## Usage ##
 
-### Form ###
+### Form tab ###
 Wrap the desired fields with `[field_group your_group_id_here][/field_group]`. The shortcode accepts additional parameters, in WP shortcode format and in CF7 fields parameters format as well.
 
 Example:
@@ -30,7 +30,7 @@ Example:
 [/field_group]
 ~~~~
 
-### Mail ###
+### Mail tab ###
 In the mail settings, wrap the fields with your group id. You can use the `[group_index]` tag to print the group index and an additional `__<NUMBER>` to print a field at a specific index.
 
 Example:
@@ -60,10 +60,8 @@ If you like it, a review is appreciated :)
 
 ## Changelog ##
 
-### 1.0.1 - 2018/03/20 ###
+To read the full list check our changelog.txt
+
+### Latest ###
 
 * Fix the `wpcf7_field_group_remove_button_atts` filter name. Thanks @asilvestre87
-
-### 1.0.0 - 2018/03/19 ###
-
-* Initial release
