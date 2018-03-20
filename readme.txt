@@ -4,7 +4,7 @@ Tags: contact form 7, cf7
 Requires at least: 4.6
 Tested up to: 4.9.4
 Requires PHP: 5.3
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,10 +60,8 @@ If you like it, a review is appreciated :)
 
 == Changelog ==
 
-= 1.0.1 - 2018/03/20 =
+To read the full list check our changelog.txt
+
+= Latest =
 
 * Fix the `wpcf7_field_group_remove_button_atts` filter name. Thanks @asilvestre87
-
-= 1.0.0 - 2018/03/19 =
-
-* Initial release
