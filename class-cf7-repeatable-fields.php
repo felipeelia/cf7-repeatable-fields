@@ -205,8 +205,9 @@ class CF7_Repeatable_Fields {
 							$group_tags_replaced = $group_tags_first_replaced;
 							for ( $j = 2; $j <= $group_sent_count; $j++ ) {
 								// Change the `name__1` to `name__$i`.
-								$group_tags_replaced .= preg_replace( '/__1\]/', "__{$j}]", $group_tags_replaced );
+								$group_tags_replaced .= preg_replace( '/__1\]/', "__{$j}]", $group_tags_first_replaced );
 							}
+
 							$group_tags_replaced = preg_replace( '/\[group_index__([0-9]*)\]/', '\\1', $group_tags_replaced );
 							$mail['body'] = str_replace( $matches[0][ $i ], $group_tags_replaced, $mail['body'] );
 						}
