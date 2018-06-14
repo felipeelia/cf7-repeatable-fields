@@ -164,11 +164,14 @@ class CF7_Repeatable_Fields {
 		// Don't mess up when user is editing the form.
 		if ( ! is_admin() ) {
 			// This enables shortcode in Contact Form form. Side effects?
-			$form = do_shortcode( $contact_form->prop( 'form' ) );
-			$mail = $contact_form->prop( 'mail' );
+			$form   = do_shortcode( $contact_form->prop( 'form' ) );
+			$mail   = $contact_form->prop( 'mail' );
+			$mail_2 = $contact_form->prop( 'mail_2' );
 
-			// We only make our magic when user is sending the form. There is no need to change anything
-			// when showing it up for the first time.
+			/*
+			 * We only make our magic when user is sending the form.
+			 * There is no need to change anything when showing it for the first time.
+			 */
 			if ( count( $this->groups ) && isset( $_POST['_wpcf7_groups_count'] ) ) {
 				foreach ( $_POST['_wpcf7_groups_count'] as $group_id => $group_sent_count ) {
 					// Change the `form` property.
@@ -193,34 +196,70 @@ class CF7_Repeatable_Fields {
 					);
 
 					// Change the `mail` property. Users can use `[group_index]` inside a group to show it's number.
-					$group_name = preg_quote( $group_id );
-					$group_in_mail = preg_match_all( "/\[{$group_name}\](.*?)\[\/{$group_name}\]/s", $mail['body'], $matches );
-					if ( $group_in_mail ) {
-						foreach ( $matches[1] as $i => $group_raw_content ) {
-							$group_tags_first_replaced = str_replace( '[group_index]', '[group_index__1]', $group_raw_content );
-							foreach ( $this->groups[ $group_id ]['tags'] as $tag ) {
-								// Change the original `name` to `name__1`.
-								$group_tags_first_replaced = str_replace( "[{$tag->name}]", "[{$tag->name}__1]", $group_tags_first_replaced );
-							}
-							$group_tags_replaced = $group_tags_first_replaced;
-							for ( $j = 2; $j <= $group_sent_count; $j++ ) {
-								// Change the `name__1` to `name__$i`.
-								$group_tags_replaced .= preg_replace( '/__1\]/', "__{$j}]", $group_tags_first_replaced );
-							}
-
-							$group_tags_replaced = preg_replace( '/\[group_index__([0-9]*)\]/', '\\1', $group_tags_replaced );
-							$mail['body'] = str_replace( $matches[0][ $i ], $group_tags_replaced, $mail['body'] );
-						}
-					}
+					$mail['body']   = $this->replace_mail_field_groups( $group_id, $group_sent_count, $mail['body'] );
+					$mail_2['body'] = $this->replace_mail_field_groups( $group_id, $group_sent_count, $mail_2['body'] );
 				}
 			}
 
 			// Set up modified properties. `form` here already was `do_shortcode`'ed.
 			$contact_form->set_properties( array(
-				'form' => $form,
-				'mail' => $mail,
+				'form'   => $form,
+				'mail'   => $mail,
+				'mail_2' => $mail_2,
 			) );
 		}
+	}
+
+	/**
+	 * Replace a field group in mail bodies
+	 *
+	 * @param string $group_id           The group ID.
+	 * @param int    $group_sent_count   Groups sent count.
+	 * @param string $mail_body          The text set as body by users in CF7. User for main mail and mail 2.
+	 * @return string            `$mail_body` with group replaced.
+	 */
+	private function replace_mail_field_groups( $group_id, $group_sent_count, $mail_body ) {
+		$group_name    = preg_quote( $group_id );
+		$group_in_mail = preg_match_all(
+			"/\[{$group_name}\](.*?)\[\/{$group_name}\]/s",
+			$mail_body,
+			$matches
+		);
+		if ( $group_in_mail ) {
+			foreach ( $matches[1] as $i => $group_raw_content ) {
+				$group_tags_first_replaced = str_replace(
+					'[group_index]', '[group_index__1]',
+					$group_raw_content
+				);
+
+				foreach ( $this->groups[ $group_id ]['tags'] as $tag ) {
+					// Change the original `name` to `name__1`.
+					$group_tags_first_replaced = str_replace(
+						"[{$tag->name}]", "[{$tag->name}__1]",
+						$group_tags_first_replaced
+					);
+				}
+
+				$group_tags_replaced = $group_tags_first_replaced;
+
+				for ( $j = 2; $j <= $group_sent_count; $j++ ) {
+					// Change the `name__1` to `name__$i`.
+					$group_tags_replaced .= preg_replace( '/__1\]/', "__{$j}]", $group_tags_first_replaced );
+				}
+
+				$group_tags_replaced = preg_replace(
+					'/\[group_index__([0-9]*)\]/', '\\1',
+					$group_tags_replaced
+				);
+
+				$mail_body = str_replace(
+					$matches[0][ $i ],
+					$group_tags_replaced,
+					$mail_body
+				);
+			}
+		}
+		return $mail_body;
 	}
 
 	/**

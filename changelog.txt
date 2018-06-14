@@ -13,3 +13,13 @@
 
 * Fix repeated tags in mail body
 
+
+= 1.1 - 2018/06/14 =
+
+* Replace groups in mail 2 field
+
+
+= 1.1 - 2018/06/14 =
+
+* Replace groups in mail 2 field
+
