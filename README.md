@@ -56,7 +56,7 @@ If you like it, a review is appreciated :)
 
 ### Can I change the add/remove buttons? ###
 
-* Yes. You can use `wpcf7_field_group_add_button_atts`, `wpcf7_field_group_add_button`, `wpcf7_field_group_remove_button`, and `wpcf7_field_group_remove_button` filters. It'll be better documented soon.
+* Yes. You can use `wpcf7_field_group_add_button_atts`, `wpcf7_field_group_add_button`, `wpcf7_field_group_remove_button_atts`, and `wpcf7_field_group_remove_button` filters. It'll be better documented soon.
 
 ## Changelog ##
 
