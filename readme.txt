@@ -1,8 +1,8 @@
 === Contact Form 7 - Repeatable Fields ===
 Contributors: felipeelia
-Tags: contact form 7, cf7
+Tags: contact form 7, cf7, repeater, repeatable
 Requires at least: 4.6
-Tested up to: 4.9.4
+Tested up to: 4.9.8
 Requires PHP: 5.3
 Stable tag: 1.1
 License: GPLv2 or later
@@ -112,7 +112,36 @@ If you like it, a review is appreciated :)
 
 = Can I change the add/remove buttons? =
 
-* Yes. You can use `wpcf7_field_group_add_button_atts`, `wpcf7_field_group_add_button`, `wpcf7_field_group_remove_button_atts`, and `wpcf7_field_group_remove_button` filters. It'll be better documented soon.
+Yes. You can use `wpcf7_field_group_add_button_atts`, `wpcf7_field_group_add_button`, `wpcf7_field_group_remove_button_atts`, and `wpcf7_field_group_remove_button` filters, as shown above. Props to @berniegp.
+
+= How can I display the group index number in the form? =
+
+You'll have to use the `wpcf7-field-groups/change` jQuery event.
+
+In the Mail tab, add an element to hold the group index. In this example, it'll be a `<span>` with the `group-index` class:
+~~~
+[field_group emails id="emails-groups" tabindex:1]
+	<p>Group #<span class="group-index"></span></p>
+	<label>Your Email (required)[email* your-email]</label>
+	[radio your-radio use_label_element default:1 "radio 1" "radio 2" "radio 3"]
+	[select* your-menu include_blank "option1" "option 2"]
+	[checkbox* your-checkbox "check 1" "check 2"]
+[/field_group]
+~~~
+
+And then you’ll have to add this to your JavaScript code:
+~~~
+jQuery( function( $ ) {
+	$( '.wpcf7-field-groups' ).on( 'wpcf7-field-groups/change', function() {
+		var $groups = $( this ).find( '.group-index' );
+		$groups.each( function() {
+			$( this ).text( $groups.index( this ) + 1 );
+		} );
+	} ).trigger( 'wpcf7-field-groups/change' );
+} );
+~~~
+
+You can add that JS through your theme OR use some plugin like [Simple Custom CSS and JS](https://wordpress.org/plugins/custom-css-js/).
 
 == Changelog ==
 
