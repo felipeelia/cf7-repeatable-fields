@@ -252,10 +252,12 @@ class CF7_Repeatable_Fields {
 				);
 
 				foreach ( $this->groups[ $group_id ]['tags'] as $tag ) {
+					$tag_name_regex = preg_quote( $tag->name, '/' );
 					// Change the original `name` to `name__1`.
-					$group_tags_first_replaced = str_replace(
-						"[{$tag->name}]",
-						"[{$tag->name}__1]",
+					// Date fields accept `_format_` as a prefix.
+					$group_tags_first_replaced = preg_replace(
+						"/\[(_format_)?{$tag_name_regex}(\s|\])/",
+						"[$1{$tag->name}__1$2",
 						$group_tags_first_replaced
 					);
 				}
@@ -264,7 +266,11 @@ class CF7_Repeatable_Fields {
 
 				for ( $j = 2; $j <= $group_sent_count; $j++ ) {
 					// Change the `name__1` to `name__$i`.
-					$group_tags_replaced .= preg_replace( '/__1\]/', "__{$j}]", $group_tags_first_replaced );
+					$group_tags_replaced .= preg_replace(
+						'/__1(\s|\])/',
+						"__{$j}$1",
+						$group_tags_first_replaced
+					);
 				}
 
 				$group_tags_replaced = preg_replace(
