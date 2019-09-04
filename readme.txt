@@ -2,9 +2,9 @@
 Contributors: felipeelia
 Tags: contact form 7, cf7, repeater, repeatable
 Requires at least: 4.6
-Tested up to: 4.9.8
+Tested up to: 5.2.2
 Requires PHP: 5.3
-Stable tag: 1.1
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,7 @@ Adds repeatable groups of fields to Contact Form 7.
 == Description ==
 This plugin adds repeatable groups of fields to Contact Form 7.
 
-**NOTE:** Tested with Contact Form 7 5.0.
+**NOTE:** Tested with Contact Form 7 5.1.4.
 
 == Usage ==
 
@@ -147,6 +147,13 @@ You can add that JS through your theme OR use some plugin like [Simple Custom CS
 
 To read the full list check our changelog.txt
 
-= Latest =
+= 1.1.1 =
+
+* Add compatibility to formatted dates (`[_format_{field name} "{date format}"]`)
+* DEV: Copy data and events while cloning a new group (JS)
+* DEV: Pass `$new_group` as an extra param for the `wpcf7-field-groups/added` event.
+* DEV: Apply some WPCS rules and add a CF7_REPEATABLE_FIELDS_VERSION const (may affect JS cache)
+
+= 1.1 =
 
 * Replace groups in mail 2 field
