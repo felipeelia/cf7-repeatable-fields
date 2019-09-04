@@ -50,9 +50,9 @@
 					$groups = $$.closest( '.wpcf7-field-groups' );
 
 				if ( $$.hasClass( 'wpcf7-field-group-add' ) ) {
-					var $new_group = $groups.data( 'group-model' ).clone();
+					var $new_group = $groups.data( 'group-model' ).clone( true );
 					$groups.append( $new_group );
-					$$.trigger( 'wpcf7-field-groups/added' );
+					$$.trigger( 'wpcf7-field-groups/added', $new_group );
 				} else {
 					$$.trigger( 'wpcf7-field-groups/removed' );
 					$$.closest( '.wpcf7-field-group' ).remove();
