@@ -53,24 +53,28 @@ class CF7_Repeatable_Fields {
 	 */
 	public function shortcode_render( $atts, $content ) {
 		// Respect classes sent by user, but add the necessary class for js.
-		$atts = ( empty( $atts ) ) ? array() : $atts;
+		$atts          = ( empty( $atts ) ) ? array() : $atts;
 		$atts['class'] = ( isset( $atts['class'] ) ) ? $atts['class'] : '';
 		$atts['class'] = 'wpcf7-field-groups ' . $atts['class'];
 
 		$group_id = '';
-		$atts = array_map( function( $att, $value ) use ( &$group_id ) {
-			// WordPress sets numeric atts when user don't user the format `attr="value"`.
-			if ( is_int( $att ) ) {
-				if ( false === strpos( $value, ':' ) ) {
-					$att      = 'data-wpcf7-group-id';
-					$group_id = $value;
-				} else {
-					// User can send attributes in the same format of CF7, i.e., `attr:value`.
-					list( $att, $value ) = explode( ':', $value );
+		$atts     = array_map(
+			function( $att, $value ) use ( &$group_id ) {
+					// WordPress sets numeric atts if the `attr="value"` format isn't used.
+				if ( is_int( $att ) ) {
+					if ( false === strpos( $value, ':' ) ) {
+						$att      = 'data-wpcf7-group-id';
+						$group_id = $value;
+					} else {
+						// User can send attributes in the same format of CF7, i.e., `attr:value`.
+						list( $att, $value ) = explode( ':', $value );
+					}
 				}
-			}
-			return sprintf( '%s="%s"', $att, esc_attr( $value ) );
-		}, array_keys( $atts ), $atts );
+					return sprintf( '%s="%s"', $att, esc_attr( $value ) );
+			},
+			array_keys( $atts ),
+			$atts
+		);
 		// Abort if there is no group id.
 		if ( empty( $group_id ) ) {
 			return sprintf(
@@ -80,7 +84,7 @@ class CF7_Repeatable_Fields {
 			);
 		}
 
-		$form_tags_manager = WPCF7_FormTagsManager::get_instance();
+		$form_tags_manager         = WPCF7_FormTagsManager::get_instance();
 		$this->groups[ $group_id ] = array(
 			'tags' => $form_tags_manager->scan( $content ),
 			'raw'  => $content,
@@ -93,10 +97,13 @@ class CF7_Repeatable_Fields {
 		 * @param array $add_button_atts Array of strings with `additional_classes` and
 		 *                               `text` as indexes.
 		 */
-		$add_button_atts = apply_filters( 'wpcf7_field_group_add_button_atts', array(
-			'additional_classes' => '',
-			'text'               => '+',
-		) );
+		$add_button_atts = apply_filters(
+			'wpcf7_field_group_add_button_atts',
+			array(
+				'additional_classes' => '',
+				'text'               => '+',
+			)
+		);
 		/**
 		 * Filters the whole add group button. This way developers can wrap it with another element.
 		 *
@@ -115,10 +122,13 @@ class CF7_Repeatable_Fields {
 		 * @param array $remove_button_atts Array of strings with `additional_classes` and
 		 *                                  `text` as indexes.
 		 */
-		$remove_button_atts = apply_filters( 'wpcf7_field_group_remove_button_atts', array(
-			'additional_classes' => '',
-			'text'               => '-',
-		) );
+		$remove_button_atts = apply_filters(
+			'wpcf7_field_group_remove_button_atts',
+			array(
+				'additional_classes' => '',
+				'text'               => '-',
+			)
+		);
 		/**
 		 * Filters the whole remove group button. This way developers can wrap it with another element.
 		 *
@@ -146,7 +156,13 @@ class CF7_Repeatable_Fields {
 	 */
 	public function wpcf7_enqueue_scripts() {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-		wp_enqueue_script( 'wpcf7-field-group-script', plugin_dir_url( CF7_REPEATABLE_FIELDS_FILE ) . 'assets/js/scripts' . $suffix . '.js', array( 'jquery' ), false, true );
+		wp_enqueue_script(
+			'wpcf7-field-group-script',
+			plugin_dir_url( CF7_REPEATABLE_FIELDS_FILE ) . 'assets/js/scripts' . $suffix . '.js',
+			array( 'jquery' ),
+			CF7_REPEATABLE_FIELDS_VERSION,
+			true
+		);
 	}
 
 	/**
@@ -175,11 +191,11 @@ class CF7_Repeatable_Fields {
 			if ( count( $this->groups ) && isset( $_POST['_wpcf7_groups_count'] ) ) {
 				foreach ( $_POST['_wpcf7_groups_count'] as $group_id => $group_sent_count ) {
 					// Change the `form` property.
-					$form_raw_tags = $this->groups[ $group_id ]['raw'];
+					$form_raw_tags            = $this->groups[ $group_id ]['raw'];
 					$form_tags_first_replaced = $form_raw_tags;
 					foreach ( $this->groups[ $group_id ]['tags'] as $tag ) {
-						$tag_type = preg_quote( $tag->type );
-						$tag_name = preg_quote( $tag->name );
+						$tag_type = preg_quote( $tag->type, '/' );
+						$tag_name = preg_quote( $tag->name, '/' );
 						// Change the original `name` to `name__1`.
 						$form_tags_first_replaced = preg_replace( "/\[{$tag_type}(.*?){$tag_name}/", "[{$tag->type}\\1{$tag->name}__1", $form_tags_first_replaced );
 
@@ -202,11 +218,13 @@ class CF7_Repeatable_Fields {
 			}
 
 			// Set up modified properties. `form` here already was `do_shortcode`'ed.
-			$contact_form->set_properties( array(
-				'form'   => $form,
-				'mail'   => $mail,
-				'mail_2' => $mail_2,
-			) );
+			$contact_form->set_properties(
+				array(
+					'form'   => $form,
+					'mail'   => $mail,
+					'mail_2' => $mail_2,
+				)
+			);
 		}
 	}
 
@@ -219,7 +237,7 @@ class CF7_Repeatable_Fields {
 	 * @return string            `$mail_body` with group replaced.
 	 */
 	private function replace_mail_field_groups( $group_id, $group_sent_count, $mail_body ) {
-		$group_name    = preg_quote( $group_id );
+		$group_name    = preg_quote( $group_id, '/' );
 		$group_in_mail = preg_match_all(
 			"/\[{$group_name}\](.*?)\[\/{$group_name}\]/s",
 			$mail_body,
@@ -228,14 +246,16 @@ class CF7_Repeatable_Fields {
 		if ( $group_in_mail ) {
 			foreach ( $matches[1] as $i => $group_raw_content ) {
 				$group_tags_first_replaced = str_replace(
-					'[group_index]', '[group_index__1]',
+					'[group_index]',
+					'[group_index__1]',
 					$group_raw_content
 				);
 
 				foreach ( $this->groups[ $group_id ]['tags'] as $tag ) {
 					// Change the original `name` to `name__1`.
 					$group_tags_first_replaced = str_replace(
-						"[{$tag->name}]", "[{$tag->name}__1]",
+						"[{$tag->name}]",
+						"[{$tag->name}__1]",
 						$group_tags_first_replaced
 					);
 				}
@@ -248,7 +268,8 @@ class CF7_Repeatable_Fields {
 				}
 
 				$group_tags_replaced = preg_replace(
-					'/\[group_index__([0-9]*)\]/', '\\1',
+					'/\[group_index__([0-9]*)\]/',
+					'\\1',
 					$group_tags_replaced
 				);
 

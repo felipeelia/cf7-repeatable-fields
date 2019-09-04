@@ -11,7 +11,6 @@
 
 	<rule ref="WordPress-Docs"/>
 	<rule ref="WordPress-Extra">
-		<exclude name="WordPress.CSRF.NonceVerification" /> <!-- We only uses $_POST throught CF7 hooks -->
 		<exclude name="Generic.Formatting.MultipleStatementAlignment" />
 	</rule>
 

@@ -15,6 +15,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
+define( 'CF7_REPEATABLE_FIELDS_VERSION', '1.1.1' );
 define( 'CF7_REPEATABLE_FIELDS_FILE', __FILE__ );
 define( 'CF7_REPEATABLE_FIELDS_DIR', __DIR__ );
 
