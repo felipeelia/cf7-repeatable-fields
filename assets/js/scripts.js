@@ -60,6 +60,12 @@
 				$groups.trigger( 'wpcf7-field-groups/change' );
 				return false;
 			});
+
+			// Exclusive Checkbox
+			$groups.on( 'click', '.wpcf7-exclusive-checkbox input:checkbox', function() {
+				var name = $( this ).attr( 'name' );
+				$groups.find( 'input:checkbox[name="' + name + '"]' ).not( this ).prop( 'checked', false );
+			} );
 		}
 	});
 }( jQuery ));
