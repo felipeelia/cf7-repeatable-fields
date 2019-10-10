@@ -22,3 +22,7 @@
 * DEV: Copy data and events while cloning a new group (JS) (issue #13)
 * DEV: Pass `$new_group` as an extra param for the `wpcf7-field-groups/added` event (issue #13)
 * DEV: Apply some WPCS rules and add a CF7_REPEATABLE_FIELDS_VERSION const (may affect JS cache)
+
+= 1.1.2 - 2019/10/10 =
+
+* Fix Exclusive Checkboxes

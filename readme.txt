@@ -4,7 +4,7 @@ Tags: contact form 7, cf7, repeater, repeatable
 Requires at least: 4.6
 Tested up to: 5.2.2
 Requires PHP: 5.3
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -146,6 +146,10 @@ You can add that JS through your theme OR use some plugin like [Simple Custom CS
 == Changelog ==
 
 To read the full list check our changelog.txt
+
+= 1.1.2 =
+
+* Fix Exclusive Checkboxes
 
 = 1.1.1 =
 
