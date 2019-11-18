@@ -1,8 +1,9 @@
 === Contact Form 7 - Repeatable Fields ===
 Contributors: felipeelia
+Donate link: https://felipeelia.dev/contact-form-7-repeatable-fields/
 Tags: contact form 7, cf7, repeater, repeatable
 Requires at least: 4.6
-Tested up to: 5.2.2
+Tested up to: 5.3
 Requires PHP: 5.3
 Stable tag: 1.1.2
 License: GPLv2 or later
