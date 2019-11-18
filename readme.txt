@@ -119,7 +119,7 @@ Yes. You can use `wpcf7_field_group_add_button_atts`, `wpcf7_field_group_add_but
 
 You'll have to use the `wpcf7-field-groups/change` jQuery event.
 
-In the Mail tab, add an element to hold the group index. In this example, it'll be a `<span>` with the `group-index` class:
+In the Form tab, add an element to hold the group index. In this example, it'll be a `<span>` with the `group-index` class:
 ~~~
 [field_group emails id="emails-groups" tabindex:1]
 	<p>Group #<span class="group-index"></span></p>
