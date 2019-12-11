@@ -26,3 +26,9 @@
 = 1.1.2 - 2019/10/10 =
 
 * Fix Exclusive Checkboxes
+
+= 1.1.3 - 2019/12/11 =
+
+* Update WP `Tested up to` field
+* Apply WP Coding Standards
+* Fix a small sanitation problem

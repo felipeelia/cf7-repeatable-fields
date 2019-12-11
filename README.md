@@ -5,7 +5,7 @@
 **Requires at least:** 4.6  
 **Tested up to:** 5.3  
 **Requires PHP:** 5.3  
-**Stable tag:** 1.1.2  
+**Stable tag:** 1.1.3  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -14,7 +14,7 @@ Adds repeatable groups of fields to Contact Form 7.
 ## Description ##
 This plugin adds repeatable groups of fields to Contact Form 7.
 
-**NOTE:** Tested with Contact Form 7 5.1.4.
+**NOTE:** Tested with Contact Form 7 5.1.6.
 
 ## Usage ##
 
@@ -147,6 +147,12 @@ You can add that JS through your theme OR use some plugin like [Simple Custom CS
 ## Changelog ##
 
 To read the full list check our changelog.txt
+
+### 1.1.3 ###
+
+* Update WP `Tested up to` field
+* Apply WP Coding Standards
+* Fix a small sanitation problem
 
 ### 1.1.2 ###
 
