@@ -3,7 +3,7 @@
 	"description": "Contact Form 7 – Repeatable Fields",
 	"type": "wordpress-plugin",
 	"license": "GPL-2.0",
-	"require": {
+	"require-dev": {
 		"dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
 		"wp-coding-standards/wpcs": "^2.2"
 	},
