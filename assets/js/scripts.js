@@ -4,11 +4,11 @@
  * `wpcf7-field-groups/added`: triggered by .wpcf7-field-group-add elements
  * `wpcf7-field-groups/removed`: triggered by .wpcf7-field-group-remove elements
  */
-(function( $ ) {
+( function( $ ) {
 	'use strict';
 
 	$( function() {
-		var $groups = $( '.wpcf7-field-groups' );
+		const $groups = $( '.wpcf7-field-groups' );
 		// Only need to work if there is any group.
 		if ( $groups.length ) {
 			// Let's grab the groups models to append them when necessary.
@@ -18,54 +18,54 @@
 
 			$( 'body' ).on( 'wpcf7-field-groups/change', '.wpcf7-field-groups', function() {
 				// For each group inside this we have to adjust name parameter.
-				var $groups_inside = $( this ).find( '.wpcf7-field-group' );
-				$groups_inside.each( function( index ) {
+				const $groupsInside = $( this ).find( '.wpcf7-field-group' );
+				$groupsInside.each( function( index ) {
 					$( this ).find( '.wpcf7-field-group-remove' ).toggle( index > 0 );
-					var i = index + 1;
+					const i = index + 1;
 					$( this ).find( '[name]' ).each( function() {
-						var $$                 = $( this ),
-							$form_control_wrap = $$.closest( '.wpcf7-form-control-wrap' ),
-							name               = $$.attr( 'name' ),
-							is_array           = ( name.indexOf( '[]' ) > -1 ),
-							raw_name           = name.replace( '[]', '' ),
-							new_name           = raw_name.replace( /__[0-9]*/, '' ) + '__' + i;
+						const $$ = $( this ),
+							$formControlWrap = $$.closest( '.wpcf7-form-control-wrap' ),
+							name = $$.attr( 'name' ),
+							isArray = ( name.indexOf( '[]' ) > -1 ),
+							rawName = name.replace( '[]', '' );
+						let newName = rawName.replace( /__[0-9]*/, '' ) + '__' + i;
 
 						// The form control wrap class doesn't have `[]` chars...
-						if ( $form_control_wrap.length && ! $form_control_wrap.hasClass( new_name ) ) {
-							$form_control_wrap.removeClass( raw_name ).addClass( new_name );
+						if ( $formControlWrap.length && ! $formControlWrap.hasClass( newName ) ) {
+							$formControlWrap.removeClass( rawName ).addClass( newName );
 						}
 						// but the field can have.
-						new_name += ( is_array ) ? '[]' : '';
-						$$.attr( 'name', new_name )
+						newName += ( isArray ) ? '[]' : '';
+						$$.attr( 'name', newName );
 					} );
 				} );
-				$( this ).find( '.wpcf7-field-group-count' ).val( $groups_inside.length );
+				$( this ).find( '.wpcf7-field-group-count' ).val( $groupsInside.length );
 			} );
 			// Set thing up for the first time.
 			$groups.trigger( 'wpcf7-field-groups/change' );
 
 			// Handle the buttons action.
 			$( 'body' ).on( 'click', '.wpcf7-field-group-add, .wpcf7-field-group-remove', function() {
-				var $$ = $( this ),
-					$groups = $$.closest( '.wpcf7-field-groups' );
+				const $$ = $( this ),
+					$allGroups = $$.closest( '.wpcf7-field-groups' );
 
 				if ( $$.hasClass( 'wpcf7-field-group-add' ) ) {
-					var $new_group = $groups.data( 'group-model' ).clone( true );
-					$groups.append( $new_group );
-					$$.trigger( 'wpcf7-field-groups/added', $new_group );
+					const $newGroup = $allGroups.data( 'group-model' ).clone( true );
+					$allGroups.append( $newGroup );
+					$$.trigger( 'wpcf7-field-groups/added', $newGroup );
 				} else {
 					$$.trigger( 'wpcf7-field-groups/removed' );
 					$$.closest( '.wpcf7-field-group' ).remove();
 				}
-				$groups.trigger( 'wpcf7-field-groups/change' );
+				$allGroups.trigger( 'wpcf7-field-groups/change' );
 				return false;
-			});
+			} );
 
 			// Exclusive Checkbox
 			$groups.on( 'click', '.wpcf7-exclusive-checkbox input:checkbox', function() {
-				var name = $( this ).attr( 'name' );
+				const name = $( this ).attr( 'name' );
 				$groups.find( 'input:checkbox[name="' + name + '"]' ).not( this ).prop( 'checked', false );
 			} );
 		}
-	});
-}( jQuery ));
+	} );
+}( jQuery ) );

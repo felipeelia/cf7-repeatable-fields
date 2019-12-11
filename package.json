@@ -2,6 +2,7 @@
 	"name": "cf7-repeatable-fields",
 	"version": "1.1.2",
 	"description": "Repeatable Fields Add-on for Contact Form 7",
+	"license": "GPL-3.0+",
 	"main": "Gruntfile.js",
 	"repository": {
 		"type": "git",
@@ -13,11 +14,33 @@
 	"author": "Felipe Elia",
 	"homepage": "https://github.com/felipeelia/cf7-repeatable-fields#readme",
 	"devDependencies": {
+		"@babel/core": "^7.7.5",
+		"@babel/preset-env": "^7.7.6",
+		"@wordpress/babel-preset-default": "^4.7.0",
+		"@wordpress/eslint-plugin": "^3.2.0",
+		"eslint": "^6.7.2",
 		"grunt": "^1.0.4",
+		"grunt-babel": "^8.0.0",
 		"grunt-checktextdomain": "^1.0.1",
-		"grunt-contrib-uglify": "^2.0.0",
-		"grunt-contrib-watch": "^1.0.0",
+		"grunt-contrib-watch": "^1.1.0",
 		"grunt-wp-i18n": "^1.0.3",
-		"grunt-wp-readme-to-markdown": "^2.0.1"
+		"grunt-wp-readme-to-markdown": "^2.0.1",
+		"husky": "^3.1.0",
+		"lint-staged": "^9.5.0"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.php": [
+			"php -d display_errors=1 -l",
+			"composer run-script phpcs-pre-commit"
+		],
+		"**/*.js": [
+			"eslint --fix",
+			"git add"
+		]
 	}
 }
