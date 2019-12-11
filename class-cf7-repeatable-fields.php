@@ -184,12 +184,16 @@ class CF7_Repeatable_Fields {
 			$mail   = $contact_form->prop( 'mail' );
 			$mail_2 = $contact_form->prop( 'mail_2' );
 
+			// Post info sanitization.
+			$groups_count = $this->sanitize_groups_count();
+
 			/*
 			 * We only make our magic when user is sending the form.
 			 * There is no need to change anything when showing it for the first time.
 			 */
-			if ( count( $this->groups ) && isset( $_POST['_wpcf7_groups_count'] ) ) {
-				foreach ( $_POST['_wpcf7_groups_count'] as $group_id => $group_sent_count ) {
+			if ( count( $this->groups ) && ! empty( $groups_count ) ) {
+				foreach ( $groups_count as $group_id => $group_sent_count ) {
+
 					// Change the `form` property.
 					$form_raw_tags            = $this->groups[ $group_id ]['raw'];
 					$form_tags_first_replaced = $form_raw_tags;
@@ -287,6 +291,21 @@ class CF7_Repeatable_Fields {
 			}
 		}
 		return $mail_body;
+	}
+
+	/**
+	 * Sanitization method of the `_wpcf7_groups_count` hidden input.
+	 *
+	 * @return array
+	 */
+	private function sanitize_groups_count() {
+		// phpcs:disable WordPress.Security.NonceVerification.Missing -- CF7 Handles this.
+		// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$groups_count = ( isset( $_POST['_wpcf7_groups_count'] ) ) ? wp_unslash( (array) $_POST['_wpcf7_groups_count'] ) : array();
+		$groups_count = array_map( 'sanitize_text_field', wp_unslash( (array) $groups_count ) );
+		// phpcs:enable WordPress.Security.NonceVerification.Missing
+		// phpcs:enable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		return $groups_count;
 	}
 
 	/**
