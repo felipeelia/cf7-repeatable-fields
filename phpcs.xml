@@ -20,4 +20,8 @@
 			<property name="text_domain" value="cf7-repeatable-fields" />
 		</properties>
 	</rule>
+
+	<rule ref="WordPress-Extra">
+		<exclude name="Generic.Arrays.DisallowShortArraySyntax.Found"/>
+	</rule>
 </ruleset>

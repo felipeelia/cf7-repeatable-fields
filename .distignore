@@ -18,3 +18,5 @@ phpcs.xml
 README.md
 
 .wp-env.json
+.husky
+tests
