@@ -16,3 +16,5 @@ package.json
 package-lock.json
 phpcs.xml
 README.md
+
+.wp-env.json

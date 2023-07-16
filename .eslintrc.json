@@ -1,12 +1,7 @@
 {
-	"extends": [
-		"plugin:@wordpress/eslint-plugin/recommended"
-	],
+	"extends": ["plugin:@wordpress/eslint-plugin/recommended"],
 	"env": {
 		"jquery": true
 	},
-	"ignorePatterns": [
-		"vendor/*",
-		"assets/js/scripts.min.js"
-	]
+	"ignorePatterns": ["vendor/*", "dist/*"]
 }

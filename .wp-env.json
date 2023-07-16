@@ -1,0 +1,7 @@
+{
+	"plugins": [
+		".",
+		"https://downloads.wordpress.org/plugin/contact-form-7.zip",
+		"https://downloads.wordpress.org/plugin/smtp-mailer.zip"
+	]
+}

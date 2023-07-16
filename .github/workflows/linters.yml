@@ -1,16 +1,38 @@
 name: Code Linters
 
+env:
+  NODE_VERSION: "18"
+
 on: [push, pull_request]
 
 jobs:
-  build:
+    build:
+        runs-on: ubuntu-latest
 
-    runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
 
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v1
-    - name: Lint PHP
-      uses: next-press/github-actions-linters/actions/phpcs@master
-    - name: Lint JS
-      uses: next-press/github-actions-linters/actions/eslint@master
+            - name: "Install node v${{ env.NODE_VERSION }}"
+              uses: actions/setup-node@v3
+              with:
+                node-version: ${{ env.NODE_VERSION }}
+
+            - name: npm ci
+              run: npm ci
+
+            - name: ES lint
+              run: npm run lint:js
+
+            - name: Set PHP version
+              uses: shivammathur/setup-php@v2
+              with:
+                php-version: '8.2'
+                tools: cs2pr
+                coverage: none
+
+            - name: composer install
+              run: composer install
+
+            - name: PHPCS check
+              run: './vendor/bin/phpcs . -q --report=checkstyle --runtime-set testVersion 7.0- | cs2pr'

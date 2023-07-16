@@ -155,10 +155,12 @@ class CF7_Repeatable_Fields {
 	 * Enqueue the necessary JS for groups manipulation.
 	 */
 	public function wpcf7_enqueue_scripts() {
-		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		$file = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ?
+			'assets/js/scripts.js' :
+			'dist/scripts.js';
 		wp_enqueue_script(
 			'wpcf7-field-group-script',
-			plugin_dir_url( CF7_REPEATABLE_FIELDS_FILE ) . 'assets/js/scripts' . $suffix . '.js',
+			plugin_dir_url( CF7_REPEATABLE_FIELDS_FILE ) . $file,
 			array( 'jquery' ),
 			CF7_REPEATABLE_FIELDS_VERSION,
 			true

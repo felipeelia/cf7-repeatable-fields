@@ -14,19 +14,12 @@
 	"author": "Felipe Elia",
 	"homepage": "https://github.com/felipeelia/cf7-repeatable-fields#readme",
 	"devDependencies": {
-		"@babel/core": "^7.8.7",
-		"@babel/preset-env": "^7.8.7",
-		"@wordpress/babel-preset-default": "^4.10.0",
-		"@wordpress/eslint-plugin": "^3.4.1",
-		"eslint": "^6.8.0",
-		"grunt": "^1.0.4",
-		"grunt-babel": "^8.0.0",
-		"grunt-checktextdomain": "^1.0.1",
-		"grunt-contrib-watch": "^1.1.0",
-		"grunt-wp-i18n": "^1.0.3",
-		"grunt-wp-readme-to-markdown": "^2.0.1",
-		"husky": "^3.1.0",
-		"lint-staged": "^9.5.0"
+		"@wordpress/env": "^8.3.0",
+		"@wordpress/eslint-plugin": "^14.10.0",
+		"@wordpress/scripts": "^26.8.0",
+		"eslint-plugin-prettier": "^5.0.0",
+		"husky": "^8.0.3",
+		"lint-staged": "^13.2.0"
 	},
 	"husky": {
 		"hooks": {
@@ -34,13 +27,21 @@
 		}
 	},
 	"lint-staged": {
-		"*.php": [
-			"php -d display_errors=1 -l",
-			"composer run-script phpcs-pre-commit"
+		"*.js": [
+			"wp-scripts lint-js"
 		],
-		"**/*.js": [
-			"eslint --fix",
-			"git add"
+		"*.php": [
+			"./vendor/bin/phpcs --extensions=php --runtime-set testVersion 7.0- -s"
 		]
+	},
+	"scripts": {
+		"prepare": "husky install",
+		"build": "wp-scripts build assets/js/scripts.js --webpack-no-externals --output-path=dist",
+		"env": "wp-env",
+		"format": "wp-scripts format ./assets",
+		"lint:js": "wp-scripts lint-js",
+		"lint:php": "./vendor/bin/phpcs --extensions=php --runtime-set testVersion 7.0- -s",
+		"lint": "npm run lint:js && npm run lint:php",
+		"start": "wp-scripts start"
 	}
 }
