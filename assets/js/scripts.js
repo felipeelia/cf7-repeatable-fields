@@ -4,6 +4,12 @@
  * `wpcf7-field-groups/added`: triggered by .wpcf7-field-group-add elements
  * `wpcf7-field-groups/removed`: triggered by .wpcf7-field-group-remove elements
  */
+
+/**
+ * Main function
+ *
+ * @param {Object} $ jQuery
+ */
 (function ($) {
 	'use strict';
 
