@@ -94,12 +94,13 @@ class CF7_Repeatable_Fields {
 		/**
 		 * Filters the add button attributes. Additional classes and text, so far.
 		 *
-		 * @param array $add_button_atts Array of strings with `additional_classes` and
+		 * @param array $add_button_atts Array of strings with `group_id`, `additional_classes` and
 		 *                               `text` as indexes.
 		 */
 		$add_button_atts = apply_filters(
 			'wpcf7_field_group_add_button_atts',
 			array(
+				'group_id'           => $group_id,
 				'additional_classes' => '',
 				'text'               => '+',
 			)
@@ -108,23 +109,26 @@ class CF7_Repeatable_Fields {
 		 * Filters the whole add group button. This way developers can wrap it with another element.
 		 *
 		 * @param string $button_html The HTML of the add button.
+		 * @param string $group_id    Current group ID.
 		 */
 		$add_button = apply_filters(
 			'wpcf7_field_group_add_button',
 			"<button type='button' class='wpcf7-field-group-add {$add_button_atts['additional_classes']}'>" .
 				$add_button_atts['text'] .
-			'</button>'
+			'</button>',
+			$group_id
 		);
 
 		/**
 		 * Filters the remove button attributes. Additional classes and text, so far.
 		 *
-		 * @param array $remove_button_atts Array of strings with `additional_classes` and
+		 * @param array $remove_button_atts Array of strings with `group_id`, `additional_classes` and
 		 *                                  `text` as indexes.
 		 */
 		$remove_button_atts = apply_filters(
 			'wpcf7_field_group_remove_button_atts',
 			array(
+				'group_id'           => $group_id,
 				'additional_classes' => '',
 				'text'               => '-',
 			)
@@ -133,12 +137,14 @@ class CF7_Repeatable_Fields {
 		 * Filters the whole remove group button. This way developers can wrap it with another element.
 		 *
 		 * @param string $button_html The HTML of the remove button.
+		 * @param string $group_id    Current group ID.
 		 */
 		$remove_button = apply_filters(
 			'wpcf7_field_group_remove_button',
 			"<button type='button' class='wpcf7-field-group-remove {$remove_button_atts['additional_classes']}'>" .
 				$remove_button_atts['text'] .
-			'</button>'
+			'</button>',
+			$group_id
 		);
 
 		return '<div ' . implode( ' ', $atts ) . '>' .

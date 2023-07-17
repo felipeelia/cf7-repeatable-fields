@@ -66,8 +66,9 @@ Filters the add button attributes.
 
 Parameters:
  * `$attributes`: Array of attributes for the add button. Keys:
- * `$additional_classes`: css class(es) to add to the button
- * `$text`: text used for the button
+	 * `group_id`: group ID
+	 * `additional_classes`: css class(es) to add to the button
+	 * `text`: text used for the button
 
 Return value: array of button attributes
 
@@ -77,6 +78,7 @@ Filters the add button HTML.
 
 Parameters:
 * `$html`: Default add button HTML
+* `$group_id`: The group ID
 
 Return value: button HTML
 
@@ -86,8 +88,9 @@ Filters the remove button attributes.
 
 Parameters:
  * `$attributes`: Array of attributes for the remove button. Keys:
- * `$additional_classes`: css class(es) to add to the button
- * `$text`: text used for the button
+	 * `group_id`: group ID
+	 * `additional_classes`: css class(es) to add to the button
+	 * `text`: text used for the button
 
 Return value: array of button attributes
 
@@ -97,6 +100,7 @@ Filters the remove button HTML.
 
 Parameters:
 * `$html`: Default remove button HTML
+* `$group_id`: The group ID
 
 Return value: button HTML
 
