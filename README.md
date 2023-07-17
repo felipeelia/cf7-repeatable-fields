@@ -1,20 +1,16 @@
-# Contact Form 7 - Repeatable Fields #
-**Contributors:** [felipeelia](https://profiles.wordpress.org/felipeelia)  
-**Donate link:** https://felipeelia.dev/contact-form-7-repeatable-fields/  
-**Tags:** contact form 7, cf7, repeater, repeatable  
-**Requires at least:** 6.0  
-**Tested up to:** 6.2
-**Requires PHP:** 7.2
-**Stable tag:** 2.0.0  
-**License:** GPLv2 or later  
-**License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
+# Contact Form 7 - Repeatable Fields
 
-Adds repeatable groups of fields to Contact Form 7.
+> Adds repeatable groups of fields to Contact Form 7.
 
-## Description ##
-This plugin adds repeatable groups of fields to Contact Form 7.
+[![Support Level](https://img.shields.io/badge/support-may_take_time-yellow.svg)](#support-level) [![Tests Status](https://github.com/felipeelia/cf7-repeatable-fields/actions/workflows/test.yml/badge.svg?branch=develop)](https://github.com/felipeelia/cf7-repeatable-fields) [![Release Version](https://img.shields.io/github/release/felipeelia/cf7-repeatable-fields.svg)](https://github.com/felipeelia/cf7-repeatable-fields/releases/latest) ![WordPress tested up to version](https://img.shields.io/wordpress/plugin/tested/cf7-repeatable-fields?label=WordPress) [![GPLv2 License](https://img.shields.io/github/license/felipeelia/cf7-repeatable-fields.svg)](https://github.com/felipeelia/cf7-repeatable-fields/blob/develop/LICENSE.md)
 
-**NOTE:** Tested with Contact Form 7 5.7.7.
+## Requirements
+
+ElasticPress requires these software with the following versions:
+
+* [WordPress](https://wordpress.org) 6.0+
+* [PHP](https://php.net/) 7.2+
+* [Contact Form 7](https://wordpress.org/plugins/contact-form-7/) 5.7+
 
 ## Usage ##
 
@@ -52,7 +48,7 @@ GROUP #[group_index]
 You can [add filters](https://developer.wordpress.org/reference/functions/add_filter/) to your theme to customize the add and remove buttons.
 
 Example
-~~~
+```php
 // In your theme's functions.php
 function customize_add_button_atts( $attributes ) {
   return array_merge( $attributes, array(
@@ -60,7 +56,7 @@ function customize_add_button_atts( $attributes ) {
   ) );
 }
 add_filter( 'wpcf7_field_group_add_button_atts', 'customize_add_button_atts' );
-~~~
+```
 
 The available filters are:
 
@@ -131,40 +127,19 @@ In the Form tab, add an element to hold the group index. In this example, it'll 
 ~~~
 
 And then you’ll have to add this to your JavaScript code:
-~~~
-jQuery( function( $ ) {
-	$( '.wpcf7-field-groups' ).on( 'wpcf7-field-groups/change', function() {
-		var $groups = $( this ).find( '.group-index' );
-		$groups.each( function() {
-			$( this ).text( $groups.index( this ) + 1 );
+```js
+jQuery(function($) {
+	$('.wpcf7-field-groups').on('wpcf7-field-groups/change', function() {
+		var $groups = $(this).find('.group-index');
+		$groups.each(function() {
+			$(this).text($groups.index(this) + 1);
 		} );
-	} ).trigger( 'wpcf7-field-groups/change' );
-} );
-~~~
+	}).trigger('wpcf7-field-groups/change');
+});
+```
 
 You can add that JS through your theme OR use some plugin like [Simple Custom CSS and JS](https://wordpress.org/plugins/custom-css-js/).
 
-## Changelog ##
+## Changelog
 
-To read the full list check our changelog.txt
-
-### 1.1.3 ###
-
-* Update WP `Tested up to` field
-* Apply WP Coding Standards
-* Fix a small sanitation problem
-
-### 1.1.2 ###
-
-* Fix Exclusive Checkboxes
-
-### 1.1.1 ###
-
-* Add compatibility to formatted dates (`[_format_{field name} "{date format}"]`)
-* DEV: Copy data and events while cloning a new group (JS)
-* DEV: Pass `$new_group` as an extra param for the `wpcf7-field-groups/added` event.
-* DEV: Apply some WPCS rules and add a CF7_REPEATABLE_FIELDS_VERSION const (may affect JS cache)
-
-### 1.1 ###
-
-* Replace groups in mail 2 field
+A complete listing of all notable changes to this plugin are documented in [CHANGELOG.md](https://github.com/felipeelia/cf7-repeatable-fields/blob/develop/CHANGELOG.md).

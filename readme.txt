@@ -1,13 +1,11 @@
 === Contact Form 7 - Repeatable Fields ===
 Contributors: felipeelia
-Donate link: https://felipeelia.dev/contact-form-7-repeatable-fields/
-Tags: contact form 7, cf7, repeater, repeatable
-Requires at least: 6.0
+Donate link:  https://felipeelia.dev/contact-form-7-repeatable-fields/
+Tags:         contact form 7, cf7, repeater, repeatable
 Tested up to: 6.2
-Requires PHP: 7.2
-Stable tag: 2.0.0
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Stable tag:   2.0.0
+License:      GPLv2 or later
+License URI:  http://www.gnu.org/licenses/gpl-2.0.html
 
 Adds repeatable groups of fields to Contact Form 7.
 
@@ -111,6 +109,10 @@ If you like it, a review is appreciated :)
 
 == Frequently Asked Questions ==
 
+= I have a problem with the plugin. Where can I get help? =
+
+If you have identified a bug or would like to suggest an enhancement, please refer to our [GitHub repo](https://github.com/felipeelia/cf7-repeatable-fields). I do not provide support here at WordPress.org forums.
+
 = Can I change the add/remove buttons? =
 
 Yes. You can use `wpcf7_field_group_add_button_atts`, `wpcf7_field_group_add_button`, `wpcf7_field_group_remove_button_atts`, and `wpcf7_field_group_remove_button` filters, as shown above. Props to @berniegp.
@@ -131,40 +133,55 @@ In the Form tab, add an element to hold the group index. In this example, it'll 
 ~~~
 
 And then you’ll have to add this to your JavaScript code:
-~~~
-jQuery( function( $ ) {
-	$( '.wpcf7-field-groups' ).on( 'wpcf7-field-groups/change', function() {
-		var $groups = $( this ).find( '.group-index' );
-		$groups.each( function() {
-			$( this ).text( $groups.index( this ) + 1 );
+```js
+jQuery(function($) {
+	$('.wpcf7-field-groups').on('wpcf7-field-groups/change', function() {
+		var $groups = $(this).find('.group-index');
+		$groups.each(function() {
+			$(this).text($groups.index(this) + 1);
 		} );
-	} ).trigger( 'wpcf7-field-groups/change' );
-} );
-~~~
+	}).trigger('wpcf7-field-groups/change');
+});
+```
 
 You can add that JS through your theme OR use some plugin like [Simple Custom CSS and JS](https://wordpress.org/plugins/custom-css-js/).
 
 == Changelog ==
 
-To read the full list check our changelog.txt
-
-= 1.1.3 =
+= 1.1.3 - 2019-12-11 =
 
 * Update WP `Tested up to` field
 * Apply WP Coding Standards
-* Fix a small sanitation problem
+* Fix a small sanitization problem
 
-= 1.1.2 =
+= 1.1.2 - 2019-10-10 =
 
 * Fix Exclusive Checkboxes
 
-= 1.1.1 =
+= 1.1.1 - 2019-09-04 =
 
 * Add compatibility to formatted dates (`[_format_{field name} "{date format}"]`)
 * DEV: Copy data and events while cloning a new group (JS)
 * DEV: Pass `$new_group` as an extra param for the `wpcf7-field-groups/added` event.
 * DEV: Apply some WPCS rules and add a CF7_REPEATABLE_FIELDS_VERSION const (may affect JS cache)
 
-= 1.1 =
+= 1.1 - 2018-06-14 =
 
 * Replace groups in mail 2 field
+
+= 1.0.2 - 2018/03/29 =
+
+* Fix repeated tags in mail body
+
+= 1.0.1 - 2018/03/20 =
+
+* Fix the `wpcf7_field_group_remove_button_atts` filter name. Props to @asilvestre87
+
+= 1.0.0 - 2018/03/19 =
+
+* Initial release
+
+== Upgrade Notice ==
+
+= 2.0.0 =
+This version changes the minimum requirements of the plugin: PHP 7.2+, WordPress 6.0+, and Contact Form 7 5.7+.
