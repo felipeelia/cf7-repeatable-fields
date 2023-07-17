@@ -20,20 +20,20 @@ This plugin adds repeatable groups of fields to Contact Form 7.
 Wrap the desired fields with `[field_group your_group_id_here][/field_group]`. The shortcode accepts additional parameters, in WP shortcode format and in CF7 fields parameters format as well.
 
 Example:
-~~~~
+```html
 [field_group emails id="emails-groups" tabindex:1]
 	<label>Your Email (required)[email* your-email]</label>
 	[radio your-radio use_label_element default:1 "radio 1" "radio 2" "radio 3"]
 	[select* your-menu include_blank "option1" "option 2"]
 	[checkbox* your-checkbox "check 1" "check 2"]
 [/field_group]
-~~~~
+```
 
 = Mail tab =
 In the mail settings, wrap the fields with your group id. You can use the `[group_index]` tag to print the group index and an additional `__<NUMBER>` to print a field at a specific index.
 
 Example:
-~~~~
+```html
 The second email entered by the user was: [your-email__2]
 
 These were the groups:
@@ -44,13 +44,13 @@ GROUP #[group_index]
 	Radio: [your-radio]
 	Select: [your-menu]
 [/emails]
-~~~~
+```
 
 == Customizing the add and remove buttons ==
 You can [add filters](https://developer.wordpress.org/reference/functions/add_filter/) to your theme to customize the add and remove buttons.
 
 Example
-~~~
+```php
 // In your theme's functions.php
 function customize_add_button_atts( $attributes ) {
   return array_merge( $attributes, array(
@@ -58,7 +58,7 @@ function customize_add_button_atts( $attributes ) {
   ) );
 }
 add_filter( 'wpcf7_field_group_add_button_atts', 'customize_add_button_atts' );
-~~~
+```
 
 The available filters are:
 
@@ -67,9 +67,10 @@ The available filters are:
 Filters the add button attributes.
 
 Parameters:
-* $attributes: Array of attributes for the add button. Keys:
- * `additional_classes`: css class(es) to add to the button
- * `text`: text used for the button
+
+ * `$attributes`: Array of attributes for the add button. Keys:
+ * `$additional_classes`: css class(es) to add to the button
+ * `$text`: text used for the button
 
 Return value: array of button attributes
 
@@ -78,7 +79,8 @@ Return value: array of button attributes
 Filters the add button HTML.
 
 Parameters:
-* $html: Default add button HTML
+
+* `$html`: Default add button HTML
 
 Return value: button HTML
 
@@ -87,9 +89,10 @@ Return value: button HTML
 Filters the remove button attributes.
 
 Parameters:
-* $attributes: Array of attributes for the remove button. Keys:
- * `additional_classes`: css class(es) to add to the button
- * `text`: text used for the button
+
+ * `$attributes`: Array of attributes for the remove button. Keys:
+ * `$additional_classes`: css class(es) to add to the button
+ * `$text`: text used for the button
 
 Return value: array of button attributes
 
@@ -98,7 +101,8 @@ Return value: array of button attributes
 Filters the remove button HTML.
 
 Parameters:
-* $html: Default remove button HTML
+
+* `$html`: Default remove button HTML
 
 Return value: button HTML
 
@@ -122,7 +126,7 @@ Yes. You can use `wpcf7_field_group_add_button_atts`, `wpcf7_field_group_add_but
 You'll have to use the `wpcf7-field-groups/change` jQuery event.
 
 In the Form tab, add an element to hold the group index. In this example, it'll be a `<span>` with the `group-index` class:
-~~~
+```html
 [field_group emails id="emails-groups" tabindex:1]
 	<p>Group #<span class="group-index"></span></p>
 	<label>Your Email (required)[email* your-email]</label>
@@ -130,7 +134,7 @@ In the Form tab, add an element to hold the group index. In this example, it'll 
 	[select* your-menu include_blank "option1" "option 2"]
 	[checkbox* your-checkbox "check 1" "check 2"]
 [/field_group]
-~~~
+```
 
 And then you’ll have to add this to your JavaScript code:
 ```js
