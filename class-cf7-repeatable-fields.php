@@ -220,6 +220,10 @@ class CF7_Repeatable_Fields {
 					// Change the `mail` property. Users can use `[group_index]` inside a group to show it's number.
 					$mail['body']   = $this->replace_mail_field_groups( $group_id, $group_sent_count, $mail['body'] );
 					$mail_2['body'] = $this->replace_mail_field_groups( $group_id, $group_sent_count, $mail_2['body'] );
+
+					// Replace `attachments`.
+					$mail['attachments']   = $this->replace_non_mail_field_groups( $group_id, $group_sent_count, $mail['attachments'] );
+					$mail_2['attachments'] = $this->replace_non_mail_field_groups( $group_id, $group_sent_count, $mail_2['attachments'] );
 				}
 			}
 
@@ -293,6 +297,41 @@ class CF7_Repeatable_Fields {
 			}
 		}
 		return $mail_body;
+	}
+
+	/**
+	 * Replace a field group in mail fields other than bodies, like attachments, for example.
+	 *
+	 * @param string $group_id           The group ID.
+	 * @param int    $group_sent_count   Groups sent count.
+	 * @param string $field_value        The field value set by users in CF7.
+	 * @return string                    `$field_value` with group replaced.
+	 */
+	public function replace_non_mail_field_groups( $group_id, $group_sent_count, $field_value ) {
+		$group_name         = preg_quote( $group_id, '/' );
+		$has_grouped_fields = preg_match_all(
+			"/\[{$group_name}__(.*?)\]/s",
+			$field_value,
+			$matches
+		);
+		if ( $has_grouped_fields ) {
+			foreach ( $matches[0] as $i => $grouped_fields ) {
+				foreach ( $this->groups[ $group_id ]['tags'] as $tag ) {
+
+					$field_repeated_tag = '';
+					for ( $i = 1; $i <= $group_sent_count; $i++ ) {
+						$field_repeated_tag .= "[{$tag->name}__{$i}]";
+					}
+
+					$field_value = str_replace(
+						"[{$group_name}__{$tag->name}]",
+						$field_repeated_tag,
+						$field_value
+					);
+				}
+			}
+		}
+		return $field_value;
 	}
 
 	/**
