@@ -60,7 +60,7 @@ class CF7_Repeatable_Fields {
 		$group_id = '';
 		$atts     = array_map(
 			function( $att, $value ) use ( &$group_id ) {
-					// WordPress sets numeric atts if the `attr="value"` format isn't used.
+				// WordPress sets numeric atts if the `attr="value"` format isn't used.
 				if ( is_int( $att ) ) {
 					if ( false === strpos( $value, ':' ) ) {
 						$att      = 'data-wpcf7-group-id';
@@ -70,7 +70,7 @@ class CF7_Repeatable_Fields {
 						list( $att, $value ) = explode( ':', $value );
 					}
 				}
-					return sprintf( '%s="%s"', $att, esc_attr( $value ) );
+				return sprintf( '%s="%s"', $att, esc_attr( $value ) );
 			},
 			array_keys( $atts ),
 			$atts
@@ -142,13 +142,13 @@ class CF7_Repeatable_Fields {
 		);
 
 		return '<div ' . implode( ' ', $atts ) . '>' .
-					'<div class="wpcf7-field-group">' .
-						do_shortcode( $content ) .
-						$remove_button .
-						$add_button .
-						'<input type="hidden" class="wpcf7-field-group-count" name="_wpcf7_groups_count[' . $group_id . ']" value="1" />' .
-					'</div>' .
-				'</div>';
+			'<div class="wpcf7-field-group">' .
+				do_shortcode( $content ) .
+				$remove_button .
+				$add_button .
+				'<input type="hidden" class="wpcf7-field-group-count" name="_wpcf7_groups_count[' . $group_id . ']" value="1" />' .
+			'</div>' .
+		'</div>';
 	}
 
 	/**
@@ -158,6 +158,7 @@ class CF7_Repeatable_Fields {
 		$file = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ?
 			'assets/js/scripts.js' :
 			'dist/scripts.js';
+
 		wp_enqueue_script(
 			'wpcf7-field-group-script',
 			plugin_dir_url( CF7_REPEATABLE_FIELDS_FILE ) . $file,
@@ -180,58 +181,60 @@ class CF7_Repeatable_Fields {
 	 */
 	public function wpcf7_contact_form( $contact_form ) {
 		// Don't mess up when user is editing the form.
-		if ( ! is_admin() ) {
-			// This enables shortcode in Contact Form form. Side effects?
-			$form   = do_shortcode( $contact_form->prop( 'form' ) );
-			$mail   = $contact_form->prop( 'mail' );
-			$mail_2 = $contact_form->prop( 'mail_2' );
-
-			// Post info sanitization.
-			$groups_count = $this->sanitize_groups_count();
-
-			/*
-			 * We only make our magic when user is sending the form.
-			 * There is no need to change anything when showing it for the first time.
-			 */
-			if ( count( $this->groups ) && ! empty( $groups_count ) ) {
-				foreach ( $groups_count as $group_id => $group_sent_count ) {
-
-					// Change the `form` property.
-					$form_raw_tags            = $this->groups[ $group_id ]['raw'];
-					$form_tags_first_replaced = $form_raw_tags;
-					foreach ( $this->groups[ $group_id ]['tags'] as $tag ) {
-						$tag_type = preg_quote( $tag->type, '/' );
-						$tag_name = preg_quote( $tag->name, '/' );
-						// Change the original `name` to `name__1`.
-						$form_tags_first_replaced = preg_replace( "/\[{$tag_type}(.*?){$tag_name}/", "[{$tag->type}\\1{$tag->name}__1", $form_tags_first_replaced );
-
-					}
-					$form_tags_replaced = $form_tags_first_replaced;
-					for ( $i = 2; $i <= $group_sent_count; $i++ ) {
-						// Change the `name__1` to `name__$i`.
-						$form_tags_replaced .= preg_replace( '/__1(\s|\])/', "__{$i}$1", $form_tags_first_replaced );
-					}
-					$form = str_replace(
-						$form_raw_tags,
-						$form_tags_replaced,
-						$form
-					);
-
-					// Change the `mail` property. Users can use `[group_index]` inside a group to show it's number.
-					$mail['body']   = $this->replace_mail_field_groups( $group_id, $group_sent_count, $mail['body'] );
-					$mail_2['body'] = $this->replace_mail_field_groups( $group_id, $group_sent_count, $mail_2['body'] );
-				}
-			}
-
-			// Set up modified properties. `form` here already was `do_shortcode`'ed.
-			$contact_form->set_properties(
-				array(
-					'form'   => $form,
-					'mail'   => $mail,
-					'mail_2' => $mail_2,
-				)
-			);
+		if ( is_admin() ) {
+			return;
 		}
+
+		// This enables shortcode in Contact Form form. Side effects?
+		$form   = do_shortcode( $contact_form->prop( 'form' ) );
+		$mail   = $contact_form->prop( 'mail' );
+		$mail_2 = $contact_form->prop( 'mail_2' );
+
+		// Post info sanitization.
+		$groups_count = $this->sanitize_groups_count();
+
+		/*
+		 * We only make our magic when user is sending the form.
+		 * There is no need to change anything when showing it for the first time.
+		 */
+		if ( count( $this->groups ) && ! empty( $groups_count ) ) {
+			foreach ( $groups_count as $group_id => $group_sent_count ) {
+
+				// Change the `form` property.
+				$form_raw_tags            = $this->groups[ $group_id ]['raw'];
+				$form_tags_first_replaced = $form_raw_tags;
+				foreach ( $this->groups[ $group_id ]['tags'] as $tag ) {
+					$tag_type = preg_quote( $tag->type, '/' );
+					$tag_name = preg_quote( $tag->name, '/' );
+					// Change the original `name` to `name__1`.
+					$form_tags_first_replaced = preg_replace( "/\[{$tag_type}(.*?){$tag_name}/", "[{$tag->type}\\1{$tag->name}__1", $form_tags_first_replaced );
+
+				}
+				$form_tags_replaced = $form_tags_first_replaced;
+				for ( $i = 2; $i <= $group_sent_count; $i++ ) {
+					// Change the `name__1` to `name__$i`.
+					$form_tags_replaced .= preg_replace( '/__1(\s|\])/', "__{$i}$1", $form_tags_first_replaced );
+				}
+				$form = str_replace(
+					$form_raw_tags,
+					$form_tags_replaced,
+					$form
+				);
+
+				// Change the `mail` property. Users can use `[group_index]` inside a group to show it's number.
+				$mail['body']   = $this->replace_mail_field_groups( $group_id, $group_sent_count, $mail['body'] );
+				$mail_2['body'] = $this->replace_mail_field_groups( $group_id, $group_sent_count, $mail_2['body'] );
+			}
+		}
+
+		// Set up modified properties. `form` here already was `do_shortcode`'ed.
+		$contact_form->set_properties(
+			array(
+				'form'   => $form,
+				'mail'   => $mail,
+				'mail_2' => $mail_2,
+			)
+		);
 	}
 
 	/**

@@ -24,4 +24,7 @@
 	<rule ref="WordPress-Extra">
 		<exclude name="Generic.Arrays.DisallowShortArraySyntax.Found"/>
 	</rule>
+
+	<rule ref="PHPCompatibilityWP" />
+	<config name="testVersion" value="7.2-"/>
 </ruleset>
