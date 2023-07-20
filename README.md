@@ -46,13 +46,13 @@ GROUP #[group_index]
 
 ## Check out the Wiki
 
-* [Hooks available](https://github.com/felipeelia/cf7-repeatable-fields/wiki/Hooks) - How to customize the add and remove buttons
+* [Hooks available](https://github.com/felipeelia/cf7-repeatable-fields/wiki/Hooks) - How to customize the _add_ and _remove_ buttons
 * [Frequently Asked Questions](https://github.com/felipeelia/cf7-repeatable-fields/wiki/Frequently-Asked-Questions)
 
 ## Contribute ##
 You can contribute with code, issues and ideas at the [GitHub repository](https://github.com/felipeelia/cf7-repeatable-fields).
 
-If you like it, [a review](https://wordpress.org/support/plugin/cf7-repeatable-fields/reviews/#new-post) is appreciated :)
+If you like the plugin, [a review](https://wordpress.org/support/plugin/cf7-repeatable-fields/reviews/#new-post) is appreciated :)
 
 ## Changelog
 

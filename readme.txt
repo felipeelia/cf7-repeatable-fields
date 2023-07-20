@@ -46,70 +46,15 @@ GROUP #[group_index]
 [/emails]
 ```
 
-== Customizing the add and remove buttons ==
-You can [add filters](https://developer.wordpress.org/reference/functions/add_filter/) to your theme to customize the add and remove buttons.
+== Check out the Wiki ==
 
-Example
-```php
-// In your theme's functions.php
-function customize_add_button_atts( $attributes ) {
-  return array_merge( $attributes, array(
-    'text' => 'Add Entry',
-  ) );
-}
-add_filter( 'wpcf7_field_group_add_button_atts', 'customize_add_button_atts' );
-```
-
-The available filters are:
-
-= wpcf7_field_group_add_button_atts =
-
-Filters the add button attributes.
-
-Parameters:
-
- * `$attributes`: Array of attributes for the add button. Keys:
- * `$additional_classes`: css class(es) to add to the button
- * `$text`: text used for the button
-
-Return value: array of button attributes
-
-= wpcf7_field_group_add_button =
-
-Filters the add button HTML.
-
-Parameters:
-
-* `$html`: Default add button HTML
-
-Return value: button HTML
-
-= wpcf7_field_group_remove_button_atts =
-
-Filters the remove button attributes.
-
-Parameters:
-
- * `$attributes`: Array of attributes for the remove button. Keys:
- * `$additional_classes`: css class(es) to add to the button
- * `$text`: text used for the button
-
-Return value: array of button attributes
-
-= wpcf7_field_group_remove_button =
-
-Filters the remove button HTML.
-
-Parameters:
-
-* `$html`: Default remove button HTML
-
-Return value: button HTML
+* [Hooks available](https://github.com/felipeelia/cf7-repeatable-fields/wiki/Hooks) - How to customize the _add_ and _remove_ buttons
+* [Frequently Asked Questions](https://github.com/felipeelia/cf7-repeatable-fields/wiki/Frequently-Asked-Questions)
 
 == Contribute ==
 You can contribute with code, issues and ideas at the [GitHub repository](https://github.com/felipeelia/cf7-repeatable-fields).
 
-If you like it, a review is appreciated :)
+If you like the plugin, [a review](https://wordpress.org/support/plugin/cf7-repeatable-fields/reviews/#new-post) is appreciated :)
 
 == Frequently Asked Questions ==
 
@@ -117,38 +62,9 @@ If you like it, a review is appreciated :)
 
 If you have identified a bug or would like to suggest an enhancement, please refer to our [GitHub repo](https://github.com/felipeelia/cf7-repeatable-fields). I do not provide support here at WordPress.org forums.
 
-= Can I change the add/remove buttons? =
+= My question is not listed here. Can I search somewhere else? =
 
-Yes. You can use `wpcf7_field_group_add_button_atts`, `wpcf7_field_group_add_button`, `wpcf7_field_group_remove_button_atts`, and `wpcf7_field_group_remove_button` filters, as shown above. Props to @berniegp.
-
-= How can I display the group index number in the form? =
-
-You'll have to use the `wpcf7-field-groups/change` jQuery event.
-
-In the Form tab, add an element to hold the group index. In this example, it'll be a `<span>` with the `group-index` class:
-```html
-[field_group emails id="emails-groups" tabindex:1]
-	<p>Group #<span class="group-index"></span></p>
-	<label>Your Email (required)[email* your-email]</label>
-	[radio your-radio use_label_element default:1 "radio 1" "radio 2" "radio 3"]
-	[select* your-menu include_blank "option1" "option 2"]
-	[checkbox* your-checkbox "check 1" "check 2"]
-[/field_group]
-```
-
-And then you’ll have to add this to your JavaScript code:
-```js
-jQuery(function($) {
-	$('.wpcf7-field-groups').on('wpcf7-field-groups/change', function() {
-		var $groups = $(this).find('.group-index');
-		$groups.each(function() {
-			$(this).text($groups.index(this) + 1);
-		} );
-	}).trigger('wpcf7-field-groups/change');
-});
-```
-
-You can add that JS through your theme OR use some plugin like [Simple Custom CSS and JS](https://wordpress.org/plugins/custom-css-js/).
+Yes! Give a look at the [Frequently Asked Questions](https://github.com/felipeelia/cf7-repeatable-fields/wiki/Frequently-Asked-Questions) section of our wiki.
 
 == Changelog ==
 
