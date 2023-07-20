@@ -2,7 +2,7 @@
 
 > Adds repeatable groups of fields to Contact Form 7.
 
-[![Support Level](https://img.shields.io/badge/support-may_take_time-yellow.svg)](#support-level) [![Tests Status](https://github.com/felipeelia/cf7-repeatable-fields/actions/workflows/test.yml/badge.svg?branch=develop)](https://github.com/felipeelia/cf7-repeatable-fields) [![Release Version](https://img.shields.io/github/release/felipeelia/cf7-repeatable-fields.svg)](https://github.com/felipeelia/cf7-repeatable-fields/releases/latest) ![WordPress tested up to version](https://img.shields.io/wordpress/plugin/tested/cf7-repeatable-fields?label=WordPress) [![GPLv2 License](https://img.shields.io/github/license/felipeelia/cf7-repeatable-fields.svg)](https://github.com/felipeelia/cf7-repeatable-fields/blob/trunk/LICENSE.md)
+[![Support Level](https://img.shields.io/badge/support-may_take_time-yellow.svg)](#support-level) [![Tests Status](https://github.com/felipeelia/cf7-repeatable-fields/actions/workflows/test.yml/badge.svg?branch=trunk)](https://github.com/felipeelia/cf7-repeatable-fields) [![Release Version](https://img.shields.io/github/release/felipeelia/cf7-repeatable-fields.svg)](https://github.com/felipeelia/cf7-repeatable-fields/releases/latest) ![WordPress tested up to version](https://img.shields.io/wordpress/plugin/tested/cf7-repeatable-fields?label=WordPress) [![GPLv2 License](https://img.shields.io/github/license/felipeelia/cf7-repeatable-fields.svg)](https://github.com/felipeelia/cf7-repeatable-fields/blob/trunk/LICENSE.md)
 
 ## Requirements
 
