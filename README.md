@@ -44,18 +44,15 @@ GROUP #[group_index]
 [/emails]
 ```
 
-## Customizing the add and remove buttons ##
+## Check out the Wiki
 
-Visit the plugin wiki to check all [hooks available](https://github.com/felipeelia/cf7-repeatable-fields/wiki/Hooks).
+* [Hooks available](https://github.com/felipeelia/cf7-repeatable-fields/wiki/Hooks) - How to customize the add and remove buttons
+* [Frequently Asked Questions](https://github.com/felipeelia/cf7-repeatable-fields/wiki/Frequently-Asked-Questions)
 
 ## Contribute ##
 You can contribute with code, issues and ideas at the [GitHub repository](https://github.com/felipeelia/cf7-repeatable-fields).
 
 If you like it, [a review](https://wordpress.org/support/plugin/cf7-repeatable-fields/reviews/#new-post) is appreciated :)
-
-## Frequently Asked Questions ##
-
-Visit the plugin wiki to [check our FAQs](https://github.com/felipeelia/cf7-repeatable-fields/wiki/Frequently-Asked-Questions).
 
 ## Changelog
 
