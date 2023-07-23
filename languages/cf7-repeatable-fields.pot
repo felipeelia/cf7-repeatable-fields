@@ -1,0 +1,53 @@
+# Copyright (C) 2023 Felipe Elia
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Contact Form 7 - Repeatable Fields 2.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cf7-repeatable-fields\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2023-07-23T19:32:06+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: cf7-repeatable-fields\n"
+
+#. Plugin Name of the plugin
+msgid "Contact Form 7 - Repeatable Fields"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://github.com/felipeelia/cf7-repeatable-fields"
+msgstr ""
+
+#. Description of the plugin
+msgid "An add-on plugin for Contact Form 7 that adds a repeatable group of fields functionality."
+msgstr ""
+
+#. Author of the plugin
+msgid "Felipe Elia"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://felipeelia.dev/"
+msgstr ""
+
+#. translators: 1: Plugin name; 2: Contact Form 7 link
+#: cf7-repeatable-fields.php:53
+msgid "In order to %1$s work, %2$s needs to be installed and activated."
+msgstr ""
+
+#: cf7-repeatable-fields.php:55
+msgid "Contact Form 7"
+msgstr ""
+
+#: cf7-repeatable-fields.php:64
+msgid "Do it now?"
+msgstr ""
+
+#. translators: Format to use surrounded by code tag
+#: class-cf7-repeatable-fields.php:82
+msgid "You need to set an ID to this group. Use %s format."
+msgstr ""

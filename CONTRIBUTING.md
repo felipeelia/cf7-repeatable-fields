@@ -32,7 +32,7 @@ The `trunk` branch is the main branch and contains all new code to be released i
 1. Props: Update `CREDITS.md` file with any new contributors, confirm maintainers are accurate.
 1. Readme updates: Make any other readme changes as necessary. `README.md` is geared toward GitHub and `readme.txt` contains WordPress.org-specific content. The two are slightly different.
 1. New files: Check to be sure any new files/paths that are unnecessary in the production version are included in `.distignore`.
-1. POT file: Run `wp i18n make-pot . lang/cf7-repeatable-fields.pot` and commit the file. In case of errors, try to disable Xdebug (see [this comment](https://github.com/10up/ElasticPress/pull/3079#issuecomment-1291028290).)
+1. POT file: Run `wp i18n make-pot . languages/cf7-repeatable-fields.pot` and commit the file. In case of errors, try to disable Xdebug (see [this comment](https://github.com/10up/ElasticPress/pull/3079#issuecomment-1291028290).)
 1. Release date: Double check the release date in both changelog files.
 1. Merge: Merge the release branch/PR into `trunk`.
 1. Test: Run `git pull origin trunk` and test for functionality locally.
