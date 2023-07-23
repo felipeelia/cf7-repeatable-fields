@@ -13,6 +13,31 @@ All notable changes to this project will be documented in this file, per [the Ke
 ### Security
 -->
 
+## [2.0.0] - 2023-07-23
+
+**Note that this version changes minimum required versions of:**
+
+* [WordPress](https://wordpress.org): 6.0+
+* [PHP](https://php.net/): 7.2+
+* [Contact Form 7](https://wordpress.org/plugins/contact-form-7/): 5.7+
+
+This release marks the (slow) resumption of this plugin development. If you want to know more about it check out [this blog post](https://felipeelia.dev/contact-form-7-repeatable-fields-2-0-0/). If you find this plugin useful, consider leaving it [a review](https://wordpress.org/support/plugin/cf7-repeatable-fields/reviews/#new-post).
+
+### Added
+
+* Support to [wp-env](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/). See 6db4e08.
+* `group_id` as a parameter to all filters. See #51.
+* Very basic unit testing. See #52.
+
+### Changed
+
+* Linting tools and script build process. See 6db4e08.
+* Docs were migrated to [GitHub wiki](https://github.com/felipeelia/cf7-repeatable-fields/wiki). See 14fdd49.
+
+### Fixed
+
+* Validation problem with Contact Form 5.7+. Props [@sfdeveloper](https://profiles.wordpress.org/sfdeveloper/) via [this comment](https://wordpress.org/support/topic/compatibility-issues-with-cf7-5-7/#post-16588238) - added in 6db4e08.
+
 ## [1.1.3] - 2019-12-11
 
 * Update WP `Tested up to` field
@@ -46,7 +71,8 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 * Initial release
 
-[Unreleased]: https://github.com/felipeelia/cf7-repeatable-fields/compare/1.1.3...trunk
+[Unreleased]: https://github.com/felipeelia/cf7-repeatable-fields/compare/2.0.0...trunk
+[2.0.0]: https://github.com/felipeelia/cf7-repeatable-fields/compare/1.1.3...2.0.0
 [1.1.3]: https://github.com/felipeelia/cf7-repeatable-fields/compare/1.1.2...1.1.3
 [1.1.2]: https://github.com/felipeelia/cf7-repeatable-fields/compare/1.1.1...1.1.2
 [1.1.1]: https://github.com/felipeelia/cf7-repeatable-fields/compare/1.1...1.1.1

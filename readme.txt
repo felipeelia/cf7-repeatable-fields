@@ -68,6 +68,31 @@ Yes! Give a look at the [Frequently Asked Questions](https://github.com/felipeel
 
 == Changelog ==
 
+= 2.0.0 - 2023-07-23 =
+
+**Note that this version changes minimum required versions of:**
+
+* [WordPress](https://wordpress.org): 6.0+
+* [PHP](https://php.net/): 7.2+
+* [Contact Form 7](https://wordpress.org/plugins/contact-form-7/): 5.7+
+
+This release marks the (slow) resumption of this plugin development. If you want to know more about it check out [this blog post](https://felipeelia.dev/contact-form-7-repeatable-fields-2-0-0/). If you find this plugin useful, consider leaving it [a review](https://wordpress.org/support/plugin/cf7-repeatable-fields/reviews/#new-post).
+
+__Added:__
+
+* Support to [wp-env](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/).
+* `group_id` as a parameter to all filters.
+* Very basic unit testing.
+
+__Changed:__
+
+* Linting tools and script build process.
+* Docs were migrated to [GitHub wiki](https://github.com/felipeelia/cf7-repeatable-fields/wiki).
+
+__Fixed:__
+
+* Validation problem with Contact Form 5.7+. Props [@sfdeveloper](https://profiles.wordpress.org/sfdeveloper/).
+
 = 1.1.3 - 2019-12-11 =
 
 * Update WP `Tested up to` field
