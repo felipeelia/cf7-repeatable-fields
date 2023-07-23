@@ -112,3 +112,17 @@
 		);
 	});
 })(jQuery);
+
+const setupCf7RepeaterFields = () => {
+	const groups = document.querySelectorAll('.wpcf7-field-groups');
+	if (!groups.length) {
+		return;
+	}
+
+	groups.forEach((group) => {
+		group.dataset.group_model = group
+			.querySelector('.wpcf7-field-group')
+			.cloneNode(true);
+	});
+};
+document.addEventListener('DOMContentLoaded', setupCf7RepeaterFields);
