@@ -16,6 +16,8 @@ package.json
 package-lock.json
 phpcs.xml
 README.md
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
 
 .wp-env.json
 .husky
