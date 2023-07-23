@@ -42,6 +42,6 @@
 		"lint:js": "wp-scripts lint-js",
 		"lint:php": "./vendor/bin/phpcs --extensions=php --runtime-set testVersion 7.0- -s",
 		"lint": "npm run lint:js && npm run lint:php",
-		"start": "wp-scripts start"
+		"start": "wp-scripts start assets/js/scripts.js --webpack-no-externals --output-path=dist"
 	}
 }

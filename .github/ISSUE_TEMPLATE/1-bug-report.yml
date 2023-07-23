@@ -1,0 +1,63 @@
+name: "\U0001F41B Bug report"
+description: Create a report to help us improve
+title: 'BUG: '
+labels: ["bug"]
+body:
+    - type: markdown
+      attributes:
+          value: |
+              Thanks for taking the time to fill out this bug report!  Please fill in as much of the template below as you can.
+
+    - type: textarea
+      attributes:
+          label: Describe the bug
+          description: Please write a clear and concise description of the bug.
+          placeholder: |
+              Feature '...' is not working properly. I expect '...' to happen, but '...' happens instead
+      validations:
+          required: true
+          
+    - type: textarea
+      attributes:
+          label: Steps to Reproduce
+          description: Please write the steps needed to reproduce the bug.
+          placeholder: |
+              1. Go to '...'
+              2. Click on '...'
+              3. Scroll down to '...'
+              4. See error
+      validations:
+          required: true
+
+    - type: textarea
+      attributes:
+          label: Form tab contents
+          placeholder: The content of the "Form" tab of your form
+      validations:
+          required: true
+
+    - type: textarea
+      attributes:
+          label: Mail tab contents
+          placeholder: The content of the "Mail" tab of your form
+      validations:
+          required: true
+          
+    - type: textarea
+      attributes:
+          label: WordPress information
+          placeholder: |
+             <details><summary>Site Health info:</summary>
+             <!-- Go to Tools > Site Health > Info tab, click "Copy site info to clipboard", and paste those details here. -->
+             </details>
+      validations:
+          required: false
+
+    - type: checkboxes
+      id: terms
+      attributes:
+        label: Code of Conduct
+        description: By submitting this issue, you agree to follow our `Code of Conduct` (see the `CODE_OF_CONDUCT.md` file in the repo).
+        options:
+          - label: I agree to follow this project's Code of Conduct
+            required: true

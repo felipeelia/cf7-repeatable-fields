@@ -3,17 +3,38 @@
 	"description": "Contact Form 7 – Repeatable Fields",
 	"type": "wordpress-plugin",
 	"license": "GPL-2.0",
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "https://wpackagist.org"
+		}
+	],
 	"require": {
 		"php": ">=7.0",
 		"composer/installers": "^1.0 || ^2.0"
 	},
 	"require-dev": {
-		"10up/phpcs-composer": "dev-master"
+		"10up/phpcs-composer": "dev-master",
+		"wpackagist-plugin/contact-form-7": "*",
+		"phpcompatibility/phpcompatibility-wp": "*",
+		"yoast/phpunit-polyfills": "^2.0"
 	},
 	"config": {
 		"allow-plugins": {
 			"composer/installers": true,
 			"dealerdirect/phpcodesniffer-composer-installer": true
 		}
+	},
+	"extra": {
+		"installer-paths": {
+			"vendor/{$name}/": [
+				"type:wordpress-plugin",
+				"type:wordpress-theme"
+			]
+		}
+	},
+	"scripts": {
+		"test": "phpunit",
+		"setup-local-tests": "bash bin/install-wp-tests.sh cf7_rf_test root password 127.0.0.1 latest true"
 	}
 }
