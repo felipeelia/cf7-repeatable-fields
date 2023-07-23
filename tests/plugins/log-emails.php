@@ -2,7 +2,8 @@
 /**
  * Plugin Name: Log Emails
  * Version:     1.0.0
- * Author:      10up Inc.
+ * Author:      Felipe Elia
+ * Author URI:  https://felipeelia.dev/
  * License:     GPLv2 or later
  *
  * @package CF7_Repeatable_Fields_Tests
