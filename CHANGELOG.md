@@ -25,18 +25,18 @@ This release marks the (slow) resumption of this plugin development. If you want
 
 ### Added
 
-* Support to [wp-env](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/). See 6db4e08.
-* `group_id` as a parameter to all filters. See #51.
-* Very basic unit testing. See #52.
+* Support to [wp-env](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/). See [6db4e08](https://github.com/felipeelia/cf7-repeatable-fields/commit/6db4e08).
+* `group_id` as a parameter to all filters. See [#51](https://github.com/felipeelia/cf7-repeatable-fields/pull/51).
+* Very basic unit testing. See [#52](https://github.com/felipeelia/cf7-repeatable-fields/pull/52).
 
 ### Changed
 
-* Linting tools and script build process. See 6db4e08.
-* Docs were migrated to [GitHub wiki](https://github.com/felipeelia/cf7-repeatable-fields/wiki). See 14fdd49.
+* Linting tools and script build process. See [6db4e08](https://github.com/felipeelia/cf7-repeatable-fields/commit/6db4e08).
+* Docs were migrated to [GitHub wiki](https://github.com/felipeelia/cf7-repeatable-fields/wiki). See [14fdd49](https://github.com/felipeelia/cf7-repeatable-fields/commit/14fdd49).
 
 ### Fixed
 
-* Validation problem with Contact Form 5.7+. Props [@sfdeveloper](https://profiles.wordpress.org/sfdeveloper/) via [this comment](https://wordpress.org/support/topic/compatibility-issues-with-cf7-5-7/#post-16588238) - added in 6db4e08.
+* Validation problem with Contact Form 5.7+. Props [@sfdeveloper](https://profiles.wordpress.org/sfdeveloper/) via [this comment](https://wordpress.org/support/topic/compatibility-issues-with-cf7-5-7/#post-16588238) - added in [6db4e08](https://github.com/felipeelia/cf7-repeatable-fields/commit/6db4e08).
 
 ## [1.1.3] - 2019-12-11
 
