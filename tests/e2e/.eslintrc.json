@@ -1,0 +1,13 @@
+{
+	"plugins": [
+		"cypress"
+	],
+	"extends": [
+		"plugin:cypress/recommended",
+		"../../.eslintrc.json"
+	],
+	"rules": {
+		"jest/expect-expect": "off",
+		"jest/valid-expect": "off"
+	}
+}

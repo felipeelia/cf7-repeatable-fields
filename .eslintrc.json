@@ -3,5 +3,13 @@
 	"env": {
 		"jquery": true
 	},
-	"ignorePatterns": ["vendor/*", "dist/*"]
+	"ignorePatterns": ["vendor/*", "dist/*"],
+	"rules": {
+		"import/no-extraneous-dependencies": [
+			"error",
+			{
+				"devDependencies": true
+			}
+		]
+	}
 }
