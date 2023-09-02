@@ -14,9 +14,11 @@
 	"author": "Felipe Elia",
 	"homepage": "https://github.com/felipeelia/cf7-repeatable-fields#readme",
 	"devDependencies": {
+		"@10up/cypress-wp-utils": "^0.2.0",
 		"@wordpress/env": "^8.3.0",
 		"@wordpress/eslint-plugin": "^14.10.0",
 		"@wordpress/scripts": "^26.8.0",
+		"cypress": "^13.1.0",
 		"eslint-plugin-prettier": "^5.0.0",
 		"husky": "^8.0.3",
 		"lint-staged": "^13.2.0"
@@ -42,6 +44,8 @@
 		"lint:js": "wp-scripts lint-js",
 		"lint:php": "./vendor/bin/phpcs --extensions=php --runtime-set testVersion 7.0- -s",
 		"lint": "npm run lint:js && npm run lint:php",
-		"start": "wp-scripts start assets/js/scripts.js --webpack-no-externals --output-path=dist"
+		"start": "wp-scripts start assets/js/scripts.js --webpack-no-externals --output-path=dist",
+		"e2e:open": "cypress open --config-file tests/e2e/cypress.config.js",
+		"e2e:run": "cypress run --config-file tests/e2e/cypress.config.js"
 	}
 }
