@@ -52,6 +52,9 @@
 							let newName =
 								rawName.replace(/__[0-9]*/, '') + '__' + i;
 
+							// New attribute used by CF7 to validate
+							$formControlWrap.attr('data-name', newName);
+
 							// The form control wrap class doesn't have `[]` chars...
 							if (
 								$formControlWrap.length &&
@@ -64,7 +67,6 @@
 							// but the field can have.
 							newName += isArray ? '[]' : '';
 							$$.attr('name', newName);
-							$formControlWrap.attr('data-name', newName);
 						});
 				});
 				$(this)
