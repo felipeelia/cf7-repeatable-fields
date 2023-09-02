@@ -11,7 +11,6 @@ module.exports = defineConfig({
 	},
 	e2e: {
 		async setupNodeEvents(on, config) {
-			const path = require('path');
 			const { loadConfig } = require('@wordpress/env/lib/config');
 
 			const wpEnvConfig = await loadConfig('../..');

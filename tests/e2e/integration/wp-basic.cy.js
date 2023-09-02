@@ -30,6 +30,8 @@ describe('WordPress basic actions', () => {
 		cy.get('#wpadminbar').should('be.visible');
 		cy.get('#blogname').clearThenType('Updated Title');
 		cy.get('#submit').click();
-		cy.get('#wp-admin-bar-site-name a').first().should('have.text', 'Updated Title');
+		cy.get('#wp-admin-bar-site-name a')
+			.first()
+			.should('have.text', 'Updated Title');
 	});
 });

@@ -33,6 +33,11 @@ Cypress.Commands.add('visitAdminPage', (page = 'index.php') => {
 	}
 });
 
-Cypress.Commands.add('clearThenType', { prevSubject: true }, (subject, text, force = false) => {
-	cy.wrap(subject).clear().type(text, { force });
-});
+Cypress.Commands.add(
+	'clearThenType',
+	{ prevSubject: true },
+	(subject, text, force = false) => {
+		/* eslint-disable-next-line cypress/unsafe-to-chain-command */
+		cy.wrap(subject).clear().type(text, { force });
+	}
+);

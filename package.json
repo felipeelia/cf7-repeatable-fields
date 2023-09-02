@@ -19,6 +19,7 @@
 		"@wordpress/eslint-plugin": "^14.10.0",
 		"@wordpress/scripts": "^26.8.0",
 		"cypress": "^13.1.0",
+		"eslint-plugin-cypress": "^2.14.0",
 		"eslint-plugin-prettier": "^5.0.0",
 		"husky": "^8.0.3",
 		"lint-staged": "^13.2.0"
