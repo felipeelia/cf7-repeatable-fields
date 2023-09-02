@@ -15,10 +15,12 @@ composer.lock
 package.json
 package-lock.json
 phpcs.xml
+phpunit.xml.dist
 README.md
 CODE_OF_CONDUCT.md
 CONTRIBUTING.md
 CREDITS.md
+LICENSE.md
 
 .wp-env.json
 .husky

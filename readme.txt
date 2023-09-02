@@ -2,7 +2,7 @@
 Contributors: felipeelia
 Donate link:  https://felipeelia.dev/contact-form-7-repeatable-fields/
 Tags:         contact form 7, cf7, repeater, repeatable
-Tested up to: 6.2
+Tested up to: 6.3
 Stable tag:   2.0.0
 License:      GPLv2 or later
 License URI:  http://www.gnu.org/licenses/gpl-2.0.html
