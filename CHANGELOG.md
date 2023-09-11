@@ -13,6 +13,20 @@ All notable changes to this project will be documented in this file, per [the Ke
 ### Security
 -->
 
+## [2.0.1] - 2023-09-11
+
+### Added
+
+* End-to-end tests foundation. Props [@felipeelia](https://github.com/felipeelia) via [#64](https://github.com/10up/ElasticPress/pull/64).
+
+### Changed
+
+* Removed unnecessary files from final package. Props [@felipeelia](https://github.com/felipeelia) via [#63](https://github.com/10up/ElasticPress/pull/63).
+
+### Fixed
+
+* Required checkbox not showing validation messages. Props [@felipeelia](https://github.com/felipeelia) via [#62](https://github.com/10up/ElasticPress/pull/62).
+
 ## [2.0.0] - 2023-07-23
 
 **Note that this version changes minimum required versions of:**
@@ -71,7 +85,8 @@ This release marks the (slow) resumption of this plugin development. If you want
 
 * Initial release
 
-[Unreleased]: https://github.com/felipeelia/cf7-repeatable-fields/compare/2.0.0...trunk
+[Unreleased]: https://github.com/felipeelia/cf7-repeatable-fields/compare/2.0.1...trunk
+[2.0.1]: https://github.com/felipeelia/cf7-repeatable-fields/compare/2.0.0...2.0.1
 [2.0.0]: https://github.com/felipeelia/cf7-repeatable-fields/compare/1.1.3...2.0.0
 [1.1.3]: https://github.com/felipeelia/cf7-repeatable-fields/compare/1.1.2...1.1.3
 [1.1.2]: https://github.com/felipeelia/cf7-repeatable-fields/compare/1.1.1...1.1.2

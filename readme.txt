@@ -68,6 +68,20 @@ Yes! Give a look at the [Frequently Asked Questions](https://github.com/felipeel
 
 == Changelog ==
 
+= 2.0.1 - 2023-09-11 =
+
+__Added:__
+
+* End-to-end tests foundation.
+
+__Changed:__
+
+* Removed unnecessary files from final package.
+
+__Fixed:__
+
+* Required checkbox not showing validation messages.
+
 = 2.0.0 - 2023-07-23 =
 
 **Note that this version changes minimum required versions of:**
