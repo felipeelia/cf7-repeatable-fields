@@ -1,6 +1,6 @@
 {
 	"name": "cf7-repeatable-fields",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"description": "Repeatable Fields Add-on for Contact Form 7",
 	"license": "GPL-3.0+",
 	"main": "Gruntfile.js",

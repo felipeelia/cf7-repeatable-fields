@@ -3,7 +3,7 @@ Contributors: felipeelia
 Donate link:  https://felipeelia.dev/contact-form-7-repeatable-fields/
 Tags:         contact form 7, cf7, repeater, repeatable
 Tested up to: 6.3
-Stable tag:   2.0.0
+Stable tag:   2.0.1
 License:      GPLv2 or later
 License URI:  http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -67,6 +67,20 @@ If you have identified a bug or would like to suggest an enhancement, please ref
 Yes! Give a look at the [Frequently Asked Questions](https://github.com/felipeelia/cf7-repeatable-fields/wiki/Frequently-Asked-Questions) section of our wiki.
 
 == Changelog ==
+
+= 2.0.1 - 2023-09-11 =
+
+__Added:__
+
+* End-to-end tests foundation.
+
+__Changed:__
+
+* Removed unnecessary files from final package.
+
+__Fixed:__
+
+* Required checkbox not showing validation messages.
 
 = 2.0.0 - 2023-07-23 =
 
