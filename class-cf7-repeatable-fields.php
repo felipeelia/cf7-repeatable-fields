@@ -147,14 +147,15 @@ class CF7_Repeatable_Fields {
 			$group_id
 		);
 
-		return '<div ' . implode( ' ', $atts ) . '>' .
-			'<div class="wpcf7-field-group">' .
-				do_shortcode( $content ) .
+		return '<div ' . implode( ' ', $atts ) . '>' . apply_filters(
+				'wpcf7_field_group_content',
+				'<div class="wpcf7-field-group">' . do_shortcode( $content ) .
 				$remove_button .
 				$add_button .
-				'<input type="hidden" class="wpcf7-field-group-count" name="_wpcf7_groups_count[' . $group_id . ']" value="1" />' .
-			'</div>' .
-		'</div>';
+				'<input type="hidden" class="wpcf7-field-group-count" name="_wpcf7_groups_count[' . $group_id . ']" value="1" /></div>',
+			$group_id,
+			$this->groups[$group_id]
+		) . '</div>';
 	}
 
 	/**
