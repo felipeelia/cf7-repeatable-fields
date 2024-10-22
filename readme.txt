@@ -2,8 +2,8 @@
 Contributors: felipeelia
 Donate link:  https://felipeelia.dev/contact-form-7-repeatable-fields/
 Tags:         contact form 7, cf7, repeater, repeatable
-Tested up to: 6.3
-Stable tag:   2.0.1
+Tested up to: 6.6
+Stable tag:   2.0.2
 License:      GPLv2 or later
 License URI:  http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -67,6 +67,33 @@ If you have identified a bug or would like to suggest an enhancement, please ref
 Yes! Give a look at the [Frequently Asked Questions](https://github.com/felipeelia/cf7-repeatable-fields/wiki/Frequently-Asked-Questions) section of our wiki.
 
 == Changelog ==
+
+= 2.0.2 - 2024-10-22 =
+
+**This is a security release.** It fixes a Stored cross-site scripting (XSS) vulnerability, that allowed users with contributor-level access and above, to inject arbitrary web scripts in pages that will execute whenever a user accesses an injected page. Thanks to Peter Thaleikis and the Wordfence team for reaching out about it.
+
+__Added:__
+
+* New `wpcf7_field_group_content` filter. Props [@Tessachu](https://github.com/Tessachu) and [@felipeelia](https://github.com/felipeelia).
+* End-to-end basic tests. Props [@felipeelia](https://github.com/felipeelia).
+
+__Changed:__
+
+* Node version to v20. Props [@felipeelia](https://github.com/felipeelia).
+
+__Security:__
+
+* Sanitize wrapper div attributes. Props Peter Thaleikis and [@felipeelia](https://github.com/felipeelia).
+* Bumped `postcss` from 8.4.26 to 8.4.31. Props [@dependabot](https://github.com/dependabot).
+* Updated `ws` from 8.13.0 to 8.18.0. Props [@dependabot](https://github.com/dependabot).
+* Updated `@wordpress/scripts` from 27.7.0 to 30.3.0. Props [@dependabot](https://github.com/dependabot).
+* Bumped `braces` from 3.0.2 to 3.0.3. Props [@dependabot](https://github.com/dependabot).
+* Bumped `webpack` from 5.91.0 to 5.94.0. Props [@dependabot](https://github.com/dependabot).
+* Bumped `express` from 4.18.2 to 4.19.2. Props [@dependabot](https://github.com/dependabot).
+* Bumped `follow-redirects` from 1.15.2 to 1.15.6. Props [@dependabot](https://github.com/dependabot).
+* Bumped `webpack-dev-middleware` from 5.3.3 to 5.3.4. Props [@dependabot](https://github.com/dependabot).
+* Bumped `@babel/traverse` from 7.22.8 to 7.23.2. Props [@dependabot](https://github.com/dependabot).
+* Several node packages updated. Props [@felipeelia](https://github.com/felipeelia).
 
 = 2.0.1 - 2023-09-11 =
 
