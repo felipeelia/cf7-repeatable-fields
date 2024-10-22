@@ -13,13 +13,17 @@
 	},
 	"author": "Felipe Elia",
 	"homepage": "https://github.com/felipeelia/cf7-repeatable-fields#readme",
+	"engines": {
+		"node": ">=20.0.0",
+		"npm": ">=9.0.0"
+	},
 	"devDependencies": {
-		"@10up/cypress-wp-utils": "^0.3.0",
-		"@wordpress/env": "^9.8.0",
-		"@wordpress/eslint-plugin": "^17.13.0",
+		"@10up/cypress-wp-utils": "^0.4.0",
+		"@wordpress/env": "^10.10.0",
+		"@wordpress/eslint-plugin": "^21.3.0",
 		"@wordpress/scripts": "^30.3.0",
 		"cypress": "^13.1.0",
-		"eslint-plugin-cypress": "^3.0.2",
+		"eslint-plugin-cypress": "^4.0.0",
 		"eslint-plugin-prettier": "^5.0.0",
 		"husky": "^9.0.11",
 		"lint-staged": "^15.2.2"
@@ -38,7 +42,7 @@
 		]
 	},
 	"scripts": {
-		"prepare": "husky install",
+		"prepare": "husky",
 		"build": "wp-scripts build assets/js/scripts.js --webpack-no-externals --output-path=dist",
 		"env": "wp-env",
 		"format": "wp-scripts format ./assets",
