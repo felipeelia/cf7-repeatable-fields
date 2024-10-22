@@ -13,6 +13,33 @@ All notable changes to this project will be documented in this file, per [the Ke
 ### Security
 -->
 
+## [2.0.2] - 2024-10-22
+
+**This is a security release.** It fixes a Stored cross-site scripting (XSS) vulnerability, that allowed users with contributor-level access and above, to inject arbitrary web scripts in pages that will execute whenever a user accesses an injected page. Thanks to Peter Thaleikis and the Wordfence team for reaching out about it.
+
+### Added
+
+* New `wpcf7_field_group_content` filter. Props [@Tessachu](https://github.com/Tessachu) and [@felipeelia](https://github.com/felipeelia) via [#90](https://github.com/10up/ElasticPress/pull/90).
+* End-to-end basic tests. Props [@felipeelia](https://github.com/felipeelia) via [#78](https://github.com/10up/ElasticPress/pull/78).
+
+### Changed
+
+* Node version to v20. Props [@felipeelia](https://github.com/felipeelia) via [#89](https://github.com/10up/ElasticPress/pull/89).
+
+### Security
+
+* Sanitize wrapper div attributes. Props Peter Thaleikis and [@felipeelia](https://github.com/felipeelia) via [#90](https://github.com/10up/ElasticPress/pull/90).
+* Bumped `postcss` from 8.4.26 to 8.4.31. Props [@dependabot](https://github.com/dependabot) via [#70](https://github.com/10up/ElasticPress/pull/70).
+* Updated `ws` from 8.13.0 to 8.18.0. Props [@dependabot](https://github.com/dependabot) via [#88](https://github.com/10up/ElasticPress/pull/88).
+* Updated `@wordpress/scripts` from 27.7.0 to 30.3.0. Props [@dependabot](https://github.com/dependabot) via [#88](https://github.com/10up/ElasticPress/pull/88).
+* Bumped `braces` from 3.0.2 to 3.0.3. Props [@dependabot](https://github.com/dependabot) via [#80](https://github.com/10up/ElasticPress/pull/80).
+* Bumped `webpack` from 5.91.0 to 5.94.0. Props [@dependabot](https://github.com/dependabot) via [#82](https://github.com/10up/ElasticPress/pull/82).
+* Bumped `express` from 4.18.2 to 4.19.2. Props [@dependabot](https://github.com/dependabot) via [#74](https://github.com/10up/ElasticPress/pull/74).
+* Bumped `follow-redirects` from 1.15.2 to 1.15.6. Props [@dependabot](https://github.com/dependabot) via [#76](https://github.com/10up/ElasticPress/pull/76).
+* Bumped `webpack-dev-middleware` from 5.3.3 to 5.3.4. Props [@dependabot](https://github.com/dependabot) via [#75](https://github.com/10up/ElasticPress/pull/75).
+* Bumped `@babel/traverse` from 7.22.8 to 7.23.2. Props [@dependabot](https://github.com/dependabot) via [#71](https://github.com/10up/ElasticPress/pull/71).
+* Several node packages updated. Props [@felipeelia](https://github.com/felipeelia) via [#77](https://github.com/10up/ElasticPress/pull/77).
+
 ## [2.0.1] - 2023-09-11
 
 ### Added
@@ -85,7 +112,8 @@ This release marks the (slow) resumption of this plugin development. If you want
 
 * Initial release
 
-[Unreleased]: https://github.com/felipeelia/cf7-repeatable-fields/compare/2.0.1...trunk
+[Unreleased]: https://github.com/felipeelia/cf7-repeatable-fields/compare/2.0.2...trunk
+[2.0.2]: https://github.com/felipeelia/cf7-repeatable-fields/compare/2.0.1...2.0.2
 [2.0.1]: https://github.com/felipeelia/cf7-repeatable-fields/compare/2.0.0...2.0.1
 [2.0.0]: https://github.com/felipeelia/cf7-repeatable-fields/compare/1.1.3...2.0.0
 [1.1.3]: https://github.com/felipeelia/cf7-repeatable-fields/compare/1.1.2...1.1.3

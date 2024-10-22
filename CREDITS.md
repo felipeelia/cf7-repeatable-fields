@@ -14,6 +14,8 @@ Thank you to all the people who have already contributed to this repository via 
 
 [Bertrand Guay-Paquet (@berniegp)](https://github.com/berniegp),
 [Matthew Harris (@rtpHarry)](https://github.com/rtpHarry),
+[Peter Thaleikis](https://peterthaleikis.com/),
+[Tessa Watkins](https://github.com/Tessachu),
 and
 [@sfdeveloper](https://profiles.wordpress.org/sfdeveloper/).
 

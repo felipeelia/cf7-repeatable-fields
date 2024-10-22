@@ -9,6 +9,8 @@ vendor
 
 .editorconfig
 .eslintrc.json
+.npmrc
+.nvmrc
 Gruntfile.js
 composer.json
 composer.lock
