@@ -147,14 +147,30 @@ class CF7_Repeatable_Fields {
 			$group_id
 		);
 
-		return '<div ' . implode( ' ', $atts ) . '>' .
+		// Remove any attribute that is not allowed by CF7.
+		$open_tag = wpcf7_kses( '<div ' . implode( ' ', $atts ) . '>' );
+
+		/**
+		 * Filters the group content.
+		 *
+		 * @since 2.0.2
+		 * @param string $group_content Group content HTML
+		 * @param array  $atts          Shortcode attributes
+		 * @param string $group_id      Current group ID.
+		 */
+		$group_content = apply_filters(
+			'wpcf7_field_group_content',
 			'<div class="wpcf7-field-group">' .
 				do_shortcode( $content ) .
 				$remove_button .
 				$add_button .
 				'<input type="hidden" class="wpcf7-field-group-count" name="_wpcf7_groups_count[' . $group_id . ']" value="1" />' .
-			'</div>' .
-		'</div>';
+			'</div>',
+			$atts,
+			$group_id
+		);
+
+		return $open_tag . $group_content . '</div>';
 	}
 
 	/**
