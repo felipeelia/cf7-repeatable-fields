@@ -1,0 +1,39 @@
+name: Run Playground E2E tests
+
+on:
+  workflow_call:
+    inputs:
+      wordpress:
+        type: string
+        default: '7.1.4'
+      cf7:
+        type: string
+        default: '6.2.5'
+
+permissions:
+  contents: read
+
+jobs:
+  playwright:
+    runs-on: ubuntu-latest
+    env:
+      WP_VERSION: ${{ inputs.wordpress }}
+      CF7_VERSION: ${{ inputs.cf7 }}
+      PHP_VERSION: '8.3'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run e2e:run
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-${{ inputs.wordpress }}-${{ inputs.cf7 }}
+          retention-days: 7
+          path: |
+            playwright-report/
+            test-results/

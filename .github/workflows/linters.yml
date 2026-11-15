@@ -1,7 +1,7 @@
 name: Code Linters
 
 env:
-  NODE_VERSION: "20"
+  NODE_VERSION: "24"
 
 on:
   push:
@@ -17,10 +17,10 @@ jobs:
 
         steps:
             - name: Checkout
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
 
             - name: "Install node v${{ env.NODE_VERSION }}"
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v4
               with:
                 node-version: ${{ env.NODE_VERSION }}
 
@@ -33,7 +33,7 @@ jobs:
             - name: Set PHP version
               uses: shivammathur/setup-php@v2
               with:
-                php-version: '8.2'
+                php-version: '8.3'
                 tools: cs2pr
                 coverage: none
 
@@ -41,4 +41,4 @@ jobs:
               run: composer install
 
             - name: PHPCS check
-              run: './vendor/bin/phpcs . -q --report=checkstyle --runtime-set testVersion 7.0- | cs2pr'
+              run: './vendor/bin/phpcs . -q --report=checkstyle --runtime-set testVersion 8.3- | cs2pr'

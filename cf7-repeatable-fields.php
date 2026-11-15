@@ -4,8 +4,8 @@
  * Plugin URI:        https://github.com/felipeelia/cf7-repeatable-fields
  * Description:       An add-on plugin for Contact Form 7 that adds a repeatable group of fields functionality.
  * Version:           2.0.2
- * Requires at least: 6.0
- * Requires PHP:      7.2
+ * Requires at least: 7.1
+ * Requires PHP:      8.3
  * Requires Plugins:  contact-form-7
  * Author:            Felipe Elia
  * Author URI:        https://felipeelia.dev/
@@ -19,6 +19,7 @@
 defined( 'ABSPATH' ) || exit;
 
 define( 'CF7_REPEATABLE_FIELDS_VERSION', '2.0.2' );
+define( 'CF7_REPEATABLE_FIELDS_MIN_CF7_VERSION', '6.2.5' );
 define( 'CF7_REPEATABLE_FIELDS_FILE', __FILE__ );
 define( 'CF7_REPEATABLE_FIELDS_DIR', __DIR__ );
 
@@ -26,7 +27,7 @@ define( 'CF7_REPEATABLE_FIELDS_DIR', __DIR__ );
  * Run after all plugins are loaded. If CF7 is active loads the main class, otherwise show a notice.
  */
 function wpcf7_repeatable_fields_init() {
-	if ( class_exists( 'WPCF7_ContactForm' ) ) {
+	if ( class_exists( 'WPCF7_ContactForm' ) && defined( 'WPCF7_VERSION' ) && version_compare( WPCF7_VERSION, CF7_REPEATABLE_FIELDS_MIN_CF7_VERSION, '>=' ) ) {
 		require CF7_REPEATABLE_FIELDS_DIR . '/class-cf7-repeatable-fields.php';
 		CF7_Repeatable_Fields::get_instance();
 	} else {
@@ -50,10 +51,11 @@ function wpcf7_repeatable_fields_admin_notice() {
 		<p>
 			<?php
 			printf(
-				/* translators: 1: Plugin name; 2: Contact Form 7 link */
-				esc_html__( 'In order to %1$s work, %2$s needs to be installed and activated.', 'cf7-repeatable-fields' ),
+				/* translators: 1: Plugin name; 2: Contact Form 7 link; 3: Minimum CF7 version */
+				esc_html__( 'For %1$s to work, %2$s version %3$s or newer must be installed and activated.', 'cf7-repeatable-fields' ),
 				'<strong>' . esc_html( $plugin_info['Name'] ) . '</strong>',
-				'<a href="http://contactform7.com/" target="_blank">' . esc_html__( 'Contact Form 7', 'cf7-repeatable-fields' ) . '</a>'
+				'<a href="https://contactform7.com/" target="_blank">' . esc_html__( 'Contact Form 7', 'cf7-repeatable-fields' ) . '</a>',
+				esc_html( CF7_REPEATABLE_FIELDS_MIN_CF7_VERSION )
 			);
 			$screen = get_current_screen();
 			if ( 'plugins' !== $screen->id ) {

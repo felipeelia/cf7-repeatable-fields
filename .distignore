@@ -28,3 +28,7 @@ LICENSE.md
 .husky
 tests
 bin
+
+playwright.config.js
+playwright-report
+test-results

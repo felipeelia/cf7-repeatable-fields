@@ -2,7 +2,10 @@
 Contributors: felipeelia
 Donate link:  https://felipeelia.dev/contact-form-7-repeatable-fields/
 Tags:         contact form 7, cf7, repeater, repeatable
-Tested up to: 6.6
+Requires at least: 7.1
+Requires PHP: 8.3
+Requires Plugins: contact-form-7
+Tested up to: 7.1.4
 Stable tag:   2.0.2
 License:      GPLv2 or later
 License URI:  http://www.gnu.org/licenses/gpl-2.0.html
@@ -12,7 +15,7 @@ Adds repeatable groups of fields to Contact Form 7.
 == Description ==
 This plugin adds repeatable groups of fields to Contact Form 7.
 
-**NOTE:** Tested with Contact Form 7 5.7.7.
+Requires Contact Form 7 6.2.5 or newer.
 
 == Usage ==
 
