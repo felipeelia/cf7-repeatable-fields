@@ -22,7 +22,6 @@ README.md
 CODE_OF_CONDUCT.md
 CONTRIBUTING.md
 CREDITS.md
-LICENSE.md
 
 .wp-env.json
 .husky
@@ -32,3 +31,5 @@ bin
 playwright.config.js
 playwright-report
 test-results
+
+.phpunit.result.cache
