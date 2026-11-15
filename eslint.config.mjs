@@ -12,12 +12,6 @@ export default [
 	},
 	...wordpress.configs.recommended,
 	{
-		languageOptions: {
-			globals: {
-				$: 'readonly',
-				jQuery: 'readonly',
-			},
-		},
 		rules: {
 			'import/no-extraneous-dependencies': [
 				'error',

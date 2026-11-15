@@ -59,7 +59,7 @@ WP_VERSION=latest CF7_VERSION=latest npm run e2e:run
 
 Use `npm run e2e:open` for Playwright's interactive runner or `npm run e2e:serve` for manual inspection of the seeded Playground site (admin login: `admin` / `password`). Reports are written to `playwright-report/`; failed tests retain screenshots and traces in `test-results/`. Browser JavaScript errors fail the test; PHP debug output is written to `test-results/php-errors.log` when present.
 
-Coverage includes saving group syntax in the CF7 editor, adding/removing rows, generated mail, invalid repeated fields and correction, and independent groups with unequal row counts. The reduced #65 fixture currently passes; the original report still needs investigation before the issue can be considered resolved.
+Coverage includes saving group syntax in the CF7 editor, adding/removing rows, generated mail, invalid repeated fields and correction, independent groups with unequal row counts, jQuery-free operation, native group events, cloned defaults, exclusive checkboxes, and late script loading. The reduced #65 fixture currently passes; the original report still needs investigation before the issue can be considered resolved.
 
 ### PHP integration tests
 

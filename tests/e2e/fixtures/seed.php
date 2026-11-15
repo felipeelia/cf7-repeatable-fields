@@ -19,6 +19,7 @@ $cf7rf_forms = [
 [radio your-radio use_label_element default:1 "radio 1" "radio 2"]
 [select* your-menu include_blank "option1" "option 2"]
 [checkbox* your-checkbox use_label_element "check 1" "check 2"]
+[checkbox exclusive-choice exclusive use_label_element default:1 "First" "Second"]
 [/field_group]
 [submit "Submit"]',
 		'body' => 'From: [your-name] [your-email]
