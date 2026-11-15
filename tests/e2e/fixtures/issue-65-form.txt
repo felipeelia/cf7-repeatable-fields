@@ -1,0 +1,175 @@
+<div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                <label class="college-add w-100">Address [text* HCT-Address class:form-control]</label>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                <label class="college-city w-100">City [text* HCT-City class:form-control]</label>
+            </div>
+        </div>
+ 
+        <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                <label class="college-state w-100">State [text* HCT-State class:form-control]</label>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                <label class="college-zip-code w-100">Zip Code [number* HCT-Zip-Code]</label>
+            </div>
+        </div>
+    </div>
+    <h3 class="emp-history">Employment History</h3>
+    <span class="presetn-past-emp">List below all present and past employment starting with your most recent employer (last five years is sufficient). You must complete this section even if attaching a resume.</span>
+    <div class="row current_employer">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="form-group">
+                <div class="radio_main current-employer w-100 d-flex flex-column">Current Employer ? [radio Current-Eployer use_label_element "Yes" "No"]</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-rep-one">
+    [field_group EmpHistory id="employment-history" tabindex:1] 
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group w-100">
+                <label class="employer-name">Name of Employer [text* employer-Name class:form-control]</label>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group w-100">
+                <label class="employer-phn">Phone Number [tel* Employer-Phone-Number]</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group w-100">
+                <label class="employer-bt">Type of Business [text* employer-Type-Business class:form-control]</label>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group w-100">
+                <label class="employer-supervisor">Your Supervisor's Name [text* employer-supervisors class:form-control]</label>
+            </div>
+        </div>
+    </div>
+    <div class="row employer_address">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                <label class="college-add w-100">Address [text* employer-address class:form-control]</label>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                <label class="college-city w-100">City [text* employer-city class:form-control]</label>
+            </div>
+        </div>
+   
+        <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                <label class="college-state w-100">State [text* employer-State class:form-control]</label>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                <label class="college-zip-code w-100">Zip Code [number* Employer-Zip-Code]</label>
+            </div>
+        </div>
+    </div>
+    <h3 class="date-emp">Dates of Employment:</h3>
+    <div class="row employer_dates">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                <label class="emp-date-start">From [date* Emp-From-Date]</label>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                <label class="emp-date-end">To [date* Emp-To-Date]</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+             <label class="position-duties w-100">Your Position and Duties [text* employer-positions-duties class:form-control]</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <label class="position-duties w-100">Reason for Leaving [text* employer-leaving-reasion class:form-control]</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="radio_main contact-this-employer w-100 d-flex flex-column">May we contact this employer for a reference? [radio contact-employer use_label_element "Yes" "No"]</div>
+        </div>
+    </div>
+ [/field_group]
+    </div>
+   
+    <div class="row reference_row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h3>References</h3>
+            <p>List below three persons not related to you who have knowledge of your work performance within the last three years.</p>
+        </div>
+    </div>
+   <div class="two">
+    [field_group references id="references-data" tabindex:10]
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="form-group">
+                <label class="first-name w-100">First Name [text* References-Fisrt-Name class:form-control]</label>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="form-group">
+                <label class="last-name w-100">Last Name [text* References-Last-Name class:form-control]</label>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="form-group">
+                <label class="ref-phone">Phone Number [tel* References-Phone-Number]</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                <label class="college-add w-100">Address [text* References-Address class:form-control]</label>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                <label class="college-city w-100">City [text* References-City class:form-control]</label>
+            </div>
+        </div>
+    
+        <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                <label class="college-state w-100">State [text* References-State class:form-control]</label>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                <label class="college-zip-code w-100">Zip Code [number* References-Zip-Cod]</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                <label class="occupations-ref w-100">Occupation [text* References-Occupation class:form-control]</label>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                <label class="college-zip-code w-100">No. of Years Acquainted [number* References-Acquired-Years]</label>
+            </div>
+        </div>
+    </div>
+    [/field_group]
+[submit "Submit"]
