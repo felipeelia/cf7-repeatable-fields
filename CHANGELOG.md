@@ -10,6 +10,10 @@ All notable changes to this project will be documented in this file, per [the Ke
 * [PHP](https://php.net/): 8.3+
 * [Contact Form 7](https://wordpress.org/plugins/contact-form-7/): 6.2.5+
 
+### Added
+
+* Regression tests for the form reported in #65, both mail templates, and resubmission after a successful form reset. Props [@felipeelia](https://github.com/felipeelia) via [#110](https://github.com/felipeelia/cf7-repeatable-fields/pull/110).
+
 ### Changed
 
 * Removed the frontend jQuery dependency, migrated group events to native `CustomEvent`s, and fixed exclusive checkbox choices affecting separate form instances. Props [@felipeelia](https://github.com/felipeelia) via [#109](https://github.com/felipeelia/cf7-repeatable-fields/pull/109).

@@ -15,8 +15,8 @@ async function submit(page) {
 	return result.json();
 }
 
-async function fillSingleGroup(page, subject) {
-	await page.goto('/?pagename=single-group');
+async function fillSingleGroup(page, subject, slug = 'single-group') {
+	await page.goto(`/?pagename=${slug}`);
 	await page.locator('[name="your-name"]').fill('Test Name');
 	await page.locator('[name="your-email"]').fill('email@example.org');
 	await page.locator('[name="your-subject"]').fill(subject);
@@ -193,4 +193,63 @@ test('validates repeated fields independently when the same form appears twice',
 	await repeated.fill('corrected@example.org');
 	await repeated.blur();
 	await expect(repeated).toHaveAttribute('aria-invalid', 'false');
+});
+
+test('renders independent repeated values in both mail templates', async ({
+	page,
+	request,
+}, testInfo) => {
+	const subject = `${testInfo.title}-${testInfo.retry}`;
+	await fillSingleGroup(page, subject, 'mail-two');
+	await page.locator('.wpcf7-field-group-add').click();
+	await fillRow(page.locator('.wpcf7-field-group').nth(1), 2);
+	expect(await submit(page)).toMatchObject({ status: 'mail_sent' });
+	const primary = await request.get(mailboxPath, { params: { subject } });
+	const copy = await request.get(mailboxPath, {
+		params: { subject: `${subject} - copy` },
+	});
+	const primaryEmails = await primary.json();
+	const copyEmails = await copy.json();
+	expect(primaryEmails).toHaveLength(1);
+	expect(copyEmails).toHaveLength(1);
+	expect(primaryEmails[0]).toContain('E-mail: email-1@example.org');
+	expect(primaryEmails[0]).toContain('E-mail: email-2@example.org');
+	expect(copyEmails[0]).toContain('Second: email-2@example.org');
+	expect(copyEmails[0]).toContain('Copy #1: email-1@example.org');
+	expect(copyEmails[0]).toContain('Copy #2: email-2@example.org');
+});
+
+test('retains every repeated row when submitting again after a successful reset', async ({
+	page,
+	request,
+}, testInfo) => {
+	const subject = `${testInfo.title}-${testInfo.retry}`;
+	await fillSingleGroup(page, `${subject} first`);
+	await page.locator('.wpcf7-field-group-add').click();
+	await fillRow(page.locator('.wpcf7-field-group').nth(1), 2);
+	await page.evaluate(() => {
+		window.cf7rfResetComplete = false;
+		document.addEventListener(
+			'wpcf7reset',
+			() => {
+				window.cf7rfResetComplete = true;
+			},
+			{ once: true }
+		);
+	});
+	expect(await submit(page)).toMatchObject({ status: 'mail_sent' });
+	await expect
+		.poll(() => page.evaluate(() => window.cf7rfResetComplete))
+		.toBe(true);
+	await page.locator('[name="your-name"]').fill('Again');
+	await page.locator('[name="your-email"]').fill('again@example.org');
+	await page.locator('[name="your-subject"]').fill(subject);
+	await fillRow(page.locator('.wpcf7-field-group').first(), 1);
+	await fillRow(page.locator('.wpcf7-field-group').nth(1), 2);
+	expect(await submit(page)).toMatchObject({ status: 'mail_sent' });
+	const response = await request.get(mailboxPath, { params: { subject } });
+	const emails = await response.json();
+	expect(emails).toHaveLength(1);
+	expect(emails[0]).toContain('GROUP #2');
+	expect(emails[0]).toContain('E-mail: email-2@example.org');
 });

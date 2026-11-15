@@ -54,6 +54,15 @@ Reference #[group_index]: [References-First-Name], [References-Acquired-Years]
 	],
 ];
 
+
+$cf7rf_forms['mail-two'] = $cf7rf_forms['single-group'];
+
+// Preserve the form and mail template supplied in issue #65; the report omitted a submit button.
+$cf7rf_forms['issue-65'] = [
+	'form' => file_get_contents( '/wordpress/wp-content/plugins/cf7-repeatable-fields/tests/e2e/fixtures/issue-65-form.txt' ), // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Local test fixture.
+	'body' => file_get_contents( '/wordpress/wp-content/plugins/cf7-repeatable-fields/tests/e2e/fixtures/issue-65-mail.txt' ), // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Local test fixture.
+];
+
 foreach ( $cf7rf_forms as $cf7rf_slug => $cf7rf_fixture ) {
 	$cf7rf_form = WPCF7_ContactForm::get_template();
 	$cf7rf_form->set_title( $cf7rf_slug );
@@ -62,7 +71,7 @@ foreach ( $cf7rf_forms as $cf7rf_slug => $cf7rf_fixture ) {
 			'form' => $cf7rf_fixture['form'],
 			'mail' => [
 				'active'             => true,
-				'subject'            => '[your-subject]',
+				'subject'            => 'issue-65' === $cf7rf_slug ? 'Issue 65 reproduction' : '[your-subject]',
 				'sender'             => 'Test Site <wordpress@example.org>',
 				'recipient'          => 'recipient@example.org',
 				'body'               => $cf7rf_fixture['body'],
@@ -73,6 +82,13 @@ foreach ( $cf7rf_forms as $cf7rf_slug => $cf7rf_fixture ) {
 			],
 		]
 	);
+	if ( 'mail-two' === $cf7rf_slug ) {
+		$cf7rf_mail_2            = $cf7rf_form->prop( 'mail' );
+		$cf7rf_mail_2['active']  = true;
+		$cf7rf_mail_2['subject'] = '[your-subject] - copy';
+		$cf7rf_mail_2['body']    = "Second: [repeated-email__2]\n[emails]Copy #[group_index]: [repeated-email]\n[/emails]";
+		$cf7rf_form->set_properties( [ 'mail_2' => $cf7rf_mail_2 ] );
+	}
 	$cf7rf_form->save();
 	$cf7rf_shortcode = sprintf( '[contact-form-7 id="%d"]', $cf7rf_form->id() );
 
