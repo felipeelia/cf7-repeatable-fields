@@ -8,7 +8,7 @@ vendor
 .gitignore
 
 .editorconfig
-.eslintrc.json
+eslint.config.mjs
 .npmrc
 .nvmrc
 Gruntfile.js

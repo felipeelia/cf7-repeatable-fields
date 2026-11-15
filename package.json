@@ -14,33 +14,28 @@
 	"author": "Felipe Elia",
 	"homepage": "https://github.com/felipeelia/cf7-repeatable-fields#readme",
 	"engines": {
-		"node": ">=24.0.0",
+		"node": "^24.15.0 || >=26.0.0",
 		"npm": ">=11.0.0"
 	},
 	"devDependencies": {
 		"@playwright/test": "1.65.1",
-		"@typescript-eslint/eslint-plugin": "^8.11.0",
-		"@wordpress/env": "^10.10.0",
-		"@wordpress/eslint-plugin": "^21.3.0",
-		"@wordpress/scripts": "^30.3.0",
+		"@typescript-eslint/eslint-plugin": "^8.72.2",
+		"@wordpress/env": "^12.1.0",
+		"@wordpress/eslint-plugin": "^28.1.0",
+		"@wordpress/scripts": "^37.1.0",
 		"@wp-playground/cli": "3.1.64",
-		"eslint": "^8.57.1",
-		"eslint-plugin-prettier": "^5.0.0",
-		"eslint-plugin-react-hooks": "^5.0.0",
-		"husky": "^9.0.11",
-		"lint-staged": "^15.2.2"
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
+		"eslint": "^10.15.0",
+		"eslint-plugin-prettier": "^5.5.7",
+		"eslint-plugin-react-hooks": "^7.1.1",
+		"husky": "^9.1.7",
+		"lint-staged": "^17.6.1"
 	},
 	"lint-staged": {
-		"*.js": [
-			"wp-scripts lint-js"
-		],
 		"*.php": [
 			"./vendor/bin/phpcs --extensions=php --runtime-set testVersion 8.3- -s"
+		],
+		"*.{js,mjs}": [
+			"wp-scripts lint-js"
 		]
 	},
 	"scripts": {
@@ -55,5 +50,13 @@
 		"e2e:open": "npm run build && playwright test --ui",
 		"e2e:run": "npm run build && playwright test",
 		"e2e:serve": "npm run build && node tests/e2e/server.mjs"
+	},
+	"overrides": {
+		"@wp-playground/storage": {
+			"isomorphic-git": "^1.44.14"
+		},
+		"copy-webpack-plugin": {
+			"serialize-javascript": "^7.1.4"
+		}
 	}
 }

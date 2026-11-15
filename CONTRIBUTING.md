@@ -26,13 +26,17 @@ The `trunk` branch is the main branch and contains all new code to be released i
 
 ## Development and tests
 
-Use Node.js 24 (`nvm use`), npm 11+, and PHP 8.3+. The plugin targets WordPress 7.1+ and Contact Form 7 6.2.5+. PHP linting uses the `10up-Default` ruleset from `10up/phpcs-composer`.
+Use Node.js 24.15+ (`nvm use`), npm 11+, and PHP 8.3+. The plugin targets WordPress 7.1+ and Contact Form 7 6.2.5+. PHP linting uses the `10up-Default` ruleset from `10up/phpcs-composer`.
 
 ```sh
 npm ci
 composer install
 npm run lint
 ```
+
+JavaScript linting uses the flat configuration in `eslint.config.mjs`. The WordPress preset provides compatibility wrappers for ESLint 10; npm currently reports upstream peer-range warnings for some of its plugins. A normal `npm ci` works without `--force` or `--legacy-peer-deps`.
+
+Two scoped npm overrides temporarily select patched tooling dependencies: `isomorphic-git` under Playground storage, and `serialize-javascript` under `copy-webpack-plugin`. Remove these when the parent packages adopt the fixed releases.
 
 ### End-to-end tests
 

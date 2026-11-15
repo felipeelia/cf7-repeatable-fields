@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ### Changed
 
+* Update npm development dependencies and migrate JavaScript linting to ESLint 10. Development now requires Node.js 24.15+ or 26+.
+
 * Require WordPress 7.1+, PHP 8.3+, and Contact Form 7 6.2.5+.
 * Replace Cypress E2E tests with Playwright and WordPress Playground, using pinned fixtures and scheduled checks against latest releases.
 * Use Node.js 24 and refresh PHP development tools for supported PHP versions.
