@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ## [Unreleased]
 
+### Changed
+
+* Require WordPress 7.1+, PHP 8.3+, and Contact Form 7 6.2.5+.
+* Replace Cypress E2E tests with Playwright and WordPress Playground, using pinned fixtures and scheduled checks against latest releases.
+* Use Node.js 24 and refresh PHP development tools for supported PHP versions.
+
+### Fixed
+
+* Keep CF7 browser validation rules aligned with repeated field names so invalid fields can be corrected and the form resubmitted.
+
 <!--
 ### Added
 ### Changed

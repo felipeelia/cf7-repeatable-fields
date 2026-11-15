@@ -1,9 +1,11 @@
 {
 	"plugins": [
-		"https://downloads.wordpress.org/plugin/contact-form-7.zip",
+		"https://downloads.wordpress.org/plugin/contact-form-7.6.2.5.zip",
 		"."
 	],
 	"mappings": {
 		"wp-content/mu-plugins/log-emails.php": "./tests/plugins/log-emails.php"
-	}
+	},
+	"core": "https://wordpress.org/wordpress-7.1.4.zip",
+	"phpVersion": "8.3"
 }

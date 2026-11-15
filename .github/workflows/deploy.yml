@@ -10,12 +10,12 @@ jobs:
         steps:
 
         - name: Checkout code
-          uses: actions/checkout@v3
+          uses: actions/checkout@v7.0.1
 
         - name: WordPress Plugin Deploy
           if: "! github.event.release.prerelease"
           id: deploy
-          uses: 10up/action-wordpress-plugin-deploy@stable
+          uses: 10up/action-wordpress-plugin-deploy@2.3.0
           env:
             SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
             SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}

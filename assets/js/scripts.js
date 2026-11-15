@@ -20,6 +20,57 @@
 			return;
 		}
 
+		// CF7 loads its schema asynchronously and shares it by contact form ID.
+		// Resolve repeated field rules per form instance whenever CF7 validates.
+		$groups.closest('form').each(function () {
+			const form = this;
+			if (!form.wpcf7) {
+				return;
+			}
+			const schemaGetter = Object.getOwnPropertyDescriptor(
+				form.wpcf7,
+				'schema'
+			)?.get;
+			if (!schemaGetter) {
+				return;
+			}
+			Object.defineProperty(form.wpcf7, 'schema', {
+				get() {
+					const schema = schemaGetter.call(this);
+					if (!schema) {
+						return schema;
+					}
+					const repeatedFields = new Map();
+					$(form)
+						.find(
+							'.wpcf7-field-groups .wpcf7-form-control-wrap[data-name]'
+						)
+						.each(function () {
+							const name = this.dataset.name;
+							const originalName = name.replace(/__\d+$/, '');
+							if (!repeatedFields.has(originalName)) {
+								repeatedFields.set(originalName, new Set());
+							}
+							repeatedFields.get(originalName).add(name);
+						});
+					const expandRules = (rules) =>
+						rules.flatMap((rule) => {
+							const expanded = rule.rules
+								? { ...rule, rules: expandRules(rule.rules) }
+								: rule;
+							const names = repeatedFields.get(rule.field);
+							return names
+								? Array.from(names, (field) => ({
+										...expanded,
+										field,
+									}))
+								: [expanded];
+						});
+					return { ...schema, rules: expandRules(schema.rules) };
+				},
+			});
+		});
+
 		// Let's grab the groups models to append them when necessary.
 		$groups.each(function () {
 			$(this).data(

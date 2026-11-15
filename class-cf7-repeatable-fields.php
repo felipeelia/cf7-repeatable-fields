@@ -59,7 +59,7 @@ class CF7_Repeatable_Fields {
 
 		$group_id = '';
 		$atts     = array_map(
-			function( $att, $value ) use ( &$group_id ) {
+			function ( $att, $value ) use ( &$group_id ) {
 				// WordPress sets numeric atts if the `attr="value"` format isn't used.
 				if ( is_int( $att ) ) {
 					if ( false === strpos( $value, ':' ) ) {
@@ -184,7 +184,7 @@ class CF7_Repeatable_Fields {
 		wp_enqueue_script(
 			'wpcf7-field-group-script',
 			plugin_dir_url( CF7_REPEATABLE_FIELDS_FILE ) . $file,
-			array( 'jquery' ),
+			array( 'jquery', 'contact-form-7' ),
 			CF7_REPEATABLE_FIELDS_VERSION,
 			true
 		);

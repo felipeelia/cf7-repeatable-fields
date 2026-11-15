@@ -8,9 +8,9 @@
 
 This plugin requires these software with the following versions:
 
-* [WordPress](https://wordpress.org) 6.0+
-* [PHP](https://php.net/) 7.2+
-* [Contact Form 7](https://wordpress.org/plugins/contact-form-7/) 5.7+
+* [WordPress](https://wordpress.org) 7.1+
+* [PHP](https://php.net/) 8.3+
+* [Contact Form 7](https://wordpress.org/plugins/contact-form-7/) 6.2.5+
 
 ## Usage ##
 

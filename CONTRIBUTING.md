@@ -24,6 +24,53 @@ Pull requests represent a proposed solution to a specified problem.  They should
 
 The `trunk` branch is the main branch and contains all new code to be released in an upcoming version. A version released is just a tag of that branch.
 
+## Development and tests
+
+Use Node.js 24 (`nvm use`), npm 11+, and PHP 8.3+. The plugin targets WordPress 7.1+ and Contact Form 7 6.2.5+. PHP linting uses the `10up-Default` ruleset from `10up/phpcs-composer`.
+
+```sh
+npm ci
+composer install
+npm run lint
+```
+
+### End-to-end tests
+
+The E2E suite uses Playwright and WordPress Playground. Docker, a local database, and an SMTP server are not required.
+
+```sh
+npx playwright install chromium
+npm run e2e:run
+```
+
+The command builds the production JavaScript, starts a disposable Playground site on port 9400, installs CF7, seeds forms and pages, and runs Chromium tests. Stop any other process using that port first. Each run starts with a fresh database; mail is intercepted by the test-only MU plugin and checked through its test mailbox endpoint. Never install `tests/plugins/log-emails.php` on a public site.
+
+The default stack is WordPress 7.1.4, PHP 8.3, and CF7 6.2.5. To check upstream releases:
+
+```sh
+WP_VERSION=latest CF7_VERSION=latest npm run e2e:run
+```
+
+`PHP_VERSION` can also select a Playground PHP version. Keep combinations compatible with the CF7 release being tested. CI runs the pinned stack on pull requests and also checks latest releases on scheduled or manually triggered runs.
+
+Use `npm run e2e:open` for Playwright's interactive runner or `npm run e2e:serve` for manual inspection of the seeded Playground site (admin login: `admin` / `password`). Reports are written to `playwright-report/`; failed tests retain screenshots and traces in `test-results/`. Browser JavaScript errors fail the test; PHP debug output is written to `test-results/php-errors.log` when present.
+
+Coverage includes saving group syntax in the CF7 editor, adding/removing rows, generated mail, invalid repeated fields and correction, and independent groups with unequal row counts. The reduced #65 fixture currently passes; the original report still needs investigation before the issue can be considered resolved.
+
+### PHP integration tests
+
+PHPUnit continues to use the WordPress test library and MySQL. With Docker running, the existing optional `wp-env` setup provides these independently of the Playground E2E suite:
+
+```sh
+npm run env start
+npm run env -- run tests-cli --env-cwd=wp-content/plugins/cf7-repeatable-fields php vendor/bin/phpunit
+npm run env stop
+```
+
+If the default ports are occupied, prefix the wp-env commands with `WP_ENV_PORT=8898 WP_ENV_TESTS_PORT=8899`.
+
+Alternatively, use `bin/install-wp-tests.sh` with a dedicated test database and WordPress 7.1.4, then run `composer test`. These tests reset their database; do not point them at a development or production database.
+
 ## Release instructions
 
 1. Branch: Starting from `trunk`, cut a release branch named `release/X.Y.Z` for your changes.

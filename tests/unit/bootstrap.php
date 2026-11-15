@@ -13,8 +13,11 @@ if ( ! $_tests_dir ) {
 
 // Forward custom PHPUnit Polyfills configuration to PHPUnit bootstrap file.
 $_phpunit_polyfills_path = getenv( 'WP_TESTS_PHPUNIT_POLYFILLS_PATH' );
-if ( false !== $_phpunit_polyfills_path ) {
-	define( 'WP_TESTS_PHPUNIT_POLYFILLS_PATH', $_phpunit_polyfills_path );
+if ( ! defined( 'WP_TESTS_PHPUNIT_POLYFILLS_PATH' ) ) {
+	define(
+		'WP_TESTS_PHPUNIT_POLYFILLS_PATH',
+		$_phpunit_polyfills_path ? $_phpunit_polyfills_path : __DIR__ . '/../../vendor/yoast/phpunit-polyfills'
+	);
 }
 
 if ( ! file_exists( "{$_tests_dir}/includes/functions.php" ) ) {

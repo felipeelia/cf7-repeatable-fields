@@ -1,9 +1,16 @@
 {
-	"extends": ["plugin:@wordpress/eslint-plugin/recommended"],
+	"extends": [
+		"plugin:@wordpress/eslint-plugin/recommended"
+	],
 	"env": {
 		"jquery": true
 	},
-	"ignorePatterns": ["vendor/*", "dist/*"],
+	"ignorePatterns": [
+		"vendor/*",
+		"dist/*",
+		"playwright-report/**",
+		"test-results/**"
+	],
 	"rules": {
 		"import/no-extraneous-dependencies": [
 			"error",

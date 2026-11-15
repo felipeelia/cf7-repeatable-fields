@@ -2,29 +2,20 @@
 <ruleset name="Contact Form 7 - Repeatable Fields">
 	<description>CF7 Repeatable Fields rules for PHP_CodeSniffer</description>
 
-    <file>.</file>
-
-    <arg name="extensions" value="php" />
-
-	<exclude-pattern>index.php</exclude-pattern> <!-- As we use it just to avoid directory listing. -->
-
+	<file>.</file>
 	<arg name="extensions" value="php"/>
 
-    <exclude-pattern>vendor/*</exclude-pattern>
-    <exclude-pattern>node_modules/*</exclude-pattern>
+	<exclude-pattern>index.php</exclude-pattern> <!-- Used only to prevent directory listing. -->
+	<exclude-pattern>vendor/*</exclude-pattern>
+	<exclude-pattern>node_modules/*</exclude-pattern>
 
-	<rule ref="WordPress"/>
-
+	<rule ref="10up-Default"/>
 	<rule ref="WordPress.WP.I18n">
 		<properties>
-			<property name="text_domain" value="cf7-repeatable-fields" />
+			<property name="text_domain" value="cf7-repeatable-fields"/>
 		</properties>
 	</rule>
 
-	<rule ref="WordPress-Extra">
-		<exclude name="Generic.Arrays.DisallowShortArraySyntax.Found"/>
-	</rule>
-
-	<rule ref="PHPCompatibilityWP" />
-	<config name="testVersion" value="7.2-"/>
+	<config name="minimum_supported_wp_version" value="7.1"/>
+	<config name="testVersion" value="8.3-"/>
 </ruleset>
