@@ -102,7 +102,7 @@ class CF7_Repeatable_Fields {
 			array(
 				'group_id'           => $group_id,
 				'additional_classes' => '',
-				'text'               => '+',
+				'text'               => __( 'Add group', 'cf7-repeatable-fields' ),
 			)
 		);
 		/**
@@ -130,7 +130,7 @@ class CF7_Repeatable_Fields {
 			array(
 				'group_id'           => $group_id,
 				'additional_classes' => '',
-				'text'               => '-',
+				'text'               => __( 'Remove group', 'cf7-repeatable-fields' ),
 			)
 		);
 		/**
@@ -174,12 +174,19 @@ class CF7_Repeatable_Fields {
 	}
 
 	/**
-	 * Enqueue the necessary JS for groups manipulation.
+	 * Enqueue the styles and JavaScript for repeatable groups.
 	 */
 	public function wpcf7_enqueue_scripts() {
 		$file = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ?
 			'assets/js/scripts.js' :
 			'dist/scripts.js';
+
+		wp_enqueue_style(
+			'wpcf7-field-group-style',
+			plugin_dir_url( CF7_REPEATABLE_FIELDS_FILE ) . 'assets/css/styles.css',
+			array(),
+			CF7_REPEATABLE_FIELDS_VERSION
+		);
 
 		wp_enqueue_script(
 			'wpcf7-field-group-script',

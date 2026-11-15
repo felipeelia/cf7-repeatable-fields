@@ -10,6 +10,9 @@
 (() => {
 	'use strict';
 
+	let nextId = 0;
+	const assignedIds = new WeakMap();
+
 	/**
 	 * Dispatch a repeatable-group event.
 	 *
@@ -27,6 +30,76 @@
 	}
 
 	/**
+	 * Give row IDs stable, page-unique values and reconnect local references.
+	 *
+	 * @param {Element} row Repeated row.
+	 */
+	function updateReferences(row) {
+		const ids = new Map();
+		row.querySelectorAll('[id]').forEach((element) => {
+			const previous = element.id;
+			const original = element.dataset.cf7rfOriginalId || previous;
+			element.dataset.cf7rfOriginalId = original;
+			if (!assignedIds.has(element)) {
+				let id;
+				do {
+					id = `${original}--cf7rf-${++nextId}`;
+				} while (document.getElementById(id));
+				assignedIds.set(element, id);
+			}
+			element.id = assignedIds.get(element);
+			ids.set(previous, element.id);
+			ids.set(original, element.id);
+		});
+		row.querySelectorAll('*').forEach((element) => {
+			for (const attribute of [
+				'for',
+				'list',
+				'aria-labelledby',
+				'aria-describedby',
+				'aria-controls',
+				'aria-owns',
+				'aria-errormessage',
+				'headers',
+			]) {
+				if (element.hasAttribute(attribute)) {
+					element.setAttribute(
+						attribute,
+						element
+							.getAttribute(attribute)
+							.split(/\s+/)
+							.map((id) => ids.get(id) || id)
+							.join(' ')
+					);
+				}
+			}
+			const href = element.getAttribute('href');
+			if (href?.startsWith('#') && ids.has(href.slice(1))) {
+				element.setAttribute('href', `#${ids.get(href.slice(1))}`);
+			}
+		});
+	}
+
+	/**
+	 * Focus the first available control in a newly added row.
+	 *
+	 * @param {Element} row Repeated row.
+	 */
+	function focusRow(row) {
+		const control = Array.from(
+			row.querySelectorAll(
+				'input:not([type="hidden"]), select, textarea, button'
+			)
+		).find(
+			(element) =>
+				!element.disabled &&
+				element.tabIndex >= 0 &&
+				element.getClientRects().length
+		);
+		control?.focus();
+	}
+
+	/**
 	 * Keep field names, validation wrappers and row counts in sync.
 	 *
 	 * @param {Element} container Groups container.
@@ -34,6 +107,7 @@
 	function updateGroups(container) {
 		const rows = container.querySelectorAll('.wpcf7-field-group');
 		rows.forEach((row, index) => {
+			updateReferences(row);
 			row.querySelectorAll('.wpcf7-field-group-remove').forEach(
 				(button) => {
 					button.style.display = index > 0 ? '' : 'none';
@@ -156,16 +230,27 @@
 			event.preventDefault();
 			event.stopPropagation();
 
+			let focusTarget;
+			let addedRow;
 			if (button.classList.contains('wpcf7-field-group-add')) {
 				const row = models.get(container).cloneNode(true);
 				container.append(row);
+				addedRow = row;
 				dispatchGroupEvent(button, 'added', row);
 			} else {
 				const row = button.closest('.wpcf7-field-group');
+				focusTarget = (
+					row.previousElementSibling || row.nextElementSibling
+				)?.querySelector('.wpcf7-field-group-add');
 				dispatchGroupEvent(button, 'removed', row);
 				row.remove();
 			}
 			dispatchGroupEvent(container, 'change');
+			if (addedRow) {
+				focusRow(addedRow);
+			} else {
+				focusTarget?.focus();
+			}
 		});
 
 		// CF7's direct listeners are not copied by cloneNode. Delegate exclusive

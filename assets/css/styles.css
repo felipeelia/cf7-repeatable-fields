@@ -1,0 +1,20 @@
+.wpcf7-field-group-add,
+.wpcf7-field-group-remove {
+	min-block-size: 44px;
+	min-inline-size: 44px;
+	max-inline-size: 100%;
+	margin-block: 0.25em;
+	margin-inline-end: 0.5em;
+	white-space: normal;
+}
+
+.wpcf7-field-group + .wpcf7-field-group {
+	margin-block-start: 1.5em;
+}
+
+.wpcf7-field-group input,
+.wpcf7-field-group select,
+.wpcf7-field-group textarea {
+	box-sizing: border-box;
+	max-inline-size: 100%;
+}
