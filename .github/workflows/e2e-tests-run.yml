@@ -21,15 +21,15 @@ jobs:
       CF7_VERSION: ${{ inputs.cf7 }}
       PHP_VERSION: '8.3'
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
         with:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run e2e:run
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.2
         if: failure()
         with:
           name: playwright-${{ inputs.wordpress }}-${{ inputs.cf7 }}
