@@ -184,7 +184,7 @@ class CF7_Repeatable_Fields {
 		wp_enqueue_script(
 			'wpcf7-field-group-script',
 			plugin_dir_url( CF7_REPEATABLE_FIELDS_FILE ) . $file,
-			array( 'jquery', 'contact-form-7' ),
+			array( 'contact-form-7' ),
 			CF7_REPEATABLE_FIELDS_VERSION,
 			true
 		);

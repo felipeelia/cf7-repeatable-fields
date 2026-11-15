@@ -44,6 +44,34 @@ GROUP #[group_index]
 [/emails]
 ```
 
+## JavaScript events
+
+Starting with 3.0.0, group events are bubbling DOM `CustomEvent`s. Listen with `addEventListener()`:
+
+```js
+document.addEventListener('wpcf7-field-groups/added', (event) => {
+    const group = event.detail.group;
+    // Initialize any custom widgets inside this new row.
+});
+```
+
+| Event | Target | Timing and payload |
+| --- | --- | --- |
+| `wpcf7-field-groups/added` | Add button | After the new row is appended, before renumbering. `event.detail.group` is the new DOM element. |
+| `wpcf7-field-groups/removed` | Remove button | Before the row leaves the DOM. `event.detail.group` is the row being removed. |
+| `wpcf7-field-groups/change` | Groups container | Updates field names, validation wrappers, and row counts. Listen on `document` to observe the updated state. |
+
+To request renumbering after changing rows yourself:
+
+```js
+const groups = document.querySelector('.wpcf7-field-groups');
+groups.dispatchEvent(new CustomEvent('wpcf7-field-groups/change', {
+    bubbles: true,
+}));
+```
+
+Migrate integrations using jQuery `.on()` and `.trigger()` to the native event APIs. The old second `$new_group` argument on the added event is now `event.detail.group`, a DOM element rather than a jQuery object. Native cloning does not copy attached event listeners; use event delegation or initialize widgets through the added event.
+
 ## Check out the Wiki
 
 * [Hooks available](https://github.com/felipeelia/cf7-repeatable-fields/wiki/Hooks) - How to customize the _add_ and _remove_ buttons
