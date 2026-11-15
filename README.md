@@ -44,6 +44,12 @@ GROUP #[group_index]
 [/emails]
 ```
 
+## Group controls and field IDs
+
+Starting with 3.0.0, the default buttons read “Add group” and “Remove group”. Adding a row focuses its first available control; removing a row returns focus to a neighboring row’s add button. The buttons inherit the theme’s appearance, with a minimum 44px target size and spacing between rows. Existing button filters still allow custom text and markup.
+
+IDs inside repeated rows receive a unique `--cf7rf-<number>` suffix, including IDs in the first row. Labels, ARIA references, datalist references, table headers, and fragment links within that row are updated to match. IDs stay stable when other rows are removed. Use classes or field names for CSS and JavaScript hooks, and keep references to repeated IDs inside the same row. This only updates IDs present in the rendered markup; CF7 may omit a field’s explicit ID when the same form is rendered more than once on a page. Wrapping the field in its label works in that case.
+
 ## JavaScript events
 
 Starting with 3.0.0, group events are bubbling DOM `CustomEvent`s. Listen with `addEventListener()`:
@@ -59,7 +65,7 @@ document.addEventListener('wpcf7-field-groups/added', (event) => {
 | --- | --- | --- |
 | `wpcf7-field-groups/added` | Add button | After the new row is appended, before renumbering. `event.detail.group` is the new DOM element. |
 | `wpcf7-field-groups/removed` | Remove button | Before the row leaves the DOM. `event.detail.group` is the row being removed. |
-| `wpcf7-field-groups/change` | Groups container | Updates field names, validation wrappers, and row counts. Listen on `document` to observe the updated state. |
+| `wpcf7-field-groups/change` | Groups container | Updates field names, IDs and their references, validation wrappers, and row counts. Listen on `document` to observe the updated state. |
 
 To request renumbering after changing rows yourself:
 

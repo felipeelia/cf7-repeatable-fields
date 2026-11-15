@@ -15,7 +15,11 @@ $cf7rf_forms = [
 <label>Subject [text* your-subject]</label>
 <label>Message [textarea your-message]</label>
 [field_group emails id="emails-groups"]
-<label>Repeated email [email* repeated-email]</label>
+<div role="group" aria-labelledby="repeated-email-label" aria-describedby="repeated-email-help">
+<label id="repeated-email-label">Repeated email [email* repeated-email id:repeated-email]</label>
+<label for="row-note">Row note</label><input id="row-note" type="text" />
+<span id="repeated-email-help">Enter an email for this row.</span>
+</div>
 [radio your-radio use_label_element default:1 "radio 1" "radio 2"]
 [select* your-menu include_blank "option1" "option 2"]
 [checkbox* your-checkbox use_label_element "check 1" "check 2"]
