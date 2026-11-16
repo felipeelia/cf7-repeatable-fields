@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ### Changed
 
+* Updated contribution and release instructions, limited WordPress.org deployment to published releases that are not marked as prereleases, and simplified GitHub Actions version references. Props [@felipeelia](https://github.com/felipeelia) via [#112](https://github.com/felipeelia/cf7-repeatable-fields/pull/112).
 * Improved repeatable group accessibility with descriptive button labels, predictable keyboard focus, unique row IDs and matching references, and mobile sizing. Props [@felipeelia](https://github.com/felipeelia) via [#111](https://github.com/felipeelia/cf7-repeatable-fields/pull/111).
 * Removed the frontend jQuery dependency, migrated group events to native `CustomEvent`s, and fixed exclusive checkbox choices affecting separate form instances. Props [@felipeelia](https://github.com/felipeelia) via [#109](https://github.com/felipeelia/cf7-repeatable-fields/pull/109).
 * Updated compatibility with Contact Form 7 6.2.5+, fixed repeated-field validation, replaced Cypress end-to-end tests with Playwright and WordPress Playground, and updated PHP development tools and GitHub Actions. Props [@felipeelia](https://github.com/felipeelia) via [#107](https://github.com/felipeelia/cf7-repeatable-fields/pull/107).

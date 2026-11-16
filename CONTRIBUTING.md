@@ -22,7 +22,13 @@ Pull requests represent a proposed solution to a specified problem.  They should
 
 ## Workflow
 
-The `trunk` branch is the main branch and contains all new code to be released in an upcoming version. A version released is just a tag of that branch.
+The `trunk` branch contains ongoing development for the next release. Create a topic branch from `trunk` and open your pull request against `trunk`. Published GitHub releases and their version tags identify released versions.
+
+Keep pull requests focused, explain the resulting behavior, and include reproduction steps and validation results. Add regression coverage for bug fixes when practical. Commit built JavaScript in `dist/` alongside source changes (`npm run build`).
+
+Add changes under `Unreleased` in `CHANGELOG.md`, following the existing categories, wording, and props format. Every entry must link to at least one pull request. Give credit to reporters, testers, and contributors as appropriate. Add new contributors to `CREDITS.md` when preparing the release.
+
+The release checklist below follows [ElasticPress’s contributing and release process](https://github.com/10up/ElasticPress/blob/develop/CONTRIBUTING.md), adapted to this plugin’s single main branch and committed assets.
 
 ## Development and tests
 
@@ -77,18 +83,32 @@ Alternatively, use `bin/install-wp-tests.sh` with a dedicated test database and 
 
 ## Release instructions
 
-1. Branch: Starting from `trunk`, cut a release branch named `release/X.Y.Z` for your changes.
-1. Version bump: Bump the version number in `cf7-repeatable-fields.php`, `package.json`, `package-lock.json`, `readme.txt`, and any other relevant files if it does not already reflect the version being released. In `cf7-repeatable-fields.php` update both the plugin "Version:" property and the plugin `CF7_REPEATABLE_FIELDS_VERSION` constant.
-1. Changelog: Add/update the changelog in `CHANGELOG.md` and `readme.txt`, ensuring to link the [X.Y.Z] release reference in the footer of `CHANGELOG.md` (e.g., https://github.com/felipeelia/cf7-repeatable-fields/compare/X.Y.Z-1...X.Y.Z). Update the Unreleased link to https://github.com/felipeelia/cf7-repeatable-fields/compare/X.Y.Z...trunk
-1. Props: Update `CREDITS.md` file with any new contributors, confirm maintainers are accurate.
-1. Readme updates: Make any other readme changes as necessary. `README.md` is geared toward GitHub and `readme.txt` contains WordPress.org-specific content. The two are slightly different.
-1. New files: Check to be sure any new files/paths that are unnecessary in the production version are included in `.distignore`.
-1. POT file: Run `wp i18n make-pot . languages/cf7-repeatable-fields.pot` and commit the file. In case of errors, try to disable Xdebug (see [this comment](https://github.com/10up/ElasticPress/pull/3079#issuecomment-1291028290).)
-1. Release date: Double check the release date in both changelog files.
-1. Merge: Merge the release branch/PR into `trunk`.
-1. Test: Run `git pull origin trunk` and test for functionality locally.
-1. Release: Create a [new release](https://github.com/felipeelia/cf7-repeatable-fields/releases/new), naming the release and the new tag with the new version number (`X.Y.Z`). Paste the release changelog from `CHANGELOG.md` into the body of the release and include a link to the closed issues on the [milestone](https://github.com/felipeelia/cf7-repeatable-fields/milestone/#?closed=1).
-1. SVN: Wait for the [GitHub Action](https://github.com/felipeelia/cf7-repeatable-fields/actions/workflows/deploy.yml) to finish deploying to the WordPress.org repository. If all goes well, users with SVN commit access for that plugin will receive an emailed diff of changes.
-1. Check WordPress.org: Ensure that the changes are live on https://wordpress.org/plugins/cf7-repeatable-fields/. This may take a few minutes.
-1. Close milestone: Edit the [milestone](https://github.com/felipeelia/cf7-repeatable-fields/milestone/#) with release date (in the `Due date (optional)` field) and link to GitHub release (in the `Description` field), then close the milestone.
-1. Punt incomplete items: If any open issues or PRs which were milestoned for `X.Y.Z` do not make it into the release, update their milestone to `X.Y.Z+1`, `X.Y+1.0`, `X+1.0.0` or `Future Release`.
+Open an issue titled `[Release] X.Y.Z`, assign the release milestone, and copy the checklist below into its description, replacing the version and milestone links.
+
+- [ ] **Branch:** Create `release/X.Y.Z` from an up-to-date `trunk`.
+- [ ] **Versions:** Update the plugin header and `CF7_REPEATABLE_FIELDS_VERSION` in `cf7-repeatable-fields.php`, `package.json`, the root and root-package versions in `package-lock.json`, and `Stable tag` in `readme.txt`. Use `X.Y.Z` without a `v` prefix.
+- [ ] **Changelogs:** Move the `Unreleased` entries into a dated `X.Y.Z` section in `CHANGELOG.md`, and update `readme.txt` using its existing format. Retain props and pull request links in `CHANGELOG.md`. Add the release comparison link in its footer, and point `Unreleased` at `X.Y.Z...trunk`. Check the release date in both files.
+- [ ] **Credits:** Add new contributors to `CREDITS.md` and confirm maintainer details. Include credit for bug reports and testing as well as code.
+- [ ] **Readmes:** Update the GitHub and WordPress.org readmes as needed. Check minimum requirements, `Tested up to`, and any upgrade instructions.
+- [ ] **Distribution:** Check `.distignore` so runtime files and the license are included, and development tools, dependencies, tests, and reports are excluded. Confirm any JavaScript changes have their built files committed in `dist/`.
+- [ ] **Translations:** Run `wp i18n make-pot . languages/cf7-repeatable-fields.pot --exclude=tests,vendor,node_modules,playwright-report,test-results` and commit the updated POT file.
+- [ ] **Test:** Run `npm run lint`, `npm run e2e:run`, and the PHP integration tests described above. Also check current upstream releases with `WP_VERSION=latest CF7_VERSION=latest npm run e2e:run`.
+- [ ] **Review and merge:** Open the release pull request against `trunk`, link the release issue and milestone, and wait for review and green CI. Merge it and fetch the updated `trunk`.
+- [ ] **Publish:** Create a [GitHub release](https://github.com/felipeelia/cf7-repeatable-fields/releases/new) targeting the reviewed `trunk` commit. Use tag `X.Y.Z`, title `Version X.Y.Z`, and the release changelog as the description. Append `See: https://github.com/felipeelia/cf7-repeatable-fields/milestone/NUMBER?closed=1`.
+- [ ] **Deploy:** Watch [Deploy to WordPress.org](https://github.com/felipeelia/cf7-repeatable-fields/actions/workflows/deploy.yml). Publishing the GitHub release deploys the committed files to WordPress.org unless the release is marked **This is a pre-release**. Pushing a tag or saving a draft alone does not deploy the plugin.
+- [ ] **Verify:** Check the version, changelog, requirements, and download on [WordPress.org](https://wordpress.org/plugins/cf7-repeatable-fields/). Allow a few minutes for propagation, then smoke-test the downloaded plugin with CF7 and confirm existing installations can see the update.
+- [ ] **Close out:** Move unfinished issues and pull requests to a future milestone. Add the release date and GitHub release link to the milestone description, set its due date, and close the milestone and release issue. Leave an empty `Unreleased` section for subsequent changes.
+
+Deployment uses the repository’s `SVN_USERNAME` and `SVN_PASSWORD` secrets. Assets are already committed, so the deployment workflow does not install dependencies or build them.
+
+### Hotfixes
+
+If `trunk` contains changes that should not be included in an urgent release, create `hotfix/X.Y.Z` from the latest stable release tag. Follow the release checklist for that branch and publish the reviewed hotfix commit. Merge the fix and release metadata back into `trunk`, resolving version and changelog conflicts as needed.
+
+### Readme and assets between releases
+
+The [Plugin asset/readme update](https://github.com/felipeelia/cf7-repeatable-fields/actions/workflows/push-asset-readme-update.yml) workflow updates WordPress.org readme/assets on pushes to `trunk`. Review `readme.txt` and `.wordpress-org/` changes with that in mind; they can become public before the next plugin release.
+
+### Failed deployment
+
+Inspect the workflow and check WordPress.org before retrying; the SVN commit may already have succeeded. Rerun the failed job for a temporary failure or corrected credentials. If published code needs changing, prepare a new version rather than moving an existing release tag.
