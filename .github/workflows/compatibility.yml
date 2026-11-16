@@ -1,0 +1,113 @@
+name: Upstream compatibility
+
+on:
+  schedule:
+    - cron: '23 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: upstream-compatibility
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    if: github.ref == 'refs/heads/trunk'
+    runs-on: ubuntu-latest
+    outputs:
+      versions: ${{ steps.versions.outputs.result }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/github-script@v9
+        id: versions
+        with:
+          script: |
+            return await require('./bin/compatibility.js').discover(context.sha);
+
+  test:
+    needs: discover
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [trunk, published]
+    env:
+      VERSIONS: ${{ needs.discover.outputs.versions }}
+      WP_VERSION: ${{ fromJSON(needs.discover.outputs.versions).wordpress }}
+      CF7_VERSION: ${{ fromJSON(needs.discover.outputs.versions).cf7 }}
+      PHP_VERSION: '8.3'
+      CF7RF_VERSION: ${{ matrix.target == 'published' && fromJSON(needs.discover.outputs.versions).published || '' }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ fromJSON(needs.discover.outputs.versions).sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Download published plugin
+        if: matrix.target == 'published'
+        run: |
+          mkdir -p "$RUNNER_TEMP/published"
+          curl --fail --location --retry 3 "https://downloads.wordpress.org/plugin/cf7-repeatable-fields.${CF7RF_VERSION}.zip" -o "$RUNNER_TEMP/published.zip"
+          unzip -q "$RUNNER_TEMP/published.zip" -d "$RUNNER_TEMP/published"
+      - name: Build test assets
+        run: npm run build
+      - name: E2E tests
+        id: e2e
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_FILE: test-results/playwright.json
+          CF7RF_PLUGIN_DIR: ${{ matrix.target == 'published' && format('{0}/published/cf7-repeatable-fields', runner.temp) || github.workspace }}
+        run: npx playwright test --reporter=list,html,json
+      - name: Record result
+        if: always()
+        uses: actions/github-script@v9
+        env:
+          TARGET: ${{ matrix.target }}
+          TEST_OUTCOME: ${{ steps.e2e.outcome }}
+        with:
+          script: |
+            require('./bin/compatibility.js').recordResult(process.env);
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: compatibility-${{ matrix.target }}
+          retention-days: 14
+          path: |
+            test-results/
+            playwright-report/
+
+  report:
+    if: always() && needs.discover.result != 'skipped' && !cancelled()
+    needs: [discover, test]
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@v8
+        if: needs.discover.result == 'success'
+        continue-on-error: true
+        with:
+          pattern: compatibility-*
+          path: compatibility-results
+      - name: Report compatibility and propose readme update
+        uses: actions/github-script@v9
+        env:
+          VERSIONS: ${{ needs.discover.outputs.versions }}
+        with:
+          script: |
+            await require('./bin/compatibility.js').report({ github, context, core });

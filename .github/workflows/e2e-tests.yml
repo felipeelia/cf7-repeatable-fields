@@ -1,8 +1,6 @@
 name: E2E Tests
 
 on:
-  schedule:
-    - cron: '0 0 * * *'
   workflow_dispatch:
   push:
     branches: [trunk]
@@ -22,10 +20,3 @@ jobs:
   pinned:
     name: Pinned versions
     uses: ./.github/workflows/e2e-tests-run.yml
-  latest:
-    name: Latest releases
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
-    uses: ./.github/workflows/e2e-tests-run.yml
-    with:
-      wordpress: latest
-      cf7: latest

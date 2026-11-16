@@ -61,11 +61,23 @@ The default stack is WordPress 7.1.4, PHP 8.3, and CF7 6.2.5. To check upstream 
 WP_VERSION=latest CF7_VERSION=latest npm run e2e:run
 ```
 
-`PHP_VERSION` can also select a Playground PHP version. Keep combinations compatible with the CF7 release being tested. CI runs the pinned stack on pull requests and also checks latest releases on scheduled or manually triggered runs.
+`PHP_VERSION` can also select a Playground PHP version. Keep combinations compatible with the CF7 release being tested. The E2E Tests workflow runs the pinned stack on pushes, pull requests, and manual runs.
 
 Use `npm run e2e:open` for Playwright's interactive runner or `npm run e2e:serve` for manual inspection of the seeded Playground site (admin login: `admin` / `password`). Reports are written to `playwright-report/`; failed tests retain screenshots and traces in `test-results/`. Browser JavaScript errors fail the test; PHP debug output is written to `test-results/php-errors.log` when present.
 
 The E2E suite covers form editing, repeated-field interactions, validation, and generated mail. Add regression tests for reported bugs using reproducible fixtures.
+
+### Upstream compatibility automation
+
+The Upstream compatibility workflow runs daily and can be triggered manually from `trunk`. It resolves the latest stable WordPress and Contact Form 7 versions through WordPress.org APIs, then runs the current E2E suite against both the tested `trunk` commit and the latest published plugin downloaded from WordPress.org. Exact dependency versions and the published plugin version are verified by the suite. The pinned pull request checks remain independent.
+
+Daily checks also cover patch releases and changes to `trunk`, even when no new upstream version is available. Successful checks are recorded in the run summary. Failed checks create or update an issue for that dependency version pair and plugin target (including the plugin version for published releases). Setup, download, and server startup failures are reported separately from test failures. Test failures require investigation: the published plugin may have existing bugs covered by newer tests, and passing tests establish compatibility only for the behavior covered by the suite.
+
+When both targets pass and WordPress's `X.Y` exceeds `Tested up to`, the workflow opens a PR changing only that field in `readme.txt` to `X.Y`. WordPress patch releases and CF7 releases do not change minimum requirements or create readme bumps. If `trunk` changes during testing, the PR is deferred until the next run. Existing PRs and issues are reused; closed ones are not recreated or reopened automatically. Review remains manual, and readme changes are deployed only through the normal release process.
+
+Repository Actions settings must allow GitHub Actions to create pull requests. The workflow uses `GITHUB_TOKEN` with write permissions only in its reporting job; no additional secret is required. GitHub may require approval to run CI on a bot-created PR; check the PR's workflow approval banner before merging.
+
+Run the automation's unit tests with `node --test tests/unit/compatibility.test.js`. These use mocked metadata and GitHub APIs and do not create real issues, branches, commits, or pull requests.
 
 ### PHP integration tests
 
@@ -104,10 +116,6 @@ Deployment uses the repository’s `SVN_USERNAME` and `SVN_PASSWORD` secrets. As
 ### Hotfixes
 
 If `trunk` contains changes that should not be included in an urgent release, create `hotfix/X.Y.Z` from the latest stable release tag. Follow the release checklist for that branch and publish the reviewed hotfix commit. Merge the fix and release metadata back into `trunk`, resolving version and changelog conflicts as needed.
-
-### Readme and assets between releases
-
-The [Plugin asset/readme update](https://github.com/felipeelia/cf7-repeatable-fields/actions/workflows/push-asset-readme-update.yml) workflow updates WordPress.org readme/assets on pushes to `trunk`. Review `readme.txt` and `.wordpress-org/` changes with that in mind; they can become public before the next plugin release.
 
 ### Failed deployment
 

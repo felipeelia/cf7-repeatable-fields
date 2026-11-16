@@ -65,6 +65,7 @@ function cf7rf_tests_register_routes() {
 					'wordpress' => get_bloginfo( 'version' ),
 					'php'       => PHP_VERSION,
 					'cf7'       => WPCF7_VERSION,
+					'plugin'    => CF7_REPEATABLE_FIELDS_VERSION,
 				];
 			},
 		]
