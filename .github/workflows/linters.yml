@@ -30,6 +30,9 @@ jobs:
             - name: ES lint
               run: npm run lint:js
 
+            - name: Compatibility automation tests
+              run: node --test tests/unit/compatibility.test.js
+
             - name: Set PHP version
               uses: shivammathur/setup-php@v2
               with:

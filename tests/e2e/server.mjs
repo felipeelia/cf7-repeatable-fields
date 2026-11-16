@@ -1,8 +1,11 @@
-import { readFileSync } from 'node:fs';
+import { readFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
 import { runCLI } from '@wp-playground/cli';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
+const pluginRoot = resolve(process.env.CF7RF_PLUGIN_DIR || root);
+mkdirSync(`${root}test-results`, { recursive: true });
 const cf7Version = process.env.CF7_VERSION || '6.2.5';
 const cf7Url = `https://downloads.wordpress.org/plugin/contact-form-7${
 	cf7Version === 'latest' ? '' : `.${cf7Version}`
@@ -16,8 +19,18 @@ const cli = await runCLI({
 	login: false,
 	mount: [
 		{
-			hostPath: root,
+			hostPath: pluginRoot,
 			vfsPath: '/wordpress/wp-content/plugins/cf7-repeatable-fields',
+		},
+		{
+			hostPath: `${root}tests`,
+			vfsPath:
+				'/wordpress/wp-content/plugins/cf7-repeatable-fields/tests',
+		},
+		{
+			hostPath: `${root}test-results`,
+			vfsPath:
+				'/wordpress/wp-content/plugins/cf7-repeatable-fields/test-results',
 		},
 		{
 			hostPath: `${root}tests/plugins`,

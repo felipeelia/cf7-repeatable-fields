@@ -41,6 +41,9 @@ test('boots the requested WordPress, PHP and CF7 versions', async ({
 	);
 	expect(response.ok()).toBeTruthy();
 	const versions = await response.json();
+	if (process.env.CF7RF_VERSION) {
+		expect(versions.plugin).toBe(process.env.CF7RF_VERSION);
+	}
 	if (process.env.WP_VERSION !== 'latest') {
 		expect(versions.wordpress).toBe(process.env.WP_VERSION || '7.1.4');
 	}
