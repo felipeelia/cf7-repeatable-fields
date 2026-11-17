@@ -2,6 +2,8 @@
 
 > Adds repeatable groups of fields to Contact Form 7.
 
+Updating from an earlier version? Read the [3.0.0 upgrade notes](#upgrading-to-300).
+
 [![Support Level](https://img.shields.io/badge/support-may_take_time-yellow.svg)](#support-level) [![Tests Status](https://github.com/felipeelia/cf7-repeatable-fields/actions/workflows/test.yml/badge.svg?branch=trunk)](https://github.com/felipeelia/cf7-repeatable-fields) [![Release Version](https://img.shields.io/github/release/felipeelia/cf7-repeatable-fields.svg)](https://github.com/felipeelia/cf7-repeatable-fields/releases/latest) ![WordPress tested up to version](https://img.shields.io/wordpress/plugin/tested/cf7-repeatable-fields?label=WordPress) [![GPLv2 License](https://img.shields.io/github/license/felipeelia/cf7-repeatable-fields.svg)](https://github.com/felipeelia/cf7-repeatable-fields/blob/trunk/LICENSE.md)
 
 ## Requirements
@@ -87,6 +89,23 @@ Migrate integrations using jQuery `.on()` and `.trigger()` to the native event A
 You can contribute with code, issues and ideas at the [GitHub repository](https://github.com/felipeelia/cf7-repeatable-fields).
 
 If you like the plugin, [a review](https://wordpress.org/support/plugin/cf7-repeatable-fields/reviews/#new-post) is appreciated :)
+
+## Upgrading to 3.0.0
+
+* Requires WordPress 7.1+, PHP 8.3+, and Contact Form 7 6.2.5+.
+* Group events now use native DOM `CustomEvent`s. Update integrations using jQuery event handlers; the plugin no longer loads jQuery. See [JavaScript events](#javascript-events) for the event payloads and migration details.
+* The default buttons now read “Add group” and “Remove group”, and adding/removing a row moves keyboard focus. Existing button filters still work.
+* IDs inside repeated rows, including the first row, receive unique suffixes. Update CSS and JavaScript that target these IDs to use classes or field names, and keep label/ARIA references inside their row.
+* Group names accept only letters, numbers, underscores, and hyphens. Rename groups using other characters in both the form and mail templates.
+* The server accepts at most 50 rows per submitted group by default. Additional rows are not processed for validation or mail. This does not limit the frontend add button. If your form needs more rows, adjust the `wpcf7_field_group_max_rows` filter before upgrading.
+
+For example, to accept up to 100 rows for the `emails` group while keeping the default for other groups:
+
+```php
+add_filter( 'wpcf7_field_group_max_rows', function ( $max_rows, $group_id ) {
+    return 'emails' === $group_id ? 100 : $max_rows;
+}, 10, 2 );
+```
 
 ## Changelog
 

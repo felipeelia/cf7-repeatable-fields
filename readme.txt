@@ -6,7 +6,7 @@ Requires at least: 7.1
 Requires PHP: 8.3
 Requires Plugins: contact-form-7
 Tested up to: 7.1.4
-Stable tag:   2.0.2
+Stable tag:   3.0.0
 License:      GPLv2 or later
 License URI:  http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,6 +49,15 @@ GROUP #[group_index]
 [/emails]
 ~~~
 
+== Upgrading to 3.0.0 ==
+
+* Requires WordPress 7.1+, PHP 8.3+, and Contact Form 7 6.2.5+.
+* Group events now use native DOM `CustomEvent`s. Update integrations using jQuery event handlers; the plugin no longer loads jQuery. See the [JavaScript events documentation](https://github.com/felipeelia/cf7-repeatable-fields#javascript-events) for the event payloads and migration details.
+* The default buttons now read “Add group” and “Remove group”, and adding/removing a row moves keyboard focus. Existing button filters still work.
+* IDs inside repeated rows, including the first row, receive unique suffixes. Update CSS and JavaScript that target these IDs to use classes or field names, and keep label/ARIA references inside their row.
+* Group names accept only letters, numbers, underscores, and hyphens. Rename groups using other characters in both the form and mail templates.
+* The server accepts at most 50 rows per submitted group by default. Additional rows are not processed for validation or mail. This does not limit the frontend add button. If your form needs more rows, adjust the `wpcf7_field_group_max_rows` filter before upgrading.
+
 == Check out the Wiki ==
 
 * [Hooks available](https://github.com/felipeelia/cf7-repeatable-fields/wiki/Hooks) - How to customize the _add_ and _remove_ buttons
@@ -71,11 +80,30 @@ Yes! Give a look at the [Frequently Asked Questions](https://github.com/felipeel
 
 == Changelog ==
 
-= Unreleased =
+= 3.0.0 - 2026-11-16 =
 
-__Fixed:__
+**Note that this version changes minimum required versions of:**
 
-* Harden group ID and row count handling, with a configurable maximum of 50 rows per group.
+* [WordPress](https://wordpress.org): 7.1+
+* [PHP](https://php.net/): 8.3+
+* [Contact Form 7](https://wordpress.org/plugins/contact-form-7/): 6.2.5+
+
+__Added:__
+
+* Regression tests for the form reported in #65, both mail templates, and resubmission after a successful form reset. Props [@suchitpatel0722](https://github.com/suchitpatel0722) and [@felipeelia](https://github.com/felipeelia).
+
+__Changed:__
+
+* Added daily WordPress and Contact Form 7 compatibility checks with automated failure issues and tested-version pull requests, and limited WordPress.org readme and asset updates to releases. Props [@felipeelia](https://github.com/felipeelia).
+* Updated contribution and release instructions, limited WordPress.org deployment to published releases that are not marked as prereleases, and simplified GitHub Actions version references. Props [@felipeelia](https://github.com/felipeelia).
+* Improved repeatable group accessibility with descriptive button labels, predictable keyboard focus, unique row IDs and matching references, and mobile sizing. Props [@felipeelia](https://github.com/felipeelia).
+* Removed the frontend jQuery dependency, migrated group events to native `CustomEvent`s, and fixed exclusive checkbox choices affecting separate form instances. Props [@felipeelia](https://github.com/felipeelia).
+* Updated compatibility with Contact Form 7 6.2.5+, fixed repeated-field validation, replaced Cypress end-to-end tests with Playwright and WordPress Playground, and updated PHP development tools and GitHub Actions. Props [@felipeelia](https://github.com/felipeelia).
+* Updated npm development dependencies, migrated JavaScript linting to ESLint 10, and raised the Node.js minimum version to 24.15+ or 26+. Props [@felipeelia](https://github.com/felipeelia).
+
+__Security:__
+
+* Harden group ID and row count handling, with a configurable maximum of 50 rows per group. Props [@felipeelia](https://github.com/felipeelia).
 
 = 2.0.2 - 2024-10-22 =
 
@@ -177,6 +205,9 @@ __Fixed:__
 * Initial release
 
 == Upgrade Notice ==
+
+= 3.0.0 =
+Requires WordPress 7.1+, PHP 8.3+, and CF7 6.2.5+. Group events and row IDs have changed, and the server now processes up to 50 rows per group by default. Review the upgrade notes before updating.
 
 = 2.0.0 =
 This version changes the minimum requirements of the plugin: PHP 7.2+, WordPress 6.0+, and Contact Form 7 5.7+.

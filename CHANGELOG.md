@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ## [Unreleased]
 
+<!--
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+-->
+
+## [3.0.0] - 2026-11-16
+
 **Note that this version changes minimum required versions of:**
 
 * [WordPress](https://wordpress.org): 7.1+
@@ -12,7 +23,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ### Added
 
-* Regression tests for the form reported in #65, both mail templates, and resubmission after a successful form reset. Props [@felipeelia](https://github.com/felipeelia) via [#110](https://github.com/felipeelia/cf7-repeatable-fields/pull/110).
+* Regression tests for the form reported in #65, both mail templates, and resubmission after a successful form reset. Props [@suchitpatel0722](https://github.com/suchitpatel0722) and [@felipeelia](https://github.com/felipeelia) via [#110](https://github.com/felipeelia/cf7-repeatable-fields/pull/110).
 
 ### Changed
 
@@ -27,14 +38,6 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 * Harden group ID and row count handling, with a configurable maximum of 50 rows per group. Props [@felipeelia](https://github.com/felipeelia) via [#115](https://github.com/felipeelia/cf7-repeatable-fields/pull/115).
 
-<!--
-### Added
-### Changed
-### Deprecated
-### Removed
-### Fixed
-### Security
--->
 
 ## [2.0.2] - 2024-10-22
 
@@ -135,7 +138,8 @@ This release marks the (slow) resumption of this plugin development. If you want
 
 * Initial release
 
-[Unreleased]: https://github.com/felipeelia/cf7-repeatable-fields/compare/2.0.2...trunk
+[Unreleased]: https://github.com/felipeelia/cf7-repeatable-fields/compare/3.0.0...trunk
+[3.0.0]: https://github.com/felipeelia/cf7-repeatable-fields/compare/2.0.2...3.0.0
 [2.0.2]: https://github.com/felipeelia/cf7-repeatable-fields/compare/2.0.1...2.0.2
 [2.0.1]: https://github.com/felipeelia/cf7-repeatable-fields/compare/2.0.0...2.0.1
 [2.0.0]: https://github.com/felipeelia/cf7-repeatable-fields/compare/1.1.3...2.0.0
