@@ -49,6 +49,15 @@ GROUP #[group_index]
 [/emails]
 ~~~
 
+== Upgrading to 3.0.0 ==
+
+* Requires WordPress 7.1+, PHP 8.3+, and Contact Form 7 6.2.5+.
+* Group events now use native DOM `CustomEvent`s. Update integrations using jQuery event handlers; the plugin no longer loads jQuery. See the [JavaScript events documentation](https://github.com/felipeelia/cf7-repeatable-fields#javascript-events) for the event payloads and migration details.
+* The default buttons now read “Add group” and “Remove group”, and adding/removing a row moves keyboard focus. Existing button filters still work.
+* IDs inside repeated rows, including the first row, receive unique suffixes. Update CSS and JavaScript that target these IDs to use classes or field names, and keep label/ARIA references inside their row.
+* Group names accept only letters, numbers, underscores, and hyphens. Rename groups using other characters in both the form and mail templates.
+* The server accepts at most 50 rows per submitted group by default. Additional rows are not processed for validation or mail. This does not limit the frontend add button. If your form needs more rows, adjust the `wpcf7_field_group_max_rows` filter before upgrading.
+
 == Check out the Wiki ==
 
 * [Hooks available](https://github.com/felipeelia/cf7-repeatable-fields/wiki/Hooks) - How to customize the _add_ and _remove_ buttons
@@ -196,6 +205,9 @@ __Fixed:__
 * Initial release
 
 == Upgrade Notice ==
+
+= 3.0.0 =
+Requires WordPress 7.1+, PHP 8.3+, and CF7 6.2.5+. Group events and row IDs have changed, and the server now processes up to 50 rows per group by default. Review the upgrade notes before updating.
 
 = 2.0.0 =
 This version changes the minimum requirements of the plugin: PHP 7.2+, WordPress 6.0+, and Contact Form 7 5.7+.
