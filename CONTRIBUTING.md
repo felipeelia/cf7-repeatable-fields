@@ -26,7 +26,11 @@ The `trunk` branch contains ongoing development for the next release. Create a t
 
 Keep pull requests focused, explain the resulting behavior, and include reproduction steps and validation results. Add regression coverage for bug fixes when practical. Commit built JavaScript in `dist/` alongside source changes (`npm run build`).
 
-Add changes under `Unreleased` in `CHANGELOG.md`, following the existing categories, wording, and props format. Every entry must link to at least one pull request. Give credit to reporters, testers, and contributors as appropriate. Add new contributors to `CREDITS.md` when preparing the release.
+Add changes under `Unreleased` in `CHANGELOG.md`, following the existing categories, wording, and props format. Every entry must link to at least one pull request. AI agents may initially use the expected next PR number, but must confirm the actual number once the PR is opened and correct every provisional link before merging. Give credit to reporters, testers, and contributors as appropriate. Add new contributors to `CREDITS.md` when preparing the release.
+
+Add an `@since` tag with the intended release version to every new method, including test methods. A method may omit its own tag only when it was introduced in the same release as its containing file and that file's docblock has the matching `@since` tag. New files must have an `@since` tag in their file docblock. Use the intended release version even when the plugin's version fields have not yet been bumped.
+
+Every new action or filter must have its own `@since` tag in its hook docblock. Add new hooks to the project wiki when the release is published, as part of the release checklist below.
 
 The release checklist below follows [ElasticPress’s contributing and release process](https://github.com/10up/ElasticPress/blob/develop/CONTRIBUTING.md), adapted to this plugin’s single main branch and committed assets.
 
@@ -109,6 +113,7 @@ Open an issue titled `[Release] X.Y.Z`, assign the release milestone, and copy t
 - [ ] **Publish:** Create a [GitHub release](https://github.com/felipeelia/cf7-repeatable-fields/releases/new) targeting the reviewed `trunk` commit. Use tag `X.Y.Z`, title `Version X.Y.Z`, and the release changelog as the description. Append `See: https://github.com/felipeelia/cf7-repeatable-fields/milestone/NUMBER?closed=1`.
 - [ ] **Deploy:** Watch [Deploy to WordPress.org](https://github.com/felipeelia/cf7-repeatable-fields/actions/workflows/deploy.yml). Publishing the GitHub release deploys the committed files to WordPress.org unless the release is marked **This is a pre-release**. Pushing a tag or saving a draft alone does not deploy the plugin.
 - [ ] **Verify:** Check the version, changelog, requirements, and download on [WordPress.org](https://wordpress.org/plugins/cf7-repeatable-fields/). Allow a few minutes for propagation, then smoke-test the downloaded plugin with CF7 and confirm existing installations can see the update.
+- [ ] **Hook documentation:** Once the release is published, add every new action and filter to the [project wiki](https://github.com/felipeelia/cf7-repeatable-fields/wiki), including its `@since` version, parameters, and usage examples.
 - [ ] **Close out:** Move unfinished issues and pull requests to a future milestone. Add the release date and GitHub release link to the milestone description, set its due date, and close the milestone and release issue. Leave an empty `Unreleased` section for subsequent changes.
 
 Deployment uses the repository’s `SVN_USERNAME` and `SVN_PASSWORD` secrets. Assets are already committed, so the deployment workflow does not install dependencies or build them.

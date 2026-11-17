@@ -71,6 +71,12 @@ Yes! Give a look at the [Frequently Asked Questions](https://github.com/felipeel
 
 == Changelog ==
 
+= Unreleased =
+
+__Fixed:__
+
+* Harden group ID and row count handling, with a configurable maximum of 50 rows per group.
+
 = 2.0.2 - 2024-10-22 =
 
 **This is a security release.** It fixes a Stored cross-site scripting (XSS) vulnerability, that allowed users with contributor-level access and above, to inject arbitrary web scripts in pages that will execute whenever a user accesses an injected page. Thanks to Peter Thaleikis and the Wordfence team for reaching out about it.
