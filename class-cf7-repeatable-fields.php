@@ -2,6 +2,8 @@
 /**
  * Plugin Main Class File
  *
+ * @since 1.0.0
+ *
  * @package CF7_Repeatable_Fields
  */
 
@@ -70,13 +72,16 @@ class CF7_Repeatable_Fields {
 						list( $att, $value ) = explode( ':', $value );
 					}
 				}
+				if ( ! preg_match( '/\A[A-Za-z0-9_:-]+\z/', $att ) ) {
+					return '';
+				}
 				return sprintf( '%s="%s"', $att, esc_attr( $value ) );
 			},
 			array_keys( $atts ),
 			$atts
 		);
-		// Abort if there is no group id.
-		if ( empty( $group_id ) ) {
+		// Abort if the group ID is missing or invalid, before registering it or running filters.
+		if ( ! preg_match( '/\A[A-Za-z0-9_-]+\z/', $group_id ) ) {
 			return sprintf(
 				/* translators: Format to use surrounded by code tag */
 				'<p>' . __( 'You need to set an ID to this group. Use %s format.', 'cf7-repeatable-fields' ) . '</p>',
@@ -113,8 +118,8 @@ class CF7_Repeatable_Fields {
 		 */
 		$add_button = apply_filters(
 			'wpcf7_field_group_add_button',
-			"<button type='button' class='wpcf7-field-group-add {$add_button_atts['additional_classes']}'>" .
-				$add_button_atts['text'] .
+			"<button type='button' class='wpcf7-field-group-add " . esc_attr( $add_button_atts['additional_classes'] ) . "'>" .
+				esc_html( $add_button_atts['text'] ) .
 			'</button>',
 			$group_id
 		);
@@ -141,8 +146,8 @@ class CF7_Repeatable_Fields {
 		 */
 		$remove_button = apply_filters(
 			'wpcf7_field_group_remove_button',
-			"<button type='button' class='wpcf7-field-group-remove {$remove_button_atts['additional_classes']}'>" .
-				$remove_button_atts['text'] .
+			"<button type='button' class='wpcf7-field-group-remove " . esc_attr( $remove_button_atts['additional_classes'] ) . "'>" .
+				esc_html( $remove_button_atts['text'] ) .
 			'</button>',
 			$group_id
 		);
@@ -164,7 +169,7 @@ class CF7_Repeatable_Fields {
 				do_shortcode( $content ) .
 				$remove_button .
 				$add_button .
-				'<input type="hidden" class="wpcf7-field-group-count" name="_wpcf7_groups_count[' . $group_id . ']" value="1" />' .
+				'<input type="hidden" class="wpcf7-field-group-count" name="_wpcf7_groups_count[' . esc_attr( $group_id ) . ']" value="1" />' .
 			'</div>',
 			$atts,
 			$group_id
@@ -228,6 +233,9 @@ class CF7_Repeatable_Fields {
 		 */
 		if ( count( $this->groups ) && ! empty( $groups_count ) ) {
 			foreach ( $groups_count as $group_id => $group_sent_count ) {
+				if ( ! isset( $this->groups[ $group_id ] ) ) {
+					continue;
+				}
 
 				// Change the `form` property.
 				$form_raw_tags            = $this->groups[ $group_id ]['raw'];
@@ -335,11 +343,30 @@ class CF7_Repeatable_Fields {
 	private function sanitize_groups_count() {
 		// phpcs:disable WordPress.Security.NonceVerification.Missing -- CF7 Handles this.
 		// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		$groups_count = ( isset( $_POST['_wpcf7_groups_count'] ) ) ? wp_unslash( (array) $_POST['_wpcf7_groups_count'] ) : array();
-		$groups_count = array_map( 'sanitize_text_field', wp_unslash( (array) $groups_count ) );
+		$groups_count = isset( $_POST['_wpcf7_groups_count'] ) && is_array( $_POST['_wpcf7_groups_count'] ) ? wp_unslash( $_POST['_wpcf7_groups_count'] ) : array();
 		// phpcs:enable WordPress.Security.NonceVerification.Missing
 		// phpcs:enable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		return $groups_count;
+
+		$sanitized = array();
+		foreach ( $groups_count as $group_id => $count ) {
+			if ( ! is_string( $group_id ) || ! is_scalar( $count ) ) {
+				continue;
+			}
+
+			/**
+			 * Filters the maximum number of rows accepted for a group.
+			 *
+			 * @since 3.0.0
+			 *
+			 * @param int    $max_rows Maximum row count. Default 50, minimum 1.
+			 * @param string $group_id Current group ID.
+			 */
+			$max_rows = max( 1, (int) apply_filters( 'wpcf7_field_group_max_rows', 50, $group_id ) );
+
+			$sanitized[ $group_id ] = min( $max_rows, max( 1, absint( $count ) ) );
+		}
+
+		return $sanitized;
 	}
 
 	/**
