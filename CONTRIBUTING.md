@@ -103,7 +103,7 @@ Open an issue titled `[Release] X.Y.Z`, assign the release milestone, and copy t
 
 - [ ] **Branch:** Create `release/X.Y.Z` from an up-to-date `trunk`.
 - [ ] **Versions:** Update the plugin header and `CF7_REPEATABLE_FIELDS_VERSION` in `cf7-repeatable-fields.php`, `package.json`, the root and root-package versions in `package-lock.json`, and `Stable tag` in `readme.txt`. Use `X.Y.Z` without a `v` prefix.
-- [ ] **Changelogs:** Move the `Unreleased` entries into a dated `X.Y.Z` section in `CHANGELOG.md`, and update `readme.txt` using its existing format. Retain props and pull request links in `CHANGELOG.md`. Add the release comparison link in its footer, and point `Unreleased` at `X.Y.Z...trunk`. Check the release date in both files.
+- [ ] **Changelogs:** Move the `Unreleased` entries into a dated `X.Y.Z` section in `CHANGELOG.md`, and update `readme.txt` using its existing format. Retain props and pull request links in `CHANGELOG.md`; keep contributor props but omit pull request links in the `readme.txt` changelog. Add the release comparison link in its footer, and point `Unreleased` at `X.Y.Z...trunk`. Check the release date in both files.
 - [ ] **Credits:** Add new contributors to `CREDITS.md` and confirm maintainer details. Include credit for bug reports and testing as well as code.
 - [ ] **Readmes:** Update the GitHub and WordPress.org readmes as needed. Check minimum requirements, `Tested up to`, and any upgrade instructions.
 - [ ] **Distribution:** Check `.distignore` so runtime files and the license are included, and development tools, dependencies, tests, and reports are excluded. Confirm any JavaScript changes have their built files committed in `dist/`.

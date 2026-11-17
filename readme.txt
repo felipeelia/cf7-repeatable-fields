@@ -71,11 +71,30 @@ Yes! Give a look at the [Frequently Asked Questions](https://github.com/felipeel
 
 == Changelog ==
 
-= Unreleased =
+= 3.0.0 - 2026-11-16 =
 
-__Fixed:__
+**Note that this version changes minimum required versions of:**
 
-* Harden group ID and row count handling, with a configurable maximum of 50 rows per group.
+* [WordPress](https://wordpress.org): 7.1+
+* [PHP](https://php.net/): 8.3+
+* [Contact Form 7](https://wordpress.org/plugins/contact-form-7/): 6.2.5+
+
+__Added:__
+
+* Regression tests for the form reported in #65, both mail templates, and resubmission after a successful form reset. Props [@felipeelia](https://github.com/felipeelia).
+
+__Changed:__
+
+* Added daily WordPress and Contact Form 7 compatibility checks with automated failure issues and tested-version pull requests, and limited WordPress.org readme and asset updates to releases. Props [@felipeelia](https://github.com/felipeelia).
+* Updated contribution and release instructions, limited WordPress.org deployment to published releases that are not marked as prereleases, and simplified GitHub Actions version references. Props [@felipeelia](https://github.com/felipeelia).
+* Improved repeatable group accessibility with descriptive button labels, predictable keyboard focus, unique row IDs and matching references, and mobile sizing. Props [@felipeelia](https://github.com/felipeelia).
+* Removed the frontend jQuery dependency, migrated group events to native `CustomEvent`s, and fixed exclusive checkbox choices affecting separate form instances. Props [@felipeelia](https://github.com/felipeelia).
+* Updated compatibility with Contact Form 7 6.2.5+, fixed repeated-field validation, replaced Cypress end-to-end tests with Playwright and WordPress Playground, and updated PHP development tools and GitHub Actions. Props [@felipeelia](https://github.com/felipeelia).
+* Updated npm development dependencies, migrated JavaScript linting to ESLint 10, and raised the Node.js minimum version to 24.15+ or 26+. Props [@felipeelia](https://github.com/felipeelia).
+
+__Security:__
+
+* Harden group ID and row count handling, with a configurable maximum of 50 rows per group. Props [@felipeelia](https://github.com/felipeelia).
 
 = 2.0.2 - 2024-10-22 =
 
