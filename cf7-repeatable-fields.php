@@ -3,7 +3,7 @@
  * Plugin Name:       Contact Form 7 - Repeatable Fields
  * Plugin URI:        https://github.com/felipeelia/cf7-repeatable-fields
  * Description:       An add-on plugin for Contact Form 7 that adds a repeatable group of fields functionality.
- * Version:           2.0.2
+ * Version:           3.0.0
  * Requires at least: 7.1
  * Requires PHP:      8.3
  * Requires Plugins:  contact-form-7
@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'CF7_REPEATABLE_FIELDS_VERSION', '2.0.2' );
+define( 'CF7_REPEATABLE_FIELDS_VERSION', '3.0.0' );
 define( 'CF7_REPEATABLE_FIELDS_MIN_CF7_VERSION', '6.2.5' );
 define( 'CF7_REPEATABLE_FIELDS_FILE', __FILE__ );
 define( 'CF7_REPEATABLE_FIELDS_DIR', __DIR__ );
