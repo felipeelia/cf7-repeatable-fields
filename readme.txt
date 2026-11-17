@@ -81,7 +81,7 @@ Yes! Give a look at the [Frequently Asked Questions](https://github.com/felipeel
 
 __Added:__
 
-* Regression tests for the form reported in #65, both mail templates, and resubmission after a successful form reset. Props [@felipeelia](https://github.com/felipeelia).
+* Regression tests for the form reported in #65, both mail templates, and resubmission after a successful form reset. Props [@suchitpatel0722](https://github.com/suchitpatel0722) and [@felipeelia](https://github.com/felipeelia).
 
 __Changed:__
 

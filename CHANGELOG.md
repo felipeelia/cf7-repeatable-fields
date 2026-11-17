@@ -23,7 +23,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ### Added
 
-* Regression tests for the form reported in #65, both mail templates, and resubmission after a successful form reset. Props [@felipeelia](https://github.com/felipeelia) via [#110](https://github.com/felipeelia/cf7-repeatable-fields/pull/110).
+* Regression tests for the form reported in #65, both mail templates, and resubmission after a successful form reset. Props [@suchitpatel0722](https://github.com/suchitpatel0722) and [@felipeelia](https://github.com/felipeelia) via [#110](https://github.com/felipeelia/cf7-repeatable-fields/pull/110).
 
 ### Changed
 

@@ -16,6 +16,7 @@ Thank you to all the people who have already contributed to this repository via 
 [Matthew Harris (@rtpHarry)](https://github.com/rtpHarry),
 [Peter Thaleikis](https://peterthaleikis.com/),
 [Tessa Watkins](https://github.com/Tessachu),
+[@suchitpatel0722](https://github.com/suchitpatel0722),
 and
 [@sfdeveloper](https://profiles.wordpress.org/sfdeveloper/).
 
